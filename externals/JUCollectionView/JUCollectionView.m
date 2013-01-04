@@ -552,8 +552,10 @@
 
 - (void)dealloc
 {
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    mouseDownView = nil;
+    draggingSession = nil;
 }
 
 @end

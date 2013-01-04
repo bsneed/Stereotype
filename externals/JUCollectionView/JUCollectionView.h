@@ -48,7 +48,7 @@
     
     NSView *mouseDownView;
     NSDraggingSession *draggingSession;
-    
+
     BOOL unselectOnMouseUp;
     BOOL updatingData, calledReloadData;
 }
