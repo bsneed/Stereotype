@@ -392,11 +392,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
     
     [self setManagedOutputDevicePopup:managedOutputDevicePopup];
     [self setManagedOutputSampleRatePopup:managedOutputSampleRatePopup];
-    [self setManagedOutputFormatPopup:managedOutputFormatPopup];
-    
-    //NSLog(@"virtual formats = %@", [outputDevice allVirtualFormats]);
-    RFAudioDeviceFormat *virtualFormat = outputDevice.currentVirtualFormat;
-    //NSLog(@"current virtual format = %@", virtualFormat);
+    [self setManagedOutputFormatPopup:managedOutputFormatPopup];    
 }
 
 - (void)setUpsampling:(BOOL)upsampling

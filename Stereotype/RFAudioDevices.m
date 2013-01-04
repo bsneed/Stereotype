@@ -24,50 +24,6 @@
 
 - (NSString*)description
 {
-    NSString *mixable = @"";
-    NSString *linearPCM = @"linear PCM ";
-    NSString *interleaved = @"";
-    NSString *bits = @"";
-    NSString *endianness = @"";
-    NSString *floatOrInt = @"";
-    NSString *alignedLow = @"";
-    NSString *sampleRate = @"";
-    
-    UInt32 flags = streamDesc.mFormatFlags;
-    if (flags & kAudioFormatFlagIsNonMixable)
-        mixable = @"Non-mixable ";
-    else
-        mixable = @"Mixable ";
-    
-    if (flags & kAudioFormatFlagIsNonInterleaved)
-        interleaved = @"Non-interleaved ";
-    else
-        interleaved = @"Interleaved ";
-    
-    if (flags & kAudioFormatFlagIsBigEndian)
-        endianness = @"big endian ";
-    else
-        endianness = @"little endian ";
-    
-    if (flags & kAudioFormatFlagIsAlignedHigh)
-        alignedLow = @"aligned high ";
-    else
-        alignedLow = @"aligned low ";
-    
-    if (flags & kAudioFormatFlagIsFloat)
-        floatOrInt = @"Float ";
-    else
-    if (flags & kAudioFormatFlagIsSignedInteger)
-        floatOrInt = @"Signed Integer ";
-    else
-        floatOrInt = @"Unsigned Integer ";
-    
-    bits = [NSString stringWithFormat:@"%dbits ", streamDesc.mBitsPerChannel];
-    sampleRate = [NSString stringWithFormat:@"@ %fkHz ", streamDesc.mSampleRate];
-    
-    NSString *longDesc = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@", mixable, linearPCM, interleaved, bits, endianness, floatOrInt, alignedLow, sampleRate];
-    //NSLog(@"%@", longDesc);
-    
     if (streamDesc.mFormatFlags & kAudioFormatFlagIsFloat)
         return [NSString stringWithFormat:@"%dch-%dbit Float", streamDesc.mChannelsPerFrame, streamDesc.mBitsPerChannel];
 	return [NSString stringWithFormat:@"%dch-%dbit Integer", streamDesc.mChannelsPerFrame, streamDesc.mBitsPerChannel];

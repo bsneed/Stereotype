@@ -52,6 +52,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{138, 370}, {81, 26}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="879277034"/>
 						<object class="NSShadow" key="NSViewShadow">
 							<double key="NSShadowVert">1</double>
@@ -66,7 +67,7 @@
 						<object class="NSPopUpButtonCell" key="NSCell" id="575059096">
 							<int key="NSCellFlags">-2080374720</int>
 							<int key="NSCellFlags2">134219776</int>
-							<object class="NSFont" key="NSSupport" id="280656728">
+							<object class="NSFont" key="NSSupport" id="138867206">
 								<string key="NSName">LucidaGrande</string>
 								<double key="NSSize">14</double>
 								<int key="NSfFlags">16</int>
@@ -75,7 +76,7 @@
 							<reference key="NSControlView" ref="354767075"/>
 							<int key="NSButtonFlags">100810752</int>
 							<int key="NSButtonFlags2">129</int>
-							<reference key="NSAlternateImage" ref="280656728"/>
+							<reference key="NSAlternateImage" ref="138867206"/>
 							<string key="NSAlternateContents"/>
 							<string key="NSKeyEquivalent"/>
 							<int key="NSPeriodicDelay">400</int>
@@ -178,6 +179,7 @@
 						</set>
 						<string key="NSFrame">{{0, 331}, {406, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="630387015"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -202,6 +204,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 26}, {406, 336}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSClassName">NSView</string>
 					</object>
@@ -210,6 +213,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{9, 368}, {45, 30}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="285554658"/>
 						<object class="NSShadow" key="NSViewShadow">
 							<double key="NSShadowVert">1</double>
@@ -246,6 +250,7 @@
 						<int key="NSvFlags">265</int>
 						<string key="NSFrame">{{302, 372}, {96, 22}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="393714795"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -305,11 +310,12 @@
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 					</object>
-					<object class="NSCustomView" id="147858340">
+					<object class="NSCustomView" id="270528166">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{0, 362}, {406, 42}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="939028381"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSClassName">RFDragView</string>
@@ -319,6 +325,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{59, 374}, {238, 18}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="354767075"/>
 						<object class="NSShadow" key="NSViewShadow">
 							<double key="NSShadowVert">1</double>
@@ -331,7 +338,7 @@
 							<int key="NSCellFlags">67108928</int>
 							<int key="NSCellFlags2">171968512</int>
 							<string key="NSContents">Label</string>
-							<reference key="NSSupport" ref="280656728"/>
+							<reference key="NSSupport" ref="138867206"/>
 							<string key="NSCellIdentifier">_NS:1535</string>
 							<reference key="NSControlView" ref="285554658"/>
 							<object class="NSColor" key="NSBackgroundColor">
@@ -353,7 +360,9 @@
 				</array>
 				<string key="NSFrameSize">{406, 404}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="147858340"/>
+				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="270528166"/>
+				<bool key="NSViewIsLayerTreeHost">YES</bool>
 				<bool key="NSViewCanDrawConcurrently">YES</bool>
 				<string key="NSClassName">RFLibraryViewController</string>
 			</object>
@@ -436,7 +445,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">dragView</string>
 						<reference key="source" ref="1005"/>
-						<reference key="destination" ref="147858340"/>
+						<reference key="destination" ref="270528166"/>
 					</object>
 					<int key="connectionID">104</int>
 				</object>
@@ -477,7 +486,7 @@
 							<reference ref="630387015"/>
 							<reference ref="354767075"/>
 							<reference ref="285554658"/>
-							<reference ref="147858340"/>
+							<reference ref="270528166"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -593,7 +602,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">103</int>
-						<reference key="object" ref="147858340"/>
+						<reference key="object" ref="270528166"/>
 						<reference key="parent" ref="1005"/>
 					</object>
 				</array>
@@ -653,7 +662,81 @@
 			<nil key="sourceID"/>
 			<int key="maxID">106</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">RFBackButtonCell</string>
+					<string key="superclassName">NSButtonCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/RFBackButtonCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">RFDragView</string>
+					<string key="superclassName">NSView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/RFDragView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">RFLibraryViewController</string>
+					<string key="superclassName">NSView</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="backButton">NSButton</string>
+						<string key="containerView">NSView</string>
+						<string key="dragView">RFDragView</string>
+						<string key="searchField">NSSearchField</string>
+						<string key="titleLabel">NSTextField</string>
+						<string key="titlePopup">NSPopUpButton</string>
+						<string key="topBarImageView">NSImageView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="backButton">
+							<string key="name">backButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="containerView">
+							<string key="name">containerView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="dragView">
+							<string key="name">dragView</string>
+							<string key="candidateClassName">RFDragView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchField">
+							<string key="name">searchField</string>
+							<string key="candidateClassName">NSSearchField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="titleLabel">
+							<string key="name">titleLabel</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="titlePopup">
+							<string key="name">titlePopup</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="topBarImageView">
+							<string key="name">topBarImageView</string>
+							<string key="candidateClassName">NSImageView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/RFLibraryViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">RFPopUpButtonNoBgCell</string>
+					<string key="superclassName">NSPopUpButtonCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/RFPopUpButtonNoBgCell.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
