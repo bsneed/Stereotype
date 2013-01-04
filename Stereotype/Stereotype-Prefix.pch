@@ -1,0 +1,15 @@
+//
+// Prefix header for all source files of the 'Stereotype' target in the 'Stereotype' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#import "NSObject+RFExtensions.h"
+#import "asmlib.h"
+#import "VPPCoreData.h"
+#import "RFPlaylistEntity.h"
+#import "RFTrackEntity.h"
+#import "RFItemEntity.h"
+
+//#define memcpy A_memcpy
+#endif

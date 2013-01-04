@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C3006" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="RFItemEntity" representedClassName="RFItemEntity" syncable="YES">
+        <attribute name="index" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <relationship name="track" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="RFTrackEntity" syncable="YES"/>
+    </entity>
+    <entity name="RFPlaylistEntity" representedClassName="RFPlaylistEntity" syncable="YES">
+        <attribute name="itunesPlaylistID" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="masterLibrary" optional="YES" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="smartPlaylistQuery" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RFItemEntity" syncable="YES"/>
+    </entity>
+    <entity name="RFTrackEntity" representedClassName="RFTrackEntity" syncable="YES">
+        <attribute name="albumArtist" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="albumTitle" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bitRate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="bitsPerChannel" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="bpm" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="compilation" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="composer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="discNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="discTotal" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="format" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="genre" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="itunesID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="releaseDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sampleRate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="trackNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="trackTotal" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="url" attributeType="String" indexed="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="RFItemEntity" positionX="-8966" positionY="-5539" width="128" height="73"/>
+        <element name="RFPlaylistEntity" positionX="-9063" positionY="-5695" width="128" height="118"/>
+        <element name="RFTrackEntity" positionX="-8766" positionY="-5688" width="128" height="358"/>
+    </elements>
+</model>

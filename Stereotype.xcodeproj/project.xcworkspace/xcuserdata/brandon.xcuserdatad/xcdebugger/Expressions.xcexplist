@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[AFOutputSoundcard getFrequencyResponseBins:numberOfBins:]:AFOutputSoundcard.m">
+      </ContextState>
+      <ContextState
+         contextName = "AudioPlayer::GetPlaybackTime(double&amp;, double&amp;) const:AudioPlayer.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "-[RFCompositionView initWithFrame:]:RFCompositionView.m">
+      </ContextState>
+      <ContextState
+         contextName = "AudioPlayer::GetCurrentDecoderURL():AudioPlayer.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "-[RFCompositionView updateInput]:RFCompositionView.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
