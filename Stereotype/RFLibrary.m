@@ -83,31 +83,124 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
     return libraryURL;
 }
 
-- (NSURL *)iTunesPathURL
+- (NSURL *)iTunesMusicPathURL
 {
-    NSString *normalLibraryPath = [@"~/Music/iTunes" stringByExpandingTildeInPath];
-    NSString *olderLibraryPath = [@"~/Documents/iTunes" stringByExpandingTildeInPath];
+    NSString *normalLibraryPath = [@"~/Music/iTunes/iTunes Media/Music" stringByExpandingTildeInPath];
 	
     NSURL *libraryURL = nil;
     if ([[NSFileManager defaultManager] fileExistsAtPath:normalLibraryPath])
         libraryURL = [self resolvedFileURLWithPath:normalLibraryPath];
-    else
-        if ([[NSFileManager defaultManager] fileExistsAtPath:olderLibraryPath])
-            libraryURL = [self resolvedFileURLWithPath:olderLibraryPath];
     
     return libraryURL;
 }
 
-- (void)importDirectory:(NSURL *)directory progressBlock:(RFLibraryImportProgressBlock)progressBlock doneBlock:(NSObjectPerformBlock)doneBlock;
+- (NSURL *)iTunesPodcastPathURL
+{
+    NSString *normalLibraryPath = [@"~/Music/iTunes/iTunes Media/Podcasts" stringByExpandingTildeInPath];
+	
+    NSURL *libraryURL = nil;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:normalLibraryPath])
+        libraryURL = [self resolvedFileURLWithPath:normalLibraryPath];
+    
+    return libraryURL;
+}
+
+- (void)importFile:(NSURL *)fileURL skipExisting:(BOOL)skipExisting saveAfter:(BOOL)saveAfter
+{
+    NSURL *actualURL = [fileURL URLByResolvingSymlinksAndAliases];
+    RFTrackEntity *entity = nil;
+    if (skipExisting)
+    {
+        //NSPredicate *predicate = [trackPredicate predicateWithSubstitutionVariables:@{@"TRACKURL" : [actualURL absoluteString]}];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"url == %@", [actualURL absoluteString]];
+        entity = [database findObjectFromEntity:@"RFTrackEntity" withPredicate:predicate];
+    }
+    
+    if (!entity)
+    {
+        RFMetadata *metadata = [[RFMetadata alloc] initWithURL:actualURL];
+        if (metadata && [metadata handlesFileExtension])
+        {
+            NSString *title = [metadata getTitle];
+            if ([title length] < 1)
+                title = nil;
+            
+            //NSLog(@"Importing: %@", actualURL);
+            
+            entity = [database getNewObjectForEntity:@"RFTrackEntity"];
+            entity.url = [actualURL absoluteString];
+            
+            if (!title)
+                entity.title = [actualURL lastPathComponent];
+            else
+                entity.title = title;
+            
+            entity.artist = [metadata getArtist];
+            entity.albumTitle = [metadata getAlbumTitle];
+            entity.albumArtist = [metadata getAlbumArtist];
+            entity.genre = [metadata getGenre];
+            entity.releaseDate = [metadata getReleaseDate];
+            entity.trackNumber = [metadata getTrackNumber];
+            entity.trackTotal = [metadata getTrackTotal];
+            entity.bpm = [metadata getBPM];
+            entity.rating = [metadata getRating];
+            entity.discNumber = [metadata getDiscNumber];
+            entity.duration = [metadata getDuration];
+            entity.composer = [metadata getComposer];
+            entity.compilation = [metadata getCompilation];
+            entity.discTotal = [metadata getDiscTotal];
+            entity.sampleRate = [metadata getSampleRate];
+            entity.format = [metadata getFormat];
+        }
+    }
+    
+    if (saveAfter)
+        [database saveAllChanges];
+}
+
+- (void)importFiles:(NSArray *)urlArray progressBlock:(RFLibraryImportProgressBlock)progressBlock doneBlock:(NSObjectPerformBlock)doneBlock
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self scanDirectory:directory skipExisting:YES progressBlock:progressBlock];
+        NSUInteger urlCount = urlArray.count;
+        for (NSUInteger i = 0; i < urlCount; i++)
+        {
+            NSURL *theURL = [urlArray objectAtIndex:i];
+            //NSURL *actualURL = [theURL URLByResolvingSymlinksAndAliases];
+            
+            if (progressBlock)
+            {
+                NSString *text = [NSString stringWithFormat:@"Scanning %@", [theURL lastPathComponent]];
+                float progressValue = (i * 100) / urlCount;
+                if (progressValue < 0)
+                    progressValue = 0;
+                if (progressValue > 100)
+                    progressValue = 100;
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    progressBlock(text, progressValue);
+                });
+            }
+            
+            [self importFile:theURL skipExisting:YES saveAfter:NO];
+        }
+        
+        [database saveAllChanges];
         
         [self performBlockOnMainThread:doneBlock];
     });
 }
 
-- (void)importiTunesPlaylistsWithProgressBlock:(RFLibraryImportProgressBlock)progressBlock doneBlock:(NSObjectPerformBlock)doneBlock;
+- (void)importDirectories:(NSArray *)directories progressBlock:(RFLibraryImportProgressBlock)progressBlock doneBlock:(NSObjectPerformBlock)doneBlock
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (NSURL *directory in directories)
+            [self scanDirectory:directory skipExisting:YES progressBlock:progressBlock];
+        
+        [self performBlockOnMainThread:doneBlock];
+    });
+}
+
+- (void)importiTunesPlaylistsWithProgressBlock:(RFLibraryImportProgressBlock)progressBlock doneBlock:(NSObjectPerformBlock)doneBlock
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self importiTunesPlaylists:progressBlock];
@@ -134,7 +227,11 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
     NSMutableArray *allURLs = [[NSMutableArray alloc] init];
     
     if (progressBlock)
-        progressBlock(@"Scanning directory...", 0);
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            progressBlock(@"Scanning directory...", 0);
+        });
+    }
     
     // Enumerate the dirEnumerator results, each value is stored in allURLs
     for (NSURL *theURL in dirEnumerator) {
@@ -170,70 +267,25 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
     
     NSLog(@"Found %lu items to process.", urlCount);
     
-    NSPredicate *trackPredicate = [NSPredicate predicateWithFormat:@"url == $TRACKURL"];
-    
     for (NSUInteger i = 0; i < urlCount; i++)
     {
         NSURL *theURL = [allURLs objectAtIndex:i];
-        NSURL *actualURL = [theURL URLByResolvingSymlinksAndAliases];
-        RFTrackEntity *entity = nil;
-        if (skipExisting)
+
+        if (progressBlock)
         {
-            NSPredicate *predicate = [trackPredicate predicateWithSubstitutionVariables:@{@"TRACKURL" : [actualURL absoluteString]}];
-            //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"url == %@", [actualURL absoluteString]];
-            entity = [database findObjectFromEntity:@"RFTrackEntity" withPredicate:predicate];
+            NSString *text = [NSString stringWithFormat:@"Scanning %@", [theURL lastPathComponent]];
+            float progressValue = (i * 100) / urlCount;
+            if (progressValue < 0)
+                progressValue = 0;
+            if (progressValue > 100)
+                progressValue = 100;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                progressBlock(text, progressValue);
+            });
         }
         
-        if (!entity)
-        {
-            if (progressBlock)
-            {
-                NSString *text = [NSString stringWithFormat:@"Scanning %@", [actualURL lastPathComponent]];
-                float progressValue = (i * 100) / urlCount;
-                if (progressValue < 0)
-                    progressValue = 0;
-                if (progressValue > 100)
-                    progressValue = 100;
-                progressBlock(text, progressValue);
-            }
-
-            RFMetadata *metadata = [[RFMetadata alloc] initWithURL:actualURL];
-            if (metadata && [metadata handlesFileExtension])
-            {
-                NSString *title = [metadata getTitle];
-                if ([title length] < 1)
-                    title = nil;
-                
-                NSLog(@"Skipping track because it doesn't have a Title: %@", actualURL);
-                
-                if (title)
-                {
-                    NSLog(@"Importing: %@", actualURL);
-                    
-                    entity = [database getNewObjectForEntity:@"RFTrackEntity"];
-                    entity.url = [actualURL absoluteString];
-                    entity.title = [metadata getTitle];
-                    entity.artist = [metadata getArtist];
-                    entity.albumTitle = [metadata getAlbumTitle];
-                    entity.albumArtist = [metadata getAlbumArtist];
-                    entity.genre = [metadata getGenre];
-                    entity.releaseDate = [metadata getReleaseDate];
-                    entity.trackNumber = [metadata getTrackNumber];
-                    entity.trackTotal = [metadata getTrackTotal];
-                    entity.bpm = [metadata getBPM];
-                    entity.rating = [metadata getRating];
-                    entity.discNumber = [metadata getDiscNumber];
-                    entity.duration = [metadata getDuration];
-                    entity.composer = [metadata getComposer];
-                    entity.compilation = [metadata getCompilation];
-                    entity.discTotal = [metadata getDiscTotal];
-                    entity.sampleRate = [metadata getSampleRate];
-                    entity.format = [metadata getFormat];
-                }
-            }
-        }
-        else
-            NSLog(@"Skipping track because it is in the DB already: %@", actualURL);
+        [self importFile:theURL skipExisting:skipExisting saveAfter:NO];
     }
     
     [database saveAllChanges];
@@ -252,7 +304,11 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
 	NSMutableArray *userPlaylists = [[NSMutableArray alloc] init];
 	
     if (progressBlock)
-        progressBlock(@"Scanning playlists...", 100);
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            progressBlock(@"Scanning playlists...", 0);
+        });
+    }
     
 	// now remove the invisible ones
 	for (NSDictionary *item in masterPlaylists)
@@ -308,7 +364,10 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
                     progressValue = 0;
                 if (progressValue > 100)
                     progressValue = 100;
-                progressBlock(text, progressValue);
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    progressBlock(text, progressValue);
+                });
             }
             
             for (NSUInteger i = 0; i < [items count]; i++)
@@ -390,6 +449,17 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
             [database saveAllChanges];
         }
     }
+}
+
+- (NSArray *)urlArrayToStringArray:(NSArray *)urlArray
+{
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:urlArray.count];
+    for (int i = 0; i < urlArray.count; i++)
+    {
+        NSURL *url = [urlArray objectAtIndex:i];
+        [array addObject:url.absoluteString];
+    }
+    return [NSArray arrayWithArray:array];
 }
 
 - (NSURL *)resolvedFileURLWithPath:(NSString *)path

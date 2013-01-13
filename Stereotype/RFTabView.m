@@ -80,7 +80,7 @@
     
     //NSRect frame = activeController.view.frame;
     //frame.origin.x = -2;
-    //activeController.view.frame = frame;
+    activeController.frame = self.bounds;
     
     if (activeController.superview != self)
         [self addSubview:activeController];

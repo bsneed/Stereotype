@@ -19,14 +19,18 @@ typedef void(^RFLibraryImportProgressBlock)(NSString *text, float percentDone);
 + (id)sharedInstance;
 
 - (NSURL *)iTunesLibraryURL;
-- (NSURL *)iTunesPathURL;
+- (NSURL *)iTunesMusicPathURL;
+- (NSURL *)iTunesPodcastPathURL;
+
+- (NSArray *)urlArrayToStringArray:(NSArray *)urlArray;
 
 - (RFPlaylistEntity *)masterPlaylist;
 //- (NSArray *)masterPlaylistTracks;
 - (NSUInteger)totalTrackCount;
 
-
-- (void)importDirectory:(NSURL *)directory progressBlock:(RFLibraryImportProgressBlock)progressBlock doneBlock:(NSObjectPerformBlock)doneBlock;
+- (void)importFile:(NSURL *)fileURL skipExisting:(BOOL)skipExisting saveAfter:(BOOL)saveAfter;
+- (void)importFiles:(NSArray *)urlArray progressBlock:(RFLibraryImportProgressBlock)progressBlock doneBlock:(NSObjectPerformBlock)doneBlock;
+- (void)importDirectories:(NSArray *)directories progressBlock:(RFLibraryImportProgressBlock)progressBlock doneBlock:(NSObjectPerformBlock)doneBlock;
 - (void)importiTunesPlaylistsWithProgressBlock:(RFLibraryImportProgressBlock)progressBlock doneBlock:(NSObjectPerformBlock)doneBlock;
 
 @end

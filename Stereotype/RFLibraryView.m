@@ -38,8 +38,8 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.allowsSelection = YES;
-    self.collectionView.allowsMultipleSelection = NO;
-    self.collectionView.allowsDragging = NO;
+    self.collectionView.allowsMultipleSelection = YES;
+    self.collectionView.allowsDragging = YES;
 }
 
 - (void)dealloc

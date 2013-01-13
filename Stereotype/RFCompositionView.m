@@ -197,7 +197,8 @@
 
 float shiftSample(float sample)
 {
-    float result = (0.7 * sample) / 100;
+    //float result = (0.7 * sample) / 100;
+    float result = sample / 100;
     return result;
 }
 

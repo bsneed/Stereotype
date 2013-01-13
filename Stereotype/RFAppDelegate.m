@@ -13,6 +13,8 @@
 #import "RFPlayerView.h"
 #import "RFCompositionView.h"
 #import "RFMetadata.h"
+#import "RFPlaylistEditor.h"
+#import "NSURL+RFExtensions.h"
 
 #import "VPPCoreData.h"
 
@@ -193,7 +195,14 @@ static RFAppDelegate *__appDelegateInstance = nil;
     {
         NSMutableArray *urlQueue = [[NSMutableArray alloc] initWithCapacity:queue.count];
         for (int i = 0; i < queue.count; i++)
-            [urlQueue addObject:[NSURL URLWithString:[queue objectAtIndex:i]]];
+        {
+            id value = [queue objectAtIndex:i];
+            if ([value isKindOfClass:[NSURL class]])
+                [urlQueue addObject:value];
+            else
+            if ([value isKindOfClass:[NSString class]])
+                [urlQueue addObject:[NSURL URLWithString:value]];
+        }
         [audioPlayer setQueue:urlQueue startAtIndex:settings.urlQueueIndex];
     }
 }
@@ -284,6 +293,105 @@ static RFAppDelegate *__appDelegateInstance = nil;
         audioPlayer.outputDevice = device;
     
     [self.settingsViewController refreshDisplay];
+}
+
+/*- (BOOL)applicationOpenUntitledFile:(NSApplication *)theApplication
+{
+    //[NSAlert alertWithMessageText:@"Dropped file on app icon" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:nil];
+    return YES;
+}*/
+
+- (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames
+{
+    NSLog(@"opening files %@", filenames);
+    [[NSApplication sharedApplication] replyToOpenOrPrint:NSApplicationDelegateReplySuccess];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSMutableArray *directories = [[NSMutableArray alloc] init];
+    NSMutableArray *files = [[NSMutableArray alloc] init];
+    
+    // find any directories
+    for (NSString *path in filenames)
+    {
+        NSURL *url = [[NSURL fileURLWithPath:path] URLByResolvingSymlinksAndAliases];
+        BOOL isDirectory = NO;
+        if ([fileManager fileExistsAtPath:url.path isDirectory:&isDirectory])
+        {
+            if (isDirectory)
+                [directories addObject:url];
+            else
+                [files addObject:url];
+        }
+    }
+    
+    if (directories.count == 0 && files.count == 0)
+        return;
+    
+    importing = YES;
+    
+    BOOL bigImport = NO;
+    
+    if (files.count > 100 || directories.count > 0)
+        bigImport = YES;
+    
+    if (bigImport)
+    {
+        // hide the player
+        [audioPlayer stop];
+        [self.window orderOut:nil];
+        
+        // show the import window
+        [self.importPanel makeKeyAndOrderFront:nil];
+        [self.importProgress setDoubleValue:100];
+        [self.importProgress startAnimation:nil];
+    }
+    
+    if (!bigImport)
+    {
+        if (files.count > 0)
+        {
+            [library importFiles:files progressBlock:nil doneBlock:nil];
+
+            // set the files up in the queue since its a small set.
+            NSArray *queue = [library urlArrayToStringArray:files];
+            [RFSettingsModel sharedInstance].urlQueue = queue;
+            [RFSettingsModel sharedInstance].urlQueueIndex = 0;
+        
+            [RFSettingsModel save];
+        }
+        importing = NO;
+    }
+    else
+    {
+        NSObjectPerformBlock doneBlock = ^{
+            [self.importPanel orderOut:nil];
+            [self.window makeKeyAndOrderFront:nil];
+            [self.artworkView adjustChildWindow:NO];
+            importing = NO;
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kLibraryUpdatedNotification object:nil];
+        };
+        
+        if (files.count > 0)
+        {
+            NSObjectPerformBlock thisDoneBlock = doneBlock;
+            if (directories.count == 0)
+                thisDoneBlock = nil;
+            
+            [library importFiles:files progressBlock:^(NSString *text, float percentDone) {
+                [self.importProgress setDoubleValue:percentDone];
+                [self.importLabel setStringValue:text];
+            } doneBlock:thisDoneBlock];
+        }
+        
+        if (directories.count > 0)
+        {
+            [library importDirectories:directories progressBlock:^(NSString *text, float percentDone) {
+                [self.importProgress setDoubleValue:percentDone];
+                [self.importLabel setStringValue:text];
+            } doneBlock:doneBlock];
+        }
+    }
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -635,7 +743,7 @@ static RFAppDelegate *__appDelegateInstance = nil;
     [self.importProgress setDoubleValue:100];
     [self.importProgress startAnimation:nil];
 
-    [library importDirectory:directory progressBlock:^(NSString *text, float percentDone) {
+    [library importDirectories:@[directory] progressBlock:^(NSString *text, float percentDone) {
         [self.importProgress setDoubleValue:percentDone];
         [self.importLabel setStringValue:text];
     } doneBlock:^{
@@ -650,8 +758,6 @@ static RFAppDelegate *__appDelegateInstance = nil;
 
 - (IBAction)importiTunes:(id)sender
 {
-    NSURL *directory = [library iTunesPathURL];
-    
     importing = YES;
     
     // hide the player
@@ -663,14 +769,15 @@ static RFAppDelegate *__appDelegateInstance = nil;
     [self.importProgress setDoubleValue:100];
     [self.importProgress startAnimation:nil];
     
-    NSLog(@"Looking for iTunes data in %@", directory);
-    
     RFLibraryImportProgressBlock progressBlock = ^(NSString *text, float percentDone) {
         [self.importProgress setDoubleValue:percentDone];
         [self.importLabel setStringValue:text];
     };
     
-    [library importDirectory:directory progressBlock:progressBlock doneBlock:^{
+    NSURL *iTunesMusicPath = [library iTunesMusicPathURL];
+    NSURL *iTunesPodcastsPath = [library iTunesPodcastPathURL];
+    
+    [library importDirectories:@[iTunesMusicPath, iTunesPodcastsPath] progressBlock:progressBlock doneBlock:^{
         [library importiTunesPlaylistsWithProgressBlock:progressBlock doneBlock:^{
             [self.importPanel orderOut:nil];
             [self.window makeKeyAndOrderFront:nil];
@@ -680,6 +787,60 @@ static RFAppDelegate *__appDelegateInstance = nil;
             [[NSNotificationCenter defaultCenter] postNotificationName:kLibraryUpdatedNotification object:nil];
         }];
     }];
+}
+
+- (IBAction)showHidePane:(id)sender
+{
+    [self toggleBottomPane];
+}
+
+- (void)toggleBottomPane
+{
+    const CGFloat expandedHeight = 188;
+    const CGFloat closedHeight = 26;
+    
+    BOOL bottomPaneVisible = (self.bottomPane.frame.size.height == expandedHeight);
+    
+    if (bottomPaneVisible)
+    {
+        [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+            NSRect paneFrame = self.bottomPane.frame;
+            paneFrame.size.height = closedHeight;
+            [[self.bottomPane animator] setFrame:paneFrame];
+            
+            NSRect tabFrame = self.drawerTabView.frame;
+            tabFrame.origin.y = closedHeight;
+            tabFrame.size.height += (expandedHeight - closedHeight);
+            [[self.drawerTabView animator] setFrame:tabFrame];
+            [[self.bottomPaneContentView animator] setAlphaValue:0];
+        } completionHandler:^{
+            [self.bottomPaneContentView setHidden:YES];
+            RFPlaylistEditor *editor = [[self.bottomPaneContentView subviews] objectAtIndex:0];
+            [editor removeFromSuperview];
+        }];
+    }
+    else
+    {
+        [self.bottomPaneContentView setHidden:NO];
+        self.bottomPaneContentView.alphaValue = 0;
+        
+        RFPlaylistEditor *playlistEditor = [RFPlaylistEditor loadFromNib];
+        playlistEditor.frame = self.bottomPaneContentView.bounds;
+        [self.bottomPaneContentView addSubview:playlistEditor];
+
+        [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+            NSRect paneFrame = self.bottomPane.frame;
+            paneFrame.size.height = expandedHeight;
+            [[self.bottomPane animator] setFrame:paneFrame];
+            
+            NSRect tabFrame = self.drawerTabView.frame;
+            tabFrame.origin.y = expandedHeight;
+            tabFrame.size.height -= (expandedHeight - closedHeight);
+            [[self.drawerTabView animator] setFrame:tabFrame];
+            [[self.bottomPaneContentView animator] setAlphaValue:1.0];
+        } completionHandler:^{
+        }];
+    }
 }
 
 @end

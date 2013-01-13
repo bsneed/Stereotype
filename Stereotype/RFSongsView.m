@@ -96,8 +96,8 @@
     NSPredicate *filterPredicate = nil;
     if (self.searchString && self.searchString.length > 0)
     {
-        filterPredicate = [NSPredicate predicateWithFormat:@"title contains[cd] %@ || albumArtist contains[cd] %@ || albumTitle contains[cd] %@ || composer contains[cd] %@ || genre contains[cd] %@",
-                                        self.searchString, self.searchString, self.searchString, self.searchString, self.searchString];
+        filterPredicate = [NSPredicate predicateWithFormat:@"title contains[cd] %@ || albumArtist contains[cd] %@ || albumTitle contains[cd] %@ || composer contains[cd] %@ || genre contains[cd] %@ || releaseDate contains %@",
+                                        self.searchString, self.searchString, self.searchString, self.searchString, self.searchString, self.searchString];
     }
 
     self.items = [database allObjectsForEntity:@"RFTrackEntity" sortDescriptors:sortDescriptors filteredBy:filterPredicate];
@@ -252,6 +252,25 @@
     [RFSettingsModel sharedInstance].urlQueueIndex = selectedTrackIndex;
     
     [RFSettingsModel save];
+}
+
+
+- (NSDragOperation)collectionView:(JUCollectionView *)collectionView draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context;
+{
+    if (context == NSDraggingContextOutsideApplication)
+    {
+        //NSLog(@"drag outside the application occurred.");
+        return NSDragOperationDelete;
+    }
+    else
+    if (context == NSDraggingContextWithinApplication)
+    {
+        //NSLog(@"drag inside the application occurred.");
+        return NSDragOperationCopy;
+    }
+    else
+        NSLog(@"some unknown drag context was sent.");
+    return NSDragOperationNone;
 }
 
 

@@ -30,6 +30,8 @@
 		CA2091581693EB4E001261A2 /* RFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2091571693EB4E001261A2 /* RFImageView.m */; };
 		CA33AA6A1637968600397481 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA33AA691637968600397481 /* Quartz.framework */; };
 		CA33AA6C163796A600397481 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA33AA6B163796A600397481 /* Accelerate.framework */; };
+		CA3862FD16A137F400D0B2BE /* RFSongViewCellSmall.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA3862FC16A137F300D0B2BE /* RFSongViewCellSmall.xib */; };
+		CA38630316A29AD400D0B2BE /* Audiofile.icns in Resources */ = {isa = PBXBuildFile; fileRef = CA38630216A29AD400D0B2BE /* Audiofile.icns */; };
 		CA3C8B26163918FA007BA30C /* wowlab_Bugaboo.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CA3C8B25163918FA007BA30C /* wowlab_Bugaboo.qtz */; };
 		CA3C8B2816391A81007BA30C /* wowlab_aquaflow.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CA3C8B2716391A81007BA30C /* wowlab_aquaflow.qtz */; };
 		CA3C8B2A16391B23007BA30C /* wowlab_Stream.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CA3C8B2916391B23007BA30C /* wowlab_Stream.qtz */; };
@@ -60,6 +62,10 @@
 		CA569D4E16958D4F00212770 /* NSString+RFExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CA569D4D16958D4F00212770 /* NSString+RFExtensions.m */; };
 		CA569D50169594A200212770 /* topDrag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA569D4F169594A200212770 /* topDrag@2x.png */; };
 		CA569D531696328600212770 /* NSDictionary+SDExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CA569D521696328600212770 /* NSDictionary+SDExtensions.m */; };
+		CA5BEB251699613000B821B8 /* bottomShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = CA5BEB231699613000B821B8 /* bottomShadow.png */; };
+		CA5BEB261699613000B821B8 /* bottomShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA5BEB241699613000B821B8 /* bottomShadow@2x.png */; };
+		CA5BEB291699695600B821B8 /* RFPlaylistEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5BEB281699695600B821B8 /* RFPlaylistEditor.m */; };
+		CA5BEB2B1699697300B821B8 /* RFPlaylistEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA5BEB2A1699697300B821B8 /* RFPlaylistEditor.xib */; };
 		CA890CB51634942600BE8ACE /* drawerBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA890CB41634942600BE8ACE /* drawerBg@2x.png */; };
 		CA890D061634FFB100BE8ACE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA890D041634FFB100BE8ACE /* AudioToolbox.framework */; };
 		CA890D071634FFB100BE8ACE /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA890D051634FFB100BE8ACE /* AudioUnit.framework */; };
@@ -276,6 +282,8 @@
 		CA2091571693EB4E001261A2 /* RFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFImageView.m; sourceTree = "<group>"; };
 		CA33AA691637968600397481 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		CA33AA6B163796A600397481 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		CA3862FC16A137F300D0B2BE /* RFSongViewCellSmall.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFSongViewCellSmall.xib; sourceTree = "<group>"; };
+		CA38630216A29AD400D0B2BE /* Audiofile.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Audiofile.icns; sourceTree = "<group>"; };
 		CA3C8B25163918FA007BA30C /* wowlab_Bugaboo.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = wowlab_Bugaboo.qtz; sourceTree = "<group>"; };
 		CA3C8B2716391A81007BA30C /* wowlab_aquaflow.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = wowlab_aquaflow.qtz; sourceTree = "<group>"; };
 		CA3C8B2916391B23007BA30C /* wowlab_Stream.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = wowlab_Stream.qtz; sourceTree = "<group>"; };
@@ -317,6 +325,11 @@
 		CA569D4F169594A200212770 /* topDrag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "topDrag@2x.png"; path = "Graphics/topDrag@2x.png"; sourceTree = SOURCE_ROOT; };
 		CA569D511696328600212770 /* NSDictionary+SDExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SDExtensions.h"; sourceTree = "<group>"; };
 		CA569D521696328600212770 /* NSDictionary+SDExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SDExtensions.m"; sourceTree = "<group>"; };
+		CA5BEB231699613000B821B8 /* bottomShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bottomShadow.png; path = Graphics/bottomShadow.png; sourceTree = SOURCE_ROOT; };
+		CA5BEB241699613000B821B8 /* bottomShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottomShadow@2x.png"; path = "Graphics/bottomShadow@2x.png"; sourceTree = SOURCE_ROOT; };
+		CA5BEB271699695600B821B8 /* RFPlaylistEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFPlaylistEditor.h; sourceTree = "<group>"; };
+		CA5BEB281699695600B821B8 /* RFPlaylistEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFPlaylistEditor.m; sourceTree = "<group>"; };
+		CA5BEB2A1699697300B821B8 /* RFPlaylistEditor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFPlaylistEditor.xib; sourceTree = "<group>"; };
 		CA890CB41634942600BE8ACE /* drawerBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "drawerBg@2x.png"; path = "Graphics/drawerBg@2x.png"; sourceTree = SOURCE_ROOT; };
 		CA890D041634FFB100BE8ACE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		CA890D051634FFB100BE8ACE /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -526,6 +539,7 @@
 		CA17A0EC15A6941900ACBA13 = {
 			isa = PBXGroup;
 			children = (
+				CA38630216A29AD400D0B2BE /* Audiofile.icns */,
 				CAF58D0F16575BA300C13F36 /* asmlib.h */,
 				CAF58D1016575BA300C13F36 /* libamac64.a */,
 				CAF593A315A90988006E331A /* Stereotype.icns */,
@@ -645,6 +659,8 @@
 				CAF5937A15A7D558006E331A /* prevIcon@2x.png */,
 				CAF5935015A6B840006E331A /* bottomBg.png */,
 				CAF5935415A6B9B4006E331A /* bottomBg@2x.png */,
+				CA5BEB231699613000B821B8 /* bottomShadow.png */,
+				CA5BEB241699613000B821B8 /* bottomShadow@2x.png */,
 				CAF5935615A6BBCF006E331A /* topBg.png */,
 				CAF5935715A6BBCF006E331A /* topBg@2x.png */,
 				CAF5937315A76C38006E331A /* topShine.png */,
@@ -941,6 +957,10 @@
 				CAF8BA0F1681949D005990A8 /* RFSongViewCell.h */,
 				CAF8BA101681949D005990A8 /* RFSongViewCell.m */,
 				CAF8BA111681949E005990A8 /* RFSongViewCell.xib */,
+				CA3862FC16A137F300D0B2BE /* RFSongViewCellSmall.xib */,
+				CA5BEB271699695600B821B8 /* RFPlaylistEditor.h */,
+				CA5BEB281699695600B821B8 /* RFPlaylistEditor.m */,
+				CA5BEB2A1699697300B821B8 /* RFPlaylistEditor.xib */,
 			);
 			name = PlaylistViews;
 			sourceTree = "<group>";
@@ -1135,6 +1155,11 @@
 				CA3F292D168EE23A00C01E80 /* shuffleIcon.png in Resources */,
 				CA3F292E168EE23A00C01E80 /* shuffleIconOn.png in Resources */,
 				CA569D50169594A200212770 /* topDrag@2x.png in Resources */,
+				CA5BEB251699613000B821B8 /* bottomShadow.png in Resources */,
+				CA5BEB261699613000B821B8 /* bottomShadow@2x.png in Resources */,
+				CA5BEB2B1699697300B821B8 /* RFPlaylistEditor.xib in Resources */,
+				CA3862FD16A137F400D0B2BE /* RFSongViewCellSmall.xib in Resources */,
+				CA38630316A29AD400D0B2BE /* Audiofile.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1209,6 +1234,7 @@
 				CA2091581693EB4E001261A2 /* RFImageView.m in Sources */,
 				CA569D4E16958D4F00212770 /* NSString+RFExtensions.m in Sources */,
 				CA569D531696328600212770 /* NSDictionary+SDExtensions.m in Sources */,
+				CA5BEB291699695600B821B8 /* RFPlaylistEditor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1306,7 +1332,7 @@
 		CA17A11615A6941A00ACBA13 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: Brandon Sneed";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stereotype/Stereotype-Prefix.pch";
@@ -1328,7 +1354,7 @@
 		CA17A11715A6941A00ACBA13 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: Brandon Sneed";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stereotype/Stereotype-Prefix.pch";

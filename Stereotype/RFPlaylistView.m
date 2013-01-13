@@ -16,6 +16,7 @@
 {
     NSImage *blankArtImage;
     id observer;
+    NSCursor *lastCursor;
 }
 
 - (void)awakeFromNib
@@ -126,25 +127,24 @@
     playlistView.viewStyle = RFSongsViewStylePlaylist;
 }
 
+
 - (NSDragOperation)collectionView:(JUCollectionView *)collectionView draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context;
 {
-    if (context == NSDraggingContextOutsideApplication)
+    /*if (context == NSDraggingContextOutsideApplication)
     {
-        NSLog(@"drag outside the application occurred.");
+        //NSLog(@"drag outside the application occurred.");
         return NSDragOperationDelete;
     }
     else
     if (context == NSDraggingContextWithinApplication)
     {
-        NSLog(@"drag inside the application occurred.");
+        //NSLog(@"drag inside the application occurred.");
         return NSDragOperationCopy;
     }
     else
-        NSLog(@"some unknown drag context was sent.");
-    return NSDragOperationNone;
+        NSLog(@"some unknown drag context was sent.");*/
+    return NSDragOperationCopy;
 }
-
-NSCursor *lastCursor = nil;
 
 - (void)collectionView:(JUCollectionView *)collectionView draggingSession:(NSDraggingSession *)session movedToPoint:(NSPoint)screenPoint
 {
@@ -166,10 +166,10 @@ NSCursor *lastCursor = nil;
 
 - (void)collectionView:(JUCollectionView *)collectionView draggingSession:(NSDraggingSession *)session endedAtPoint:(NSPoint)screenPoint operation:(NSDragOperation)operation;
 {
-    if (operation == NSDragOperationDelete)
+    /*if (operation == NSDragOperationDelete)
         NSLog(@"item deleted");
     else
-        if (operation == NSDragOperationNone && !NSPointInRect(screenPoint, self.window.frame))
+    if (operation == NSDragOperationNone && !NSPointInRect(screenPoint, self.window.frame))
     {
         NSLog(@"item none'd.  lol.");
         [collectionView showPoofAnimation];
@@ -177,13 +177,13 @@ NSCursor *lastCursor = nil;
     }
     else
     if (operation == NSDragOperationCopy)
-        NSLog(@"item rearranged or copied");
+        NSLog(@"item rearranged or copied");*/
     
     [collectionView showNormalCursor];
     lastCursor = nil;
 }
 
-- (NSDragOperation)collectionView:(JUCollectionView *)collectionView draggingEntered:(id < NSDraggingInfo >)sender
+/*- (NSDragOperation)collectionView:(JUCollectionView *)collectionView draggingEntered:(id < NSDraggingInfo >)sender
 {
     NSLog(@"someone is dragging over us %@", sender);
     if ([sender draggingSourceOperationMask] == NSDragOperationNone)
@@ -225,14 +225,15 @@ NSCursor *lastCursor = nil;
 
 - (BOOL)collectionView:(JUCollectionView *)collectionView prepareForDragOperation:(id < NSDraggingInfo >)sender
 {
-    NSLog(@"prepare");
+    //NSLog(@"prepare");
     return YES;
 }
 
 - (BOOL)collectionView:(JUCollectionView *)collectionView performDragOperation:(id < NSDraggingInfo >)sender
 {
-    NSLog(@"perform");
+    //NSLog(@"perform");
     return YES;
 }
+*/
 
 @end

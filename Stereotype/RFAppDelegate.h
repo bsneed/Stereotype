@@ -56,6 +56,8 @@
 
 @property (nonatomic, weak) RFLibraryViewController *libraryViewController;
 @property (nonatomic, weak) RFSettingsViewController *settingsViewController;
+@property (weak) IBOutlet NSView *bottomPane;
+@property (weak) IBOutlet NSView *bottomPaneContentView;
 
 @property (nonatomic, assign) BOOL useVisualizer;
 

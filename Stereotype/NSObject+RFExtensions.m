@@ -68,14 +68,16 @@
 - (void)performBlockOnMainThread:(NSObjectPerformBlock)block
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        block();
+        if (block)
+            block();
     });
 }
 
 - (void)performUserBlockOnMainThread:(NSObjectPerformUserBlock)block userObject:(id)userObject
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        block(userObject);
+        if (block)
+            block(userObject);
     });
 }
 
