@@ -254,24 +254,29 @@
     [RFSettingsModel save];
 }
 
-
-- (NSDragOperation)collectionView:(JUCollectionView *)collectionView draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context;
+- (NSArray *)selectedPaths
 {
-    if (context == NSDraggingContextOutsideApplication)
+    // Write data to the pasteboard
+    NSMutableArray *fileList = [[NSMutableArray alloc] init];
+    
+    NSArray *items = [self.items objectsAtIndexes:self.collectionView.selection];
+    for (NSUInteger i = 0; i < items.count; i++)
     {
-        //NSLog(@"drag outside the application occurred.");
-        return NSDragOperationDelete;
+        RFTrackEntity *track = nil;
+        id item = [items objectAtIndex:i];
+        if ([item isKindOfClass:[RFTrackEntity class]])
+            track = item;
+        else
+        if ([item isKindOfClass:[RFItemEntity class]])
+        {
+            RFItemEntity *theItem = item;
+            track = theItem.track;
+        }
+        NSString *filePath = [[NSURL URLWithString:track.url] path];
+        [fileList addObject:filePath];
     }
-    else
-    if (context == NSDraggingContextWithinApplication)
-    {
-        //NSLog(@"drag inside the application occurred.");
-        return NSDragOperationCopy;
-    }
-    else
-        NSLog(@"some unknown drag context was sent.");
-    return NSDragOperationNone;
+    
+    return fileList;
 }
-
 
 @end

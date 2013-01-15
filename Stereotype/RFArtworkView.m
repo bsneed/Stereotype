@@ -12,6 +12,7 @@
 #import "RFAppDelegate.h"
 
 @interface RFGlossWindow : NSWindow
+- (void)configureDropTarget;
 @end
 
 @implementation RFGlossWindow
@@ -21,25 +22,48 @@
 	return NO;
 }
 
-/*- (BOOL)acceptsFirstResponder
-{
-    return YES;
-}
-
-- (BOOL)resignFirstResponder
-{
-    return YES;
-}
-
-- (BOOL)becomeFirstResponder
-{
-    return YES;
-}*/
-
 - (void)mouseDown:(NSEvent *)theEvent
 {
     [super mouseDown:theEvent];
     [[RFAppDelegate sharedInstance].playerView becomeFirstResponder];
+}
+
+- (void)configureDropTarget
+{
+    [self registerForDraggedTypes:@[NSFilenamesPboardType]];
+}
+
+- (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
+{
+    NSPasteboard *pboard;
+    NSDragOperation sourceDragMask;
+    
+    sourceDragMask = [sender draggingSourceOperationMask];
+    pboard = [sender draggingPasteboard];
+    
+    if ([[pboard types] containsObject:NSFilenamesPboardType])
+    {
+        if (sourceDragMask & NSDragOperationCopy)
+            return NSDragOperationCopy;
+    }
+    return NSDragOperationNone;
+}
+
+- (BOOL)prepareForDragOperation:(id<NSDraggingInfo>)sender
+{
+    return YES;
+}
+
+- (BOOL)performDragOperation:(id<NSDraggingInfo>)sender
+{
+    NSPasteboard *pboard = [sender draggingPasteboard];
+    
+    if ([[pboard types] containsObject:NSFilenamesPboardType])
+    {
+        NSArray *files = [pboard propertyListForType:NSFilenamesPboardType];
+        [[RFAppDelegate sharedInstance] application:nil openFiles:files];
+    }
+    return YES;
 }
 
 @end
@@ -49,7 +73,7 @@
     NSImage *_topBgImage;
     NSImage *_shineImage;
     RFCompositionView *_compositionView;
-    __strong NSWindow *overlayWindow;
+    __strong RFGlossWindow *overlayWindow;
 }
 
 - (void)setAlbumArtImage:(NSImage *)image
@@ -69,15 +93,16 @@
     CGRect wRect = self.window.frame;
     
     CGRect rect = CGRectMake(wRect.origin.x, wRect.origin.y + 202, 202, 202);
-    overlayWindow = [[NSWindow alloc]initWithContentRect:rect
-                                               styleMask:NSBorderlessWindowMask
-                                                 backing:NSBackingStoreBuffered
-                                                   defer:NO];
+    overlayWindow = [[RFGlossWindow alloc] initWithContentRect:rect
+                                                     styleMask:NSBorderlessWindowMask
+                                                       backing:NSBackingStoreBuffered
+                                                         defer:NO];
     overlayWindow.backgroundColor = [NSColor clearColor];
     [overlayWindow setOpaque:NO];
     [overlayWindow setHasShadow:NO];
     overlayWindow.alphaValue = 1.0f;
     [overlayWindow setReleasedWhenClosed:NO];
+    [overlayWindow configureDropTarget];
 
     NSView *contentView = self.window.contentView;
 
@@ -88,7 +113,43 @@
     
     [self.window addChildWindow:overlayWindow ordered:NSWindowAbove];
     [overlayWindow setParentWindow:self.window];
+    
+    [self registerForDraggedTypes:@[NSFilenamesPboardType]];
 }
+
+- (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
+{
+    NSPasteboard *pboard;
+    NSDragOperation sourceDragMask;
+    
+    sourceDragMask = [sender draggingSourceOperationMask];
+    pboard = [sender draggingPasteboard];
+    
+    if ([[pboard types] containsObject:NSFilenamesPboardType])
+    {
+        if (sourceDragMask & NSDragOperationCopy)
+            return NSDragOperationCopy;
+    }
+    return NSDragOperationNone;
+}
+
+- (BOOL)prepareForDragOperation:(id<NSDraggingInfo>)sender
+{
+    return YES;
+}
+
+- (BOOL)performDragOperation:(id<NSDraggingInfo>)sender
+{
+    NSPasteboard *pboard = [sender draggingPasteboard];
+    
+    if ([[pboard types] containsObject:NSFilenamesPboardType])
+    {
+        NSArray *files = [pboard propertyListForType:NSFilenamesPboardType];
+        [[RFAppDelegate sharedInstance] application:nil openFiles:files];
+    }
+    return YES;
+}
+
 
 - (void)mouseDown:(NSEvent *)theEvent
 {

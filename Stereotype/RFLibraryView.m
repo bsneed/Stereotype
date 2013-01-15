@@ -40,6 +40,8 @@
     self.collectionView.allowsSelection = YES;
     self.collectionView.allowsMultipleSelection = YES;
     self.collectionView.allowsDragging = YES;
+    
+    [self.collectionView registerForDraggedTypes:@[NSFilenamesPboardType]];
 }
 
 - (void)dealloc
@@ -94,6 +96,48 @@
  * @remark Currently handled are the cursor keys.
  **/
 - (void)collectionView:(JUCollectionView *)collectionView keyEvent:(NSEvent *)event forCellAtIndex:(NSUInteger)index {}
+
+#pragma mark drag and drop stuff
+
+- (NSArray *)selectedPaths
+{
+    return nil;
+}
+
+- (BOOL)copyItemsToPasteboard
+{
+    // Write data to the pasteboard
+    NSArray *fileList = [self selectedPaths];
+    if (fileList && fileList.count > 0)
+    {
+        NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
+        [pboard declareTypes:[NSArray arrayWithObject:NSFilenamesPboardType] owner:nil];
+        [pboard setPropertyList:fileList forType:NSFilenamesPboardType];
+        return TRUE;
+    }
+    
+    return FALSE;
+}
+
+- (NSDragOperation)collectionView:(JUCollectionView *)collectionView draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context;
+{
+    if (context == NSDraggingContextOutsideApplication)
+    {
+        NSLog(@"drag outside the application occurred.");
+        return NSDragOperationDelete;
+    }
+    else
+    if (context == NSDraggingContextWithinApplication)
+    {
+        NSLog(@"drag inside the application occurred.");
+        if ([self copyItemsToPasteboard])
+            return NSDragOperationCopy;
+        return NSDragOperationNone;
+    }
+    else
+        NSLog(@"some unknown drag context was sent.");
+    return NSDragOperationCopy;
+}
 
 
 @end

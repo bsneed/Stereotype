@@ -29,4 +29,6 @@
 
 @property (nonatomic, strong) NSString *searchString;
 
+- (NSArray *)selectedPaths;
+
 @end

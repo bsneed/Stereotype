@@ -30,10 +30,7 @@
     self.collectionView.desiredNumberOfColumns = 2;
     
     [self loadPlaylists];
-    [self setupNotificationListening];
-    
-    NSString *uti = [[NSBundle mainBundle].bundleIdentifier stringByAppendingFormat:@".pasteboardItem"];
-    [self.collectionView registerForDraggedTypes:@[uti]];
+    [self setupNotificationListening];    
 }
 
 - (void)loadPlaylists
@@ -127,6 +124,30 @@
     playlistView.viewStyle = RFSongsViewStylePlaylist;
 }
 
+- (NSArray *)selectedPaths
+{
+    // Write data to the pasteboard
+    NSMutableArray *fileList = [[NSMutableArray alloc] init];
+    
+    NSArray *items = [self.items objectsAtIndexes:self.collectionView.selection];
+    for (NSUInteger i = 0; i < items.count; i++)
+    {
+        RFPlaylistEntity *playlist = [items objectAtIndex:i];
+        NSSortDescriptor *sortDescriptor;
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+        NSArray *sortDescriptors = @[sortDescriptor];
+        NSArray *items = [[playlist.items allObjects] sortedArrayUsingDescriptors:sortDescriptors];
+
+        for (NSUInteger i = 0; i < items.count; i++)
+        {
+            RFItemEntity *item = [items objectAtIndex:i];
+            NSString *filePath = [[NSURL URLWithString:item.track.url] path];
+            [fileList addObject:filePath];
+        }
+    }
+    
+    return fileList;
+}
 
 - (NSDragOperation)collectionView:(JUCollectionView *)collectionView draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context;
 {

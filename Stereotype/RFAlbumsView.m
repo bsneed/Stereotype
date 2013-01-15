@@ -143,4 +143,21 @@
     songsView.viewStyle = RFSongsViewStyleAlbum;
 }
 
+- (NSArray *)selectedPaths
+{
+    // Write data to the pasteboard
+    NSMutableArray *fileList = [[NSMutableArray alloc] init];
+    
+    NSArray *items = [self.items objectsAtIndexes:self.collectionView.selection];
+    for (NSUInteger i = 0; i < items.count; i++)
+    {
+        RFTrackEntity *track = [items objectAtIndex:i];
+        NSString *filePath = [[NSURL URLWithString:track.url] path];
+        [fileList addObject:filePath];
+    }
+    
+    return fileList;
+}
+
+
 @end

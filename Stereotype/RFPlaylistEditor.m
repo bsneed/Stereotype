@@ -31,7 +31,7 @@
     self.collectionView.cellSize = NSMakeSize(406, 33);
     self.collectionView.desiredNumberOfColumns = 1;
     
-    [self.collectionView registerForDraggedTypes:@[(NSString *)kUTTypeFileURL]];
+    [self.collectionView registerForDraggedTypes:@[NSFilenamesPboardType]];
     
     [self.collectionView reloadData];
 }
