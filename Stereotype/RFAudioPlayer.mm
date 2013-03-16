@@ -128,13 +128,113 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
     self.outputDevice = [RFAudioDeviceList sharedInstance].defaultOutputDevice;
     audioPlayer->SetDeviceMasterVolume(1.0);
     audioPlayer->SetSampleRateConverterComplexity(kAudioUnitSampleRateConverterComplexity_Mastering);
-    audioPlayer->SetAudioPreRenderCallback(audioPreRenderCallback, (__bridge void*)self);
-    audioPlayer->SetAudioQueueEmptyCallback(audioQueueEmptyCallback, (__bridge void*)self);
-    audioPlayer->SetAudioSampleRateChangeCallback(audioSampleRateChangeCallback, (__bridge void*)self);
     
-    renderTimer = [NSTimer timerWithTimeInterval:0.25 target:self selector:@selector(renderTimerFired:) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:renderTimer forMode:NSRunLoopCommonModes];
-    [[NSRunLoop currentRunLoop] addTimer:renderTimer forMode:NSDefaultRunLoopMode];
+    audioPlayer->SetRenderingStartedBlock(^(const AudioDecoder *decoder) {
+        //OSAtomicTestAndSetBarrier(7 /* ePlayerFlagRenderingStarted */, &_playerFlags);
+
+        @autoreleasepool {
+            self.currentURL = [(__bridge NSURL *)audioPlayer->GetPlayingURL() copy];
+            _queueIndex = [self indexOfURLFromQueue:self.currentURL];
+            NSLog(@"started playing %@", self.currentURL);
+            
+            [self queueNextTrack];
+
+            _rendering = YES;
+            _playing = YES;
+        }
+    });
+    
+    audioPlayer->SetRenderingFinishedBlock(^(const AudioDecoder *decoder) {
+        //OSAtomicTestAndSetBarrier(6 /* ePlayerFlagRenderingFinished */, &_playerFlags);
+
+        @autoreleasepool {
+            _rendering = NO;
+            _playing = NO;
+            
+            if (_repeatMode == eRepeatModeOff)
+            {
+                if (queueShouldStop)
+                {
+                    [self stop];
+                    NSInteger nextQueueIndex = 0;
+                    nextURL = [workingQueue objectAtIndex:nextQueueIndex];
+                    shouldQueueNextTrackAfterCurrent = ![self enqueueURL:nextURL];
+                }
+                else
+                if (_queueIndex+1 >= [workingQueue count])
+                {
+                    queueShouldStop = YES;
+                }
+            }
+        }
+    });
+    
+    audioPlayer->SetDecodingStartedBlock(^(const AudioDecoder *decoder) {
+        @autoreleasepool {
+            _decoding = YES;
+            canSkipNext = YES;
+            canSkipPrevious = YES;
+        }
+    });
+    
+    audioPlayer->SetDecodingFinishedBlock(^(const AudioDecoder *decoder) {
+        @autoreleasepool {
+            _decoding = NO;
+        }
+    });
+    
+    /*audioPlayer->SetFormatMismatchBlock(^(AudioStreamBasicDescription currentFormat, AudioStreamBasicDescription nextFormat) {
+        @autoreleasepool {
+            Float64 sampleRate = 0;
+            audioPlayer->GetOutputDeviceSampleRate(sampleRate);
+            //if (nextFormat.mSampleRate != sampleRate)
+            {
+                [self performBlockOnMainThread:^{
+                    audioPlayer->Pause();
+                    audioPlayer->SetOutputDeviceSampleRate(nextFormat.mSampleRate);
+                    audioPlayer->Play();
+                }];
+                //audioPlayer->Pause();
+                //[self performSelectorOnMainThread:@selector(changeSampleRate:) withObject:[NSNumber numberWithFloat:nextFormat.mSampleRate] waitUntilDone:YES];
+            }
+        }
+    });*/
+    
+    audioPlayer->SetPreRenderBlock(^(AudioBufferList *data, UInt32 frameCount) {
+        @autoreleasepool {
+            if (self.visualizer && [self.visualizer conformsToProtocol:@protocol(RFAudioPlayerVisualizationProtocol)])
+            {
+                float *buffer1 = (float *)data->mBuffers[0].mData;
+                float *buffer2 = (float *)data->mBuffers[1].mData;
+                [self performBlockOnMainThread:^{
+                    float *buffers[2] = {buffer1, buffer2};
+                    [self.visualizer setBuffers:buffers numberOfBuffers:data->mNumberBuffers samples:frameCount];
+                }];
+            }
+        }
+    });
+    
+    /*audioPlayer->SetPostRenderBlock(^(AudioBufferList *data, UInt32 frameCount) {
+        @autoreleasepool {
+            [self performUserBlockOnMainThread:^(id userObject) {
+                CFTimeInterval currentTime = 0;
+                audioPlayer->GetCurrentTime(currentTime);
+                
+                NSUInteger currentTimeAsInt = currentTime;
+                
+                if (_elapsedTimeInSeconds != currentTimeAsInt)
+                {
+                    [self willChangeValueForKey:@"elapsedTimeInSeconds"];
+                    _elapsedTimeInSeconds = currentTimeAsInt;
+                    [self didChangeValueForKey:@"elapsedTimeInSeconds"];
+                }
+            } userObject:nil];
+        }
+    });*/
+    
+    //renderTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(renderTimerFired:) userInfo:nil repeats:YES];
+    //[[NSRunLoop currentRunLoop] addTimer:renderTimer forMode:NSRunLoopCommonModes];
+    //[[NSRunLoop currentRunLoop] addTimer:renderTimer forMode:NSDefaultRunLoopMode];
     
     effectFilters = [[NSMutableArray alloc] init];
     
@@ -408,14 +508,34 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         if (rate.floatValue > highestRate.floatValue)
             highestRate = rate;
     }
+    
+    audioPlayer->SetInputOutputSampleRatesShouldMatch(_upsampling);
 
+    BOOL wasPlaying = [self isPlaying];
+    if (wasPlaying)
+        [self pause];
+    
     if (_upsampling)
+    {
+        self.outputSampleRate = highestRate.floatValue;
+    }
+    else
+    {
+        RFMetadata *urlMetadata = [[RFMetadata alloc] initWithURL:self.currentURL];
+        self.outputSampleRate = [urlMetadata getSampleRate].floatValue;
+    }
+    
+    if (wasPlaying)
+        [self play];
+
+    /*if (_upsampling)
     {
         self.outputSampleRate = highestRate.floatValue;
     }
     else
     if (audioPlayer->IsPerformingSampleRateConversion())
     {
+        // FIXME
         Float64 inputSampleRate = 0;
         if (audioPlayer->GetSampleRateForInput(inputSampleRate))
         {
@@ -424,7 +544,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
             else
                 self.outputSampleRate = highestRate.floatValue;
         }
-    }
+    }*/
 }
 
 - (void)setExclusiveMode:(BOOL)exclusiveMode
@@ -468,7 +588,13 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 
 - (void)setCurrentURL:(NSURL *)currentURL
 {
-    if ([_currentURL isEqualTo:currentURL])
+    if (![NSThread isMainThread])
+    {
+        [self performSelectorOnMainThread:@selector(setCurrentURL:) withObject:currentURL waitUntilDone:YES];
+        return;
+    }
+    
+    if ([[_currentURL absoluteString] isEqualToString:[currentURL absoluteString]])
         return;
     
     [self willChangeValueForKey:@"currentURL"];
@@ -577,95 +703,70 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 
 - (void)renderTimerFired:(NSTimer*)timer
 {
-    if (ePlayerFlagRenderingStarted & _playerFlags)
-    {
-		OSAtomicTestAndClearBarrier(7 /* ePlayerFlagRenderingStarted */, &_playerFlags);
-        
-        self.currentURL = [(__bridge NSURL *)audioPlayer->GetPlayingURL() copy];
-        _queueIndex = [self indexOfURLFromQueue:self.currentURL];//[_queue indexOfObjectIdenticalTo:self.currentURL];
-        //NSLog(@"started playing %@", self.currentURL);
-        
-        [self queueNextTrack];
-        
-//        if (_repeatMode == eRepeatModeOn)
-//        {
-//            NSInteger nextQueueIndex = _queueIndex + 1;
-//            if (nextQueueIndex < 0)
-//                nextQueueIndex = 0;
-//            if (nextQueueIndex >= [workingQueue count])
-//                nextQueueIndex = 0;
-//            nextURL = [workingQueue objectAtIndex:nextQueueIndex];
-//            shouldQueueNextTrackAfterCurrent = ![self enqueueURL:nextURL];
-//        }
-//        else
-//        if (_repeatMode == eRepeatModeSingle)
-//        {
-//            NSInteger nextQueueIndex = _queueIndex;
-//            nextURL = [workingQueue objectAtIndex:nextQueueIndex];
-//            shouldQueueNextTrackAfterCurrent = ![self enqueueURL:nextURL];            
-//        }
+//    if (ePlayerFlagRenderingStarted & _playerFlags)
+//    {
+//		OSAtomicTestAndClearBarrier(7 /* ePlayerFlagRenderingStarted */, &_playerFlags);
+//        
+//        self.currentURL = [(__bridge NSURL *)audioPlayer->GetPlayingURL() copy];
+//        _queueIndex = [self indexOfURLFromQueue:self.currentURL];//[_queue indexOfObjectIdenticalTo:self.currentURL];
+//        //NSLog(@"started playing %@", self.currentURL);
+//        
+//        [self queueNextTrack];
+//        
+//        _rendering = YES;
+//	}
+//    else
+//    if (ePlayerFlagRenderingFinished & _playerFlags)
+//    {
+//		OSAtomicTestAndClearBarrier(6 /* ePlayerFlagRenderingFinished */, &_playerFlags);
+//        //NSLog(@"stopped playing");
+//        _rendering = NO;
+//        
 //        if (_repeatMode == eRepeatModeOff)
 //        {
-//            NSInteger nextQueueIndex = _queueIndex + 1;
-//            if (nextQueueIndex < 0)
-//                nextQueueIndex = 0;
-//            if (nextQueueIndex >= [workingQueue count])
-//                return;
-//            nextURL = [workingQueue objectAtIndex:nextQueueIndex];
-//            shouldQueueNextTrackAfterCurrent = ![self enqueueURL:nextURL];
+//            if (queueShouldStop)
+//            {
+//                [self stop];
+//                NSInteger nextQueueIndex = 0;
+//                nextURL = [workingQueue objectAtIndex:nextQueueIndex];
+//                shouldQueueNextTrackAfterCurrent = ![self enqueueURL:nextURL];
+//            }
+//            else
+//            if (_queueIndex+1 >= [workingQueue count])
+//            {
+//                queueShouldStop = YES;
+//            }
 //        }
-        
-        _rendering = YES;
-	}
-    else
-    if (ePlayerFlagRenderingFinished & _playerFlags)
-    {
-		OSAtomicTestAndClearBarrier(6 /* ePlayerFlagRenderingFinished */, &_playerFlags);
-        //NSLog(@"stopped playing");
-        _rendering = NO;
-        
-        if (_repeatMode == eRepeatModeOff)
-        {
-            if (queueShouldStop)
-            {
-                [self stop];
-                NSInteger nextQueueIndex = 0;
-                nextURL = [workingQueue objectAtIndex:nextQueueIndex];
-                shouldQueueNextTrackAfterCurrent = ![self enqueueURL:nextURL];
-            }
-            else
-            if (_queueIndex+1 >= [workingQueue count])
-            {
-                queueShouldStop = YES;
-            }
-        }
-        
-        //if (shouldQueueNextTrackAfterCurrent)
-        /*{
-            shouldQueueNextTrackAfterCurrent = NO;
-            [self performBlock:^{
-                audioPlayer->SkipToNextTrack();
-                [self play];
-            } afterDelay:0];
-        }*/
-	}
-    else
-    if (ePlayerFlagDecodingStarted & _playerFlags)
-    {
-        OSAtomicTestAndClearBarrier(5 /* ePlayerFlagDecodingStarted */, &_playerFlags);
-        //NSLog(@"started decoding %@", self.currentURL);
-        _decoding = YES;
-        canSkipNext = YES;
-        canSkipPrevious = YES;
-    }
-    else
-    if (ePlayerFlagDecodingFinished & _playerFlags)
-    {
-        OSAtomicTestAndClearBarrier(4 /* ePlayerFlagDecodingFinished */, &_playerFlags);
-        //NSLog(@"stopped decoding");
-        _decoding = NO;
-    }
+//	}
+//    else
+//    if (ePlayerFlagDecodingStarted & _playerFlags)
+//    {
+//        OSAtomicTestAndClearBarrier(5 /* ePlayerFlagDecodingStarted */, &_playerFlags);
+//        //NSLog(@"started decoding %@", self.currentURL);
+//        _decoding = YES;
+//        canSkipNext = YES;
+//        canSkipPrevious = YES;
+//    }
+//    else
+//    if (ePlayerFlagDecodingFinished & _playerFlags)
+//    {
+//        OSAtomicTestAndClearBarrier(4 /* ePlayerFlagDecodingFinished */, &_playerFlags);
+//        //NSLog(@"stopped decoding");
+//        _decoding = NO;
+//    }
     
+    CFTimeInterval currentTime = 0;
+    audioPlayer->GetCurrentTime(currentTime);
+    
+    NSUInteger currentTimeAsInt = currentTime;
+    
+    if (_elapsedTimeInSeconds != currentTimeAsInt)
+    {
+        [self willChangeValueForKey:@"elapsedTimeInSeconds"];
+        _elapsedTimeInSeconds = currentTimeAsInt;
+        [self didChangeValueForKey:@"elapsedTimeInSeconds"];
+    }
+
     if (_rendering)
     {
         BOOL playing = [self isPlaying];
@@ -795,7 +896,14 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 - (void)changeSampleRate:(NSNumber *)sampleRate
 {
     if (!self.upsampling)
-        self.outputSampleRate = sampleRate.floatValue;
+    {
+        if (self.outputSampleRate != sampleRate.floatValue)
+        {
+            self.outputSampleRate = sampleRate.floatValue;
+            // this is only called from a sample rate change, which was paused previously.
+            //audioPlayer->Play();
+        }
+    }
 }
 
 /*- (void)addToQueue:(NSArray *)items
@@ -824,6 +932,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         return NO;
     }
 
+    AudioDecoder::SetAutomaticallyOpenDecoders(true);
     AudioDecoder *decoder = AudioDecoder::CreateDecoderForInputSource(inputSource);
     if (decoder == nullptr)
     {
@@ -831,10 +940,10 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         return NO;
     }
     
-	decoder->SetRenderingStartedCallback(renderingStarted, (__bridge void*)self);
+	/*decoder->SetRenderingStartedCallback(renderingStarted, (__bridge void*)self);
 	decoder->SetRenderingFinishedCallback(renderingFinished, (__bridge void*)self);
     decoder->SetDecodingStartedCallback(decodingStarted, (__bridge void*)self);
-    decoder->SetDecodingFinishedCallback(decodingFinished, (__bridge void*)self);
+    decoder->SetDecodingFinishedCallback(decodingFinished, (__bridge void*)self);*/
     
 	if ((audioPlayer->Enqueue(decoder)) == false)
     {
@@ -922,13 +1031,13 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
     if (!canSkipNext)
         return;
     
+    canSkipNext = NO;
     BOOL wasPlaying = [self isPlaying];
     
     [self stop];
     [self loadQueuedURLAtIndex:self.queueIndex + 1];
     if (wasPlaying)
         [self play];
-    canSkipNext = NO;
 }
 
 - (void)previous
@@ -936,13 +1045,13 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
     if (!canSkipPrevious)
         return;
     
+    canSkipPrevious = NO;
     BOOL wasPlaying = [self isPlaying];
     
     [self stop];
     [self loadQueuedURLAtIndex:self.queueIndex - 1];
     if (wasPlaying)
         [self play];
-    canSkipPrevious = NO;
 }
 
 - (CFTimeInterval)elapsedTime

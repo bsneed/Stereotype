@@ -117,7 +117,7 @@
 - (NSArray *)selectedPaths
 {
     // Write data to the pasteboard
-    NSMutableArray *fileList = [[NSMutableArray alloc] init];
+    /*NSMutableArray *fileList = [[NSMutableArray alloc] init];
     
     NSArray *items = [self.items objectsAtIndexes:self.collectionView.selection];
     for (NSUInteger i = 0; i < items.count; i++)
@@ -127,7 +127,8 @@
         [fileList addObject:filePath];
     }
     
-    return fileList;
+    return fileList;*/
+    return nil;
 }
 
 @end

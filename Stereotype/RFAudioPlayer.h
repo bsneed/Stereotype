@@ -44,6 +44,8 @@ typedef enum
 @property (nonatomic, readonly) NSURL *currentURL;
 @property (nonatomic, readonly) BOOL playing;
 
+@property (nonatomic, readonly) NSUInteger elapsedTimeInSeconds;
+
 @property (nonatomic, weak) NSObject<RFAudioPlayerVisualizationProtocol> *visualizer;
 @property (nonatomic, weak) NSObject<RFAudioPlayerDelegate> *delegate;
 

@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C3006</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.SystemVersion">12C3012</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2844</string>
+			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSButton</string>
@@ -2863,75 +2863,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">RFAppDelegate</string>
 					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="decreaseVolumeAction:">id</string>
-						<string key="importDirectory:">id</string>
-						<string key="importiTunes:">id</string>
-						<string key="increaseVolumeAction:">id</string>
-						<string key="nextTrackAction:">id</string>
-						<string key="openLibraryAction:">id</string>
-						<string key="openSettingsAction:">id</string>
-						<string key="playPauseTrackAction:">id</string>
-						<string key="prevTrackAction:">id</string>
-						<string key="repeatAction:">id</string>
-						<string key="shuffleAction:">id</string>
-						<string key="sliderMovedAction:">id</string>
-						<string key="volumeSliderAction:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="decreaseVolumeAction:">
-							<string key="name">decreaseVolumeAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="importDirectory:">
-							<string key="name">importDirectory:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="importiTunes:">
-							<string key="name">importiTunes:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="increaseVolumeAction:">
-							<string key="name">increaseVolumeAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="nextTrackAction:">
-							<string key="name">nextTrackAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="openLibraryAction:">
-							<string key="name">openLibraryAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="openSettingsAction:">
-							<string key="name">openSettingsAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="playPauseTrackAction:">
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">playPauseTrackAction:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">playPauseTrackAction:</string>
+						<object class="IBActionInfo" key="NS.object.0">
 							<string key="name">playPauseTrackAction:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="prevTrackAction:">
-							<string key="name">prevTrackAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="repeatAction:">
-							<string key="name">repeatAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="shuffleAction:">
-							<string key="name">shuffleAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="sliderMovedAction:">
-							<string key="name">sliderMovedAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="volumeSliderAction:">
-							<string key="name">volumeSliderAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="albumTextField">NSTextField</string>
 						<string key="artistTextField">NSTextField</string>

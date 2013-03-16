@@ -11,7 +11,7 @@
 @interface NSImage (QuickLook)
 
 
-+ (NSImage *)imageWithPreviewOfFileAtPath:(NSURL *)fileURL ofSize:(NSSize)size asIcon:(BOOL)icon;
+//+ (NSImage *)imageWithPreviewOfFileAtPath:(NSURL *)fileURL ofSize:(NSSize)size asIcon:(BOOL)icon;
 //+ (NSImage *)albumArtForFileURL:(NSURL *)fileURL;
 + (NSImage *)imageFromAlbum:(NSString *)album artist:(NSString *)artist url:(NSURL *)url;
 

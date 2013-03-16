@@ -56,7 +56,7 @@ static BOOL useImageCache = YES;
 }
 
 
-+ (void)saveImageToCache:(NSImage *)image fileURL:(NSURL *)fileURL
++ (void)saveImageToCache:(NSImage *)image
 {
     NSData *data = [image TIFFRepresentation];
     if (data)
@@ -65,12 +65,9 @@ static BOOL useImageCache = YES;
         useImageCache = [[NSFileManager defaultManager] findOrCreateDirectory:supportDir];
         if (useImageCache)
         {
-            NSString *fileName = [NSString stringWithFormat:@"%lu.tiff", [[fileURL lastPathComponent] hash]];
-            NSURL *url = [supportDir URLByAppendingPathComponent:fileName];
+            NSURL *url = [supportDir URLByAppendingPathComponent:image.name];
             [data writeToFile:[url path] atomically:NO];
         }
-        //else
-        //    NSLog(@"image cache disabled.");
     }
 }
 
@@ -80,7 +77,10 @@ static BOOL useImageCache = YES;
     NSString *fileName = [NSString stringWithFormat:@"%lu.tiff", [[fileURL lastPathComponent] hash]];
     NSURL *url = [supportDir URLByAppendingPathComponent:fileName];
 
-    NSImage *image = [[NSImage alloc] initWithContentsOfURL:url];
+    NSImage *image = [NSImage imageNamed:fileName];
+    if (!image)
+        image = [[NSImage alloc] initWithContentsOfURL:url];
+    
     return image;
 }
 
@@ -91,11 +91,11 @@ static BOOL useImageCache = YES;
     NSError *err = nil;
     NSImage *albumArt = nil;
     
-    /*RFMetadata *metadata = [[RFMetadata alloc] initWithURL:fileURL];
+    RFMetadata *metadata = [[RFMetadata alloc] initWithURL:fileURL];
     if (metadata)
     {
         albumArt = [metadata getAlbumArt];
-    }*/
+    }
     
     if (!albumArt)
     {
@@ -150,7 +150,7 @@ static BOOL useImageCache = YES;
 {
     if (useImageCache)
     {
-        NSString *name = [NSString stringWithFormat:@"%@_%@", album, artist];
+        NSString *name = [NSString stringWithFormat:@"%lu.tiff", [[url lastPathComponent] hash]];
         NSImage *result = [NSImage imageNamed:name];
     
         if (!result)
@@ -161,13 +161,12 @@ static BOOL useImageCache = YES;
         if (!result)
         {
             result = [NSImage albumArtForFileURL:url];
-            [NSImage saveImageToCache:result fileURL:url];
-        }
-        
-        if (result)
-        {
-            [result setName:name];
-            //[result setCacheMode:NSImageCacheAlways];
+            if (result)
+            {
+                [result setName:name];
+                //[result setCacheMode:NSImageCacheAlways];
+                [NSImage saveImageToCache:result];
+            }
         }
         
         return result;

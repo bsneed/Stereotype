@@ -168,6 +168,7 @@ static RFAppDelegate *__appDelegateInstance = nil;
     [RFAudioDeviceList sharedInstance].delegate = self;
     audioPlayer.outputDevice = [[RFAudioDeviceList sharedInstance] outputDeviceByName:settings.preferredDevice];
     audioPlayer.upsampling = settings.upsampling;
+    audioPlayer.outputSampleRate = settings.preferredSampleRate;
     [audioPlayer setManagedOutputDevicePopup:self.settingsViewController.outputDevicePopup];
     [audioPlayer setManagedOutputSampleRatePopup:self.settingsViewController.sampleRatePopup];
     [audioPlayer setManagedOutputFormatPopup:self.settingsViewController.formatPopup];
@@ -183,9 +184,6 @@ static RFAppDelegate *__appDelegateInstance = nil;
     library = [RFLibrary sharedInstance];
     
     [self loadPlaylistFromSettings];
-    
-    self.useVisualizer = YES;
-    visualizer.enabled = YES;
 }
 
 - (void)loadPlaylistFromSettings
@@ -211,11 +209,38 @@ static RFAppDelegate *__appDelegateInstance = nil;
 {
     [audioPlayer addObserver:self forKeyPath:@"currentURL" options:NSKeyValueObservingOptionNew context:nil];
     [audioPlayer addObserver:self forKeyPath:@"playing" options:NSKeyValueObservingOptionNew context:nil];
+    //[audioPlayer addObserver:self forKeyPath:@"elapsedTimeInSeconds" options:NSKeyValueObservingOptionNew context:nil];
+    
     [settings addObserver:self forKeyPath:@"urlQueueIndex" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    if ([keyPath isEqualToString:@"elapsedTimeInSeconds"])
+    {
+        if ([audioPlayer isPlaying])
+        {
+            CFTimeInterval elapsedTime = [audioPlayer elapsedTime];
+            
+            [self setTime:elapsedTime textField:self.timeTextField];
+            
+            if ([[NSRunLoop currentRunLoop].currentMode isEqualToString:NSDefaultRunLoopMode])
+            {
+                if (self.timeSlider.doubleValue != elapsedTime)
+                    self.timeSlider.doubleValue = elapsedTime;
+            }
+        }
+        
+        //[self updatePlayButtonState];
+        
+        self.useVisualizer = settings.useVisualizer;
+    }
+    else
+    if ([keyPath isEqualToString:@"playing"])
+    {
+        [self updatePlayButtonState];
+    }
+    else
     if ([keyPath isEqualToString:@"currentURL"])
     {
         NSURL *url = [audioPlayer currentURL];
@@ -248,6 +273,16 @@ static RFAppDelegate *__appDelegateInstance = nil;
         
         currentTrackInfo = @{ @"name" : name, @"artist" : artist, @"album" : album, @"artwork" : albumArt, @"duration" : duration };
         visualizer.trackInfo = currentTrackInfo;
+        
+        [self setTime:duration.floatValue textField:self.durationTextField];
+        
+        if ([[NSRunLoop currentRunLoop].currentMode isEqualToString:NSDefaultRunLoopMode])
+        {
+            self.timeSlider.maxValue = duration.floatValue;
+            self.timeSlider.minValue = 0;
+            self.timeSlider.doubleValue = 0;
+        }
+
     }
     else
     if ([keyPath isEqualToString:@"urlQueueIndex"])
@@ -411,7 +446,7 @@ static RFAppDelegate *__appDelegateInstance = nil;
     [self.window makeKeyAndOrderFront:nil];
     [self.window makeFirstResponder:self.playerView];
     
-    updateTimer = [NSTimer timerWithTimeInterval:0.25 target:self selector:@selector(updateDisplayInfo:) userInfo:nil repeats:YES];
+    updateTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(updateDisplayInfo:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:updateTimer forMode:NSRunLoopCommonModes];
     
     [self checkLibrarySetup];
@@ -485,10 +520,15 @@ static RFAppDelegate *__appDelegateInstance = nil;
 	hr = min / 60;
 	min -= hr * 60;
     
+    NSString *newTime = nil;
     if (hr > 0)
-        [textField setStringValue:[NSString stringWithFormat:@"%02d:%02d:%02d", hr, min, sec]];
+        newTime = [NSString stringWithFormat:@"%02d:%02d:%02d", hr, min, sec];
     else
-        [textField setStringValue:[NSString stringWithFormat:@"%02d:%02d", min, sec]];
+        newTime = [NSString stringWithFormat:@"%02d:%02d", min, sec];
+    
+    NSString *oldTime = [textField stringValue];
+    if (![newTime isEqualToString:oldTime])
+        [textField setStringValue:newTime];
 }
 
 - (float)elapsedTime
@@ -506,16 +546,13 @@ static RFAppDelegate *__appDelegateInstance = nil;
     if ([audioPlayer isPlaying])
     {
         CFTimeInterval elapsedTime = [audioPlayer elapsedTime];
-        CFTimeInterval totalTime = [audioPlayer totalTime];
         
         [self setTime:elapsedTime textField:self.timeTextField];
-        [self setTime:totalTime textField:self.durationTextField];
         
         if ([[NSRunLoop currentRunLoop].currentMode isEqualToString:NSDefaultRunLoopMode])
         {
-            self.timeSlider.maxValue = totalTime;
-            self.timeSlider.minValue = 0;
-            self.timeSlider.doubleValue = elapsedTime;
+            if (self.timeSlider.doubleValue != elapsedTime)
+                self.timeSlider.doubleValue = elapsedTime;
         }
     }
     
@@ -536,8 +573,7 @@ static RFAppDelegate *__appDelegateInstance = nil;
         visualizer = [[RFCompositionView alloc] initWithFrame:NSMakeRect(0, 202, 202, 202)];
         [visualizer loadCompositionAtPath:vizPath];
         audioPlayer.visualizer = visualizer;
-        if ([audioPlayer isPlaying])
-            visualizer.enabled = YES;
+        visualizer.enabled = YES;
         [self.artworkView setCompositionView:visualizer];
         visualizer.trackInfo = currentTrackInfo;
     }
@@ -606,9 +642,15 @@ static RFAppDelegate *__appDelegateInstance = nil;
 - (void)updatePlayButtonState
 {
     if ([audioPlayer isPlaying])
-        [self.playButton setState:NSOnState];
+    {
+        if (self.playButton.state != NSOnState)
+            [self.playButton setState:NSOnState];
+    }
     else
-        [self.playButton setState:NSOffState];
+    {
+        if (self.playButton.state != NSOffState)
+            [self.playButton setState:NSOffState];
+    }
 }
 
 - (void)setShuffle:(BOOL)shuffle
