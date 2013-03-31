@@ -6,10 +6,11 @@
 //  Copyright (c) 2012 redf.net. All rights reserved.
 //
 
+#import <Quartz/Quartz.h>
 #import "RFLibraryView.h"
 #import "RFCollectionView.h"
 
-@interface RFPlaylistView : RFLibraryView<NSCollectionViewDelegate, RFCollectionViewDelegate>
+@interface RFPlaylistView : RFLibraryView<RFCollectionViewDelegate>
 
 @property (weak) IBOutlet RFCollectionView *collectionView;
 

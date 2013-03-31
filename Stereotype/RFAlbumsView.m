@@ -85,7 +85,7 @@
 
 #pragma mark - CollectionView delegate/datasource
 
-- (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView cellForObject:(id)object
+/*- (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView cellForObject:(id)object
 {
     RFCoverViewCell *cell = [RFCoverViewCell loadFromNib];
     
@@ -114,7 +114,7 @@
         cell.imageView.image = [NSImage imageFromAlbum:track.albumTitle artist:track.artist url:[NSURL URLWithString:url]];
     
     return cell;
-}
+}*/
 
 - (void)collectionView:(RFCollectionView *)collectionView doubleClickOnObject:(id)object
 {

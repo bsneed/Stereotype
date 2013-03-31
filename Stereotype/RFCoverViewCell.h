@@ -7,14 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "RFCollectionView.h"
+#import "RFCollectionViewCell.h"
 
-@interface RFCoverViewCell : NSCollectionViewItem
-
-@property (weak) IBOutlet NSImageView *imageView;
-@property (weak) IBOutlet NSImageView *selectionImageView;
-@property (weak) IBOutlet NSTextField *textLabel;
-@property (weak) IBOutlet NSTextField *detailTextLabel;
-@property (weak) IBOutlet NSTextField *playlistLabel;
+@interface RFCoverViewCell : RFCollectionViewCell
 
 @end

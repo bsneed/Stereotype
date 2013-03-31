@@ -1,26 +1,32 @@
 //
 //  RFCollectionView.h
-//  Stereotype
+//  image-browser
 //
 //  Created by Brandon Sneed on 3/27/13.
-//  Copyright (c) 2013 redf.net. All rights reserved.
+//
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Quartz/Quartz.h>
 
+@class RFCollectionViewCell;
 @class RFCollectionView;
 
-@protocol RFCollectionViewDelegate<NSObject>
+@protocol RFCollectionViewDelegate <NSObject>
+@required
+- (RFCollectionViewCell *)collectionView:(RFCollectionView *)collectionView cellForItem:(id)item;
+
 @optional
-- (NSCollectionViewItem *)collectionView:(RFCollectionView *)collectionView cellForObject:(id)object;
-- (void)collectionView:(RFCollectionView *)collectionView doubleClickOnObject:(id)object;
+- (CALayer *)collectionView:(RFCollectionView *)collectionView selectionLayerToModify:(CALayer *)layer;
+- (CALayer *)collectionView:(RFCollectionView *)collectionView foregroundLayerToModify:(CALayer *)layer;
+- (CALayer *)collectionView:(RFCollectionView *)collectionView backgroundLayerToModify:(CALayer *)layer;
+- (CALayer *)collectionView:(RFCollectionView *)collectionView placeholderLayerToModify:(CALayer *)layer;
+
 @end
 
-@interface RFCollectionViewCellView : NSView
-@property (weak) RFCollectionView *collectionView;
-@property (weak) id representedObject;
-@end
 
-@interface RFCollectionView : NSCollectionView
+@interface RFCollectionView : IKImageBrowserView
+
+@property (nonatomic, assign) NSColor *containerBackgroundColor;
+@property (nonatomic, assign) NSColor *imageOutlineColor;
 
 @end

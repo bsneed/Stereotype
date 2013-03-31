@@ -12,6 +12,55 @@
 #import "RFLibraryViewController.h"
 #import "JUCollectionView+Dragging.h"
 
+@interface RFPlaylistEntity (PlaylistView)
+
+@end
+
+@implementation RFPlaylistEntity (PlaylistView)
+
+- (NSString *)imageTitle
+{
+    return self.name;
+}
+
+- (NSString *)imageSubtitle
+{
+    return nil;
+}
+
+- (NSString *)imageRepresentationType
+{
+	return IKImageBrowserNSImageRepresentationType;
+}
+
+- (id)imageRepresentation
+{
+    NSImage *result = nil;
+    
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    NSArray *items = [[self.items allObjects] sortedArrayUsingDescriptors:sortDescriptors];
+    
+    NSUInteger count = [items count];
+    if (count > 0)
+    {
+        RFItemEntity *firstItem = [items objectAtIndex:0];
+        NSString *url = firstItem.track.url;
+        if (url && [url length] > 0)
+            result = [NSImage imageFromAlbum:firstItem.track.albumTitle artist:firstItem.track.artist url:[NSURL URLWithString:url]];
+    }
+
+    return result;
+}
+
+- (NSString *)imageUID
+{
+    return [self.objectID.URIRepresentation absoluteString];
+}
+
+@end
+
 @implementation RFPlaylistView
 {
     NSImage *blankArtImage;
@@ -26,9 +75,15 @@
     blankArtImage = [NSImage imageNamed:@"albumArt"];
     self.title = @"Playlists";
 
-    self.collectionView.itemPrototype = [RFCoverViewCell loadFromNib];
+    self.collectionView.animates = YES;
     self.collectionView.delegate = self;
-    
+    //self.collectionView.zoomValue = 0.55;
+    self.collectionView.cellSize = CGSizeMake(134, 134);
+    //self.collectionView.intercellSpacing = CGSizeMake(20, 20);
+    self.collectionView.containerBackgroundColor = [NSColor clearColor];
+    self.collectionView.imageOutlineColor = [NSColor lightGrayColor];
+    self.collectionView.cellsStyleMask = IKCellsStyleShadowed | IKCellsStyleOutlined | IKCellsStyleTitled;
+
     [self loadPlaylists];
     [self setupNotificationListening];
 }
@@ -44,7 +99,7 @@
         filterPredicate = [NSPredicate predicateWithFormat:@"name contains[cd] %@", self.searchString];
     }
     self.items = [database allObjectsForEntity:@"RFPlaylistEntity" sortDescriptors:sortDescriptors filteredBy:filterPredicate];
-    self.collectionView.content = self.items;
+    [self.collectionView reloadData];
 }
 
 - (void)setupNotificationListening
@@ -68,7 +123,32 @@
 
 #pragma mark - CollectionView delegate/datasource
 
-- (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView cellForObject:(id)object
+- (NSUInteger)numberOfItemsInImageBrowser:(IKImageBrowserView *)view
+{
+    return [self.items count];
+}
+
+- (id)imageBrowser:(IKImageBrowserView *)view itemAtIndex:(NSUInteger)index
+{
+    return [self.items objectAtIndex:index];
+}
+
+- (RFCollectionViewCell *)collectionView:(RFCollectionView *)collectionView cellForItem:(id)item
+{
+    return [[RFCoverViewCell alloc] init];
+}
+
+- (CALayer *)collectionView:(RFCollectionView *)collectionView selectionLayerToModify:(CALayer *)layer
+{
+    layer.shadowColor = [NSColor blackColor].CGColor;
+    layer.shadowOffset = CGSizeMake(0, -1);
+    layer.shadowRadius = 3.0;
+    layer.shadowOpacity = 0.5;
+    
+    return layer;
+}
+
+/*- (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView cellForObject:(id)object
 {
     RFCoverViewCell *cell = [RFCoverViewCell loadFromNib];
     
@@ -96,11 +176,11 @@
     }
 
     return cell;
-}
+}*/
 
-- (void)collectionView:(RFCollectionView *)collectionView doubleClickOnObject:(id)object;
+- (void)imageBrowser:(IKImageBrowserView *)aBrowser cellWasDoubleClickedAtIndex:(NSUInteger)index
 {
-    RFPlaylistEntity *selectedItem = (RFPlaylistEntity *)object;
+    RFPlaylistEntity *selectedItem = [self.items objectAtIndex:index];
     
     RFSongsView *playlistView = [RFSongsView loadFromNib];
     playlistView.title = selectedItem.name;

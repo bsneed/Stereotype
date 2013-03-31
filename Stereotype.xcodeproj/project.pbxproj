@@ -94,6 +94,7 @@
 		CAB968B0164D32B000362EC8 /* Occluded Light.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CAB968AF164D32B000362EC8 /* Occluded Light.qtz */; };
 		CAB968B2164D35FB00362EC8 /* High Particles.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CAB968B1164D35FB00362EC8 /* High Particles.qtz */; };
 		CAC1C63F1703C3EC00E0877A /* RFCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC1C63E1703C3EC00E0877A /* RFCollectionView.m */; };
+		CAC1C64C170819CB00E0877A /* RFCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC1C64B170819CB00E0877A /* RFCollectionViewCell.m */; };
 		CACA5297164A30D9005EF3E5 /* backButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CACA5295164A30D9005EF3E5 /* backButton@2x.png */; };
 		CACA5298164A30D9005EF3E5 /* backButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CACA5296164A30D9005EF3E5 /* backButtonPressed@2x.png */; };
 		CACA529B164A3171005EF3E5 /* RFBackButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CACA529A164A3171005EF3E5 /* RFBackButtonCell.m */; };
@@ -366,6 +367,8 @@
 		CAB968B1164D35FB00362EC8 /* High Particles.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = "High Particles.qtz"; sourceTree = "<group>"; };
 		CAC1C63D1703C3EC00E0877A /* RFCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFCollectionView.h; sourceTree = "<group>"; };
 		CAC1C63E1703C3EC00E0877A /* RFCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFCollectionView.m; sourceTree = "<group>"; };
+		CAC1C64A170819CB00E0877A /* RFCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFCollectionViewCell.h; sourceTree = "<group>"; };
+		CAC1C64B170819CB00E0877A /* RFCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFCollectionViewCell.m; sourceTree = "<group>"; };
 		CACA5295164A30D9005EF3E5 /* backButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backButton@2x.png"; path = "Graphics/backButton@2x.png"; sourceTree = SOURCE_ROOT; };
 		CACA5296164A30D9005EF3E5 /* backButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backButtonPressed@2x.png"; path = "Graphics/backButtonPressed@2x.png"; sourceTree = SOURCE_ROOT; };
 		CACA5299164A3171005EF3E5 /* RFBackButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBackButtonCell.h; sourceTree = "<group>"; };
@@ -968,6 +971,8 @@
 				CA5BEB2A1699697300B821B8 /* RFPlaylistEditor.xib */,
 				CAC1C63D1703C3EC00E0877A /* RFCollectionView.h */,
 				CAC1C63E1703C3EC00E0877A /* RFCollectionView.m */,
+				CAC1C64A170819CB00E0877A /* RFCollectionViewCell.h */,
+				CAC1C64B170819CB00E0877A /* RFCollectionViewCell.m */,
 			);
 			name = PlaylistViews;
 			sourceTree = "<group>";
@@ -1241,6 +1246,7 @@
 				CA5BEB291699695600B821B8 /* RFPlaylistEditor.m in Sources */,
 				CA014DC816F53BA700253769 /* RFTableRowView.m in Sources */,
 				CAC1C63F1703C3EC00E0877A /* RFCollectionView.m in Sources */,
+				CAC1C64C170819CB00E0877A /* RFCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

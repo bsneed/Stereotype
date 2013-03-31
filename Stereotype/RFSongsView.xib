@@ -465,7 +465,6 @@
 							</array>
 							<string key="NSFrame">{{1, 1}, {403, 62}}</string>
 							<reference key="NSNextKeyView" ref="120797408"/>
-							<bool key="NSViewIsLayerTreeHost">YES</bool>
 						</object>
 						<reference key="destination" ref="120797408"/>
 					</object>

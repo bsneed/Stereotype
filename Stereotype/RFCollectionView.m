@@ -1,75 +1,62 @@
 //
 //  RFCollectionView.m
-//  Stereotype
+//  image-browser
 //
 //  Created by Brandon Sneed on 3/27/13.
-//  Copyright (c) 2013 redf.net. All rights reserved.
+//
 //
 
 #import "RFCollectionView.h"
-#import "RFCoverViewCell.h"
-#import "RFPlaylistEntity.h"
-#import "NSImage+QuickLook.h"
+#import "RFCollectionViewCell.h"
+
+@interface NSView (LayerFix)
+- (void)_updateLayerGeometryFromView;
+@end
 
 @implementation RFCollectionView
-{
-    NSImage *blankArtImage;
-}
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+//@synthesize backgroundColor (setter = internalSetBackgroundColor, getter = internalBackgroundColor);
+
+- (id)initWithFrame:(NSRect)frame
 {
-    self = [super initWithCoder:aDecoder];
-    blankArtImage = [NSImage imageNamed:@"albumArt"];
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code here.
+    }
+    
     return self;
 }
 
-- (NSCollectionViewItem *)newItemForRepresentedObject:(id)object
+- (void)setContainerBackgroundColor:(NSColor *)color
 {
-    if (self.delegate && [self.delegate conformsToProtocol:@protocol(RFCollectionViewDelegate)])
-    {
-        NSCollectionViewItem *item = [(NSObject<RFCollectionViewDelegate> *)self.delegate collectionView:self cellForObject:object];
-        if ([item.view isKindOfClass:[RFCollectionViewCellView class]])
-        {
-            RFCollectionViewCellView *cellView = (RFCollectionViewCellView *)(item.view);
-
-            cellView.collectionView = self;
-            cellView.representedObject = object;
-        }
-        return item;
-    }
-
-    return nil;
+    [self setValue:color forKey:IKImageBrowserBackgroundColorKey];
 }
 
-@end
-
-@implementation RFCollectionViewCellView
-
-- (NSView *)hitTest:(NSPoint)aPoint
+- (NSColor *)containerBackgroundColor
 {
-    // don't allow any mouse clicks for subviews in this view
-	if (NSPointInRect(aPoint, [self convertRect:[self bounds] toView:[self superview]]))
-    {
-		return self;
-	}
+    return [self valueForKey:IKImageBrowserBackgroundColorKey];
+}
+
+- (void)setImageOutlineColor:(NSColor *)color
+{
+    [self setValue:[NSColor blackColor] forKey:IKImageBrowserCellsOutlineColorKey];
+}
+
+- (NSColor *)imageOutlineColor
+{
+    return [self valueForKey:IKImageBrowserCellsOutlineColorKey];
+}
+
+- (IKImageBrowserCell *)newCellForRepresentedItem:(id)anItem
+{
+    RFCollectionViewCell *cell = nil;
+    
+    if ([self.delegate respondsToSelector:@selector(collectionView:cellForItem:)])
+        cell = [self.delegate collectionView:self cellForItem:anItem];
     else
-    {
-		return nil;
-	}
-}
+        cell = [[RFCollectionViewCell alloc] init];
 
-- (void)mouseDown:(NSEvent *)theEvent
-{
-	[super mouseDown:theEvent];
-	
-	// check for click count above one, which we assume means it's a double click
-	if ([theEvent clickCount] > 1)
-    {
-		if (self.collectionView.delegate && [self.collectionView.delegate conformsToProtocol:@protocol(RFCollectionViewDelegate)])
-        {
-            [(NSObject<RFCollectionViewDelegate> *)self.collectionView.delegate collectionView:self.collectionView doubleClickOnObject:self.representedObject];
-		}
-	}
+    return cell;
 }
 
 @end
