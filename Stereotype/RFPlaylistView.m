@@ -92,7 +92,15 @@
         RFItemEntity *firstItem = [items objectAtIndex:0];
         NSString *url = firstItem.track.url;
         if (url && [url length] > 0)
-            cell.imageView.image = [NSImage imageFromAlbum:firstItem.track.albumTitle artist:firstItem.track.artist url:[NSURL URLWithString:url]];
+        {
+            [self performReturnBlockInBackground:^id{
+                NSImage *image = [NSImage imageFromAlbum:firstItem.track.albumTitle artist:firstItem.track.artist url:[NSURL URLWithString:url]];
+                return image;
+            } completion:^(id userObject) {
+                cell.imageView.image = (NSImage *)userObject;
+            }];
+             
+        }
     }
 
     return cell;

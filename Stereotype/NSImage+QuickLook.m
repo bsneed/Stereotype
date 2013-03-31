@@ -56,7 +56,7 @@ static BOOL useImageCache = YES;
 }
 
 
-+ (void)saveImageToCache:(NSImage *)image
++ (void)saveImageToCache:(NSImage *)image withName:(NSString *)name
 {
     NSData *data = [image TIFFRepresentation];
     if (data)
@@ -65,7 +65,7 @@ static BOOL useImageCache = YES;
         useImageCache = [[NSFileManager defaultManager] findOrCreateDirectory:supportDir];
         if (useImageCache)
         {
-            NSURL *url = [supportDir URLByAppendingPathComponent:image.name];
+            NSURL *url = [supportDir URLByAppendingPathComponent:name];
             [data writeToFile:[url path] atomically:NO];
         }
     }
@@ -79,7 +79,10 @@ static BOOL useImageCache = YES;
 
     NSImage *image = [NSImage imageNamed:fileName];
     if (!image)
+    {
         image = [[NSImage alloc] initWithContentsOfURL:url];
+        image.name = fileName;
+    }
     
     return image;
 }
@@ -165,7 +168,7 @@ static BOOL useImageCache = YES;
             {
                 [result setName:name];
                 //[result setCacheMode:NSImageCacheAlways];
-                [NSImage saveImageToCache:result];
+                [NSImage saveImageToCache:result withName:name];
             }
         }
         

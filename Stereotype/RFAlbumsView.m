@@ -26,6 +26,8 @@
 
     self.collectionView.itemPrototype = [RFCoverViewCell loadFromNib];
     self.collectionView.delegate = self;
+    self.collectionView.maxNumberOfColumns = 2;
+    self.collectionView.maxNumberOfRows = 8;
 
     [self loadAlbums];
     [self setupNotificationListening];
@@ -109,9 +111,16 @@
     if (track.artist && track.artist.length > 0)
         [cell.detailTextLabel setStringValue:track.artist];
     
-    NSString *url = track.url;
+    /*NSString *url = track.url;
     if (url && [url length] > 0)
-        cell.imageView.image = [NSImage imageFromAlbum:track.albumTitle artist:track.artist url:[NSURL URLWithString:url]];
+    {
+        [self performReturnBlockInBackground:^id{
+            NSImage *image = [NSImage imageFromAlbum:track.albumTitle artist:track.artist url:[NSURL URLWithString:url]];
+            return image;
+        } completion:^(id userObject) {
+            cell.imageView.image = (NSImage *)userObject;
+        }];
+    }*/
     
     return cell;
 }
