@@ -74,11 +74,6 @@
     [self.indexLabel setStringValue:[NSString stringWithFormat:@"%lu", index]];
 
     [self configureCellWithTrackEntity:item.track];
-    
-    if ([item.index integerValue] % 2)
-        self.layer.backgroundColor = [NSColor colorWithCalibratedWhite:0.000 alpha:0.300].CGColor;
-    else
-        self.layer.backgroundColor = [NSColor clearColor].CGColor;
 }
 
 - (void)configureCellWithTrackEntity:(RFTrackEntity *)track displayIndex:(NSUInteger)displayIndex
@@ -91,11 +86,6 @@
     [self.indexLabel setStringValue:[NSString stringWithFormat:@"%lu", index]];
     
     [self configureCellWithTrackEntity:track];
-    
-    if (displayIndex % 2)
-        self.layer.backgroundColor = [NSColor colorWithCalibratedWhite:0.000 alpha:0.300].CGColor;
-    else
-        self.layer.backgroundColor = [NSColor clearColor].CGColor;
 }
 
 - (void)configureCellWithTrackEntity:(RFTrackEntity *)track

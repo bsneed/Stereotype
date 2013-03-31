@@ -35,22 +35,22 @@
 
 - (void)awakeFromNib
 {
-    self.collectionView.delegate = self;
+    /*self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.allowsSelection = YES;
     self.collectionView.allowsMultipleSelection = YES;
     self.collectionView.allowsDragging = YES;
     
-    [self.collectionView registerForDraggedTypes:@[NSFilenamesPboardType]];
+    [self.collectionView registerForDraggedTypes:@[NSFilenamesPboardType]];*/
 }
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:observer];
+    /*[[NSNotificationCenter defaultCenter] removeObserver:observer];
 
     self.collectionView.delegate = nil;
     self.collectionView.dataSource = nil;
-    self.collectionView = nil;
+    self.collectionView = nil;*/
 }
 
 - (void)setSearchString:(NSString *)searchString
@@ -61,7 +61,7 @@
 - (void)setItems:(NSArray *)items
 {
     _items = items;
-    [self.collectionView reloadData];
+    //[self.collectionView reloadData];
 }
 
 #pragma mark - CollectionView delegate/datasource

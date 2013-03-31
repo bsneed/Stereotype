@@ -10,6 +10,7 @@
 #import "RFArtistViewCell.h"
 #import "RFSongsView.h"
 #import "RFLibraryViewController.h"
+#import "RFTableRowView.h"
 
 @implementation RFArtistsView
 {
@@ -24,11 +25,15 @@
     self.title = @"Artists";
     blankArtImage = [NSImage imageNamed:@"albumArt"];
     
-    self.collectionView.cellSize = NSMakeSize(406, 64);
-    self.collectionView.desiredNumberOfColumns = 1;
+    [self.tableView setDoubleAction:@selector(tableDoubleClick:)];
     
-    [self loadArtists];
     [self setupNotificationListening];
+}
+
+- (void)setItems:(NSArray *)items
+{
+    [super setItems:items];
+    [self.tableView reloadData];
 }
 
 - (void)setupNotificationListening
@@ -66,45 +71,9 @@
 
 #pragma mark - CollectionView delegate/datasource
 
-/**
- * This method is invoked to ask the data source for the number of cells inside the collection view.
- **/
-- (NSUInteger)numberOfCellsInCollectionView:(JUCollectionView *)collectionView { return self.items.count; }
-
-/**
- * This method is involed to ask the data source for a cell to display at the given index. You should first try to dequeue an old cell before creating a new one!
- **/
-- (JUCollectionViewCell *)collectionView:(JUCollectionView *)collectionView cellForIndex:(NSUInteger)index
+- (void)tableDoubleClick:(id)sender
 {
-    RFArtistViewCell *cell = (RFArtistViewCell *)[collectionView dequeueReusableCellWithIdentifier:@"artistViewCell"];
-    if (!cell)
-    {
-        cell = [RFArtistViewCell loadFromNib];
-        cell.cellIdentifier = @"artistViewCell";
-    }
-    
-    cell.imageView.image = blankArtImage;
-    
-    NSString *artist = [self.items objectAtIndex:index];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"albumArtist == %@", artist];
-    RFTrackEntity *track = [database findObjectFromEntity:@"RFTrackEntity" withPredicate:predicate];
-    
-    [cell.titleLabel setStringValue:@""];
-    if (artist && artist.length > 0)
-        [cell.titleLabel setStringValue:artist];
-
-    NSString *url = track.url;
-    if (url && [url length] > 0)
-        cell.imageView.image = [NSImage imageFromAlbum:track.albumTitle artist:track.artist url:[NSURL URLWithString:url]];
-    
-    return cell;
-}
-
-/**
- * Invoked when the user double clicked on the given cell.
- **/
-- (void)collectionView:(JUCollectionView *)collectionView didDoubleClickedCellAtIndex:(NSUInteger)index
-{
+    NSInteger index = self.tableView.clickedRow;
     NSString *selectedItem = [self.items objectAtIndex:index];
     
     RFSongsView *songsView = [RFSongsView loadFromNib];
@@ -114,21 +83,41 @@
     songsView.viewStyle = RFSongsViewStyleArtist;
 }
 
-- (NSArray *)selectedPaths
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-    // Write data to the pasteboard
-    /*NSMutableArray *fileList = [[NSMutableArray alloc] init];
+    return self.items.count;
+}
+
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    RFArtistViewCell *cell = (RFArtistViewCell *)[tableView makeViewWithIdentifier:@"artistViewCell" owner:self];
+    if (!cell)
+        cell = [[RFArtistViewCell alloc] initWithFrame:NSZeroRect];
     
-    NSArray *items = [self.items objectsAtIndexes:self.collectionView.selection];
-    for (NSUInteger i = 0; i < items.count; i++)
-    {
-        RFTrackEntity *track = [items objectAtIndex:i];
-        NSString *filePath = [[NSURL URLWithString:track.url] path];
-        [fileList addObject:filePath];
-    }
+    cell.imageView.image = blankArtImage;
     
-    return fileList;*/
-    return nil;
+    NSString *artist = [self.items objectAtIndex:row];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"albumArtist == %@", artist];
+    RFTrackEntity *track = [database findObjectFromEntity:@"RFTrackEntity" withPredicate:predicate];
+    
+    [cell.titleLabel setStringValue:@""];
+    if (artist && artist.length > 0)
+        [cell.titleLabel setStringValue:artist];
+    
+    NSString *url = track.url;
+    if (url && [url length] > 0)
+        cell.imageView.image = [NSImage imageFromAlbum:track.albumTitle artist:track.artist url:[NSURL URLWithString:url]];
+    
+    return cell;
+}
+
+- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
+{
+    RFTableRowView *rowView = [tableView makeViewWithIdentifier:@"rowView" owner:self];
+    if (!rowView)
+        rowView = [[RFTableRowView alloc] initWithFrame:NSMakeRect(0, 0, 403, 64)];
+    
+    return rowView;
 }
 
 @end

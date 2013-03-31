@@ -10,4 +10,18 @@
 
 @implementation RFCoverViewCell
 
+- (void)setSelected:(BOOL)flag
+{
+    [super setSelected:flag];
+    
+    if (flag)
+    {
+        [self.selectionImageView setHidden:NO];
+    }
+    else
+    {
+        [self.selectionImageView setHidden:YES];
+    }
+}
+
 @end

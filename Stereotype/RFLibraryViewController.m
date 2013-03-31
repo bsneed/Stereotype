@@ -58,9 +58,6 @@
         [libraryViews removeAllObjects];
         
         libraryView = nil;
-        libraryView.collectionView.delegate = nil;
-        libraryView.collectionView.dataSource = nil;
-        libraryView.collectionView = nil;
         
         [self.titlePopup setAlphaValue:1.0];
         [self.backButton setAlphaValue:0];
@@ -82,6 +79,7 @@
                 
             case RFLibraryViewStyleArtists:
                 libraryView = [RFArtistsView loadFromNib];
+                [(RFArtistsView *)libraryView loadArtists];
                 [self.titlePopup setTitle:@"Artists"];
                 break;
                 
@@ -136,7 +134,7 @@
         aView.alphaValue = 1.0;
         [libraryViews addObject:aView];
         libraryView = aView;
-        [libraryView.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0];
+        //[libraryView.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0];
     }
     
     [self.searchField setStringValue:@""];

@@ -11,6 +11,7 @@
 #import "RFSettingsModel.h"
 #import "RFURLDownloader.h"
 #import "RFLibraryViewController.h"
+#import "RFTableRowView.h"
 
 @implementation RFSongsView
 {
@@ -22,9 +23,15 @@
     [super awakeFromNib];
     
     self.title = @"Playlists";
-    self.collectionView.cellSize = NSMakeSize(406, 64);
+    [self.tableView setDoubleAction:@selector(tableDoubleClick:)];
     
     [self setupNotificationListening];
+}
+
+- (void)setItems:(NSArray *)items
+{
+    [super setItems:items];
+    [self.tableView reloadData];
 }
 
 - (void)setPlaylist:(RFPlaylistEntity *)playlist
@@ -190,43 +197,9 @@
 
 #pragma mark - CollectionView delegate/datasource
 
-/**
- * This method is involed to ask the data source for a cell to display at the given index. You should first try to dequeue an old cell before creating a new one!
- **/
-- (JUCollectionViewCell *)collectionView:(JUCollectionView *)collectionView cellForIndex:(NSUInteger)index
+- (void)tableDoubleClick:(id)sender
 {
-    RFSongViewCell *cell = (RFSongViewCell *)[collectionView dequeueReusableCellWithIdentifier:@"songViewCell"];
-    if (!cell)
-    {
-        cell = [RFSongViewCell loadFromNib];
-        cell.cellIdentifier = @"songViewCell";
-    }
-    
-    id anItem = [self.items objectAtIndex:index];
-    if ([anItem isKindOfClass:[RFItemEntity class]])
-    {
-        [cell configureCellWithItemEntity:anItem];
-    }
-    else
-    if (self.artist || self.album)
-    {
-        [cell configureCellWithTrackEntity:anItem displayIndex:index];
-    }
-    else
-    {
-        [cell hideIndexLabel];
-        [cell configureCellWithTrackEntity:anItem];
-    }
-    
-    return cell;
-}
-
-/**
- * Invoked when the user double clicked on the given cell.
- **/
-- (void)collectionView:(JUCollectionView *)collectionView didDoubleClickedCellAtIndex:(NSUInteger)index
-{
-    selectedTrackIndex = [collectionView.selection firstIndex];
+    selectedTrackIndex = self.tableView.clickedRow;
     id item = [self.items objectAtIndex:selectedTrackIndex];
     
     RFTrackEntity *track = nil;
@@ -243,7 +216,7 @@
     if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"])
     {
         [[RFURLDownloader sharedInstance] addDownload:url.absoluteString];
-        RFSongViewCell *cell = (RFSongViewCell *)[self.collectionView cellAtIndex:index];
+        RFSongViewCell *cell = (RFSongViewCell *)[self.tableView selectedCell];
         [cell.detail2Label setStringValue:@"Downloading..."];
         return;
     }
@@ -254,29 +227,48 @@
     [RFSettingsModel save];
 }
 
-- (NSArray *)selectedPaths
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-    // Write data to the pasteboard
-    NSMutableArray *fileList = [[NSMutableArray alloc] init];
+    return self.items.count;
+}
+
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    RFSongViewCell *cell = (RFSongViewCell *)[tableView makeViewWithIdentifier:@"songViewCell" owner:self];
+    if (!cell)
+        cell = [[RFSongViewCell alloc] initWithFrame:NSZeroRect];
     
-    NSArray *items = [self.items objectsAtIndexes:self.collectionView.selection];
-    for (NSUInteger i = 0; i < items.count; i++)
+    id anItem = [self.items objectAtIndex:row];
+    if ([anItem isKindOfClass:[RFItemEntity class]])
     {
-        RFTrackEntity *track = nil;
-        id item = [items objectAtIndex:i];
-        if ([item isKindOfClass:[RFTrackEntity class]])
-            track = item;
-        else
-        if ([item isKindOfClass:[RFItemEntity class]])
-        {
-            RFItemEntity *theItem = item;
-            track = theItem.track;
-        }
-        NSString *filePath = [[NSURL URLWithString:track.url] path];
-        [fileList addObject:filePath];
+        [cell configureCellWithItemEntity:anItem];
+    }
+    else
+    if (self.artist || self.album)
+    {
+        [cell configureCellWithTrackEntity:anItem displayIndex:row];
+    }
+    else
+    {
+        [cell hideIndexLabel];
+        [cell configureCellWithTrackEntity:anItem];
     }
     
-    return fileList;
+    return cell;
+}
+
+- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
+{
+    RFTableRowView *rowView = [tableView makeViewWithIdentifier:@"rowView" owner:self];
+    if (!rowView)
+        rowView = [[RFTableRowView alloc] initWithFrame:NSMakeRect(0, 0, 403, 64)];
+    
+    if (row % 2)
+        rowView.layer.backgroundColor = [NSColor colorWithCalibratedWhite:0.000 alpha:0.300].CGColor;
+    else
+        rowView.layer.backgroundColor = [NSColor clearColor].CGColor;
+
+    return rowView;
 }
 
 @end

@@ -7,10 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "RFLibraryViewCell.h"
 
-@interface RFArtistViewCell : RFLibraryViewCell
+@interface RFArtistViewCell : NSTableCellView
 
+@property (weak) IBOutlet NSImageView *imageView;
 @property (weak) IBOutlet NSTextField *titleLabel;
 
 @end

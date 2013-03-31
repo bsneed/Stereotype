@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA014DC816F53BA700253769 /* RFTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA014DC716F53BA700253769 /* RFTableRowView.m */; };
 		CA0243E91667314E00589839 /* bgPattern.png in Resources */ = {isa = PBXBuildFile; fileRef = CA0243E71667314E00589839 /* bgPattern.png */; };
 		CA0243EA1667314E00589839 /* bgPattern@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA0243E81667314E00589839 /* bgPattern@2x.png */; };
 		CA041B3215B3F8380062B33A /* NSObject+RFExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CA041B3115B3F8380062B33A /* NSObject+RFExtensions.m */; };
@@ -92,6 +93,7 @@
 		CAB968A6164D01EF00362EC8 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CAB968A5164D01EF00362EC8 /* libc++.dylib */; };
 		CAB968B0164D32B000362EC8 /* Occluded Light.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CAB968AF164D32B000362EC8 /* Occluded Light.qtz */; };
 		CAB968B2164D35FB00362EC8 /* High Particles.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CAB968B1164D35FB00362EC8 /* High Particles.qtz */; };
+		CAC1C63F1703C3EC00E0877A /* RFCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC1C63E1703C3EC00E0877A /* RFCollectionView.m */; };
 		CACA5297164A30D9005EF3E5 /* backButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CACA5295164A30D9005EF3E5 /* backButton@2x.png */; };
 		CACA5298164A30D9005EF3E5 /* backButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CACA5296164A30D9005EF3E5 /* backButtonPressed@2x.png */; };
 		CACA529B164A3171005EF3E5 /* RFBackButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CACA529A164A3171005EF3E5 /* RFBackButtonCell.m */; };
@@ -129,9 +131,7 @@
 		CAD0593B168AA9420085D742 /* RFArtistsView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD05936168AA93E0085D742 /* RFArtistsView.m */; };
 		CAD0593C168AA9420085D742 /* RFArtistsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAD05937168AA93F0085D742 /* RFArtistsView.xib */; };
 		CAD0593D168AA9420085D742 /* RFArtistViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD05939168AA9410085D742 /* RFArtistViewCell.m */; };
-		CAD0593E168AA9420085D742 /* RFArtistViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAD0593A168AA9410085D742 /* RFArtistViewCell.xib */; };
 		CAD05941168AB0590085D742 /* RFTrackEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD05940168AB0590085D742 /* RFTrackEntity.m */; };
-		CAD05944168AB6660085D742 /* RFLibraryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD05943168AB6640085D742 /* RFLibraryViewCell.m */; };
 		CAD05948168ABE310085D742 /* RFAlbumsView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD05946168ABE2F0085D742 /* RFAlbumsView.m */; };
 		CAD05949168ABE310085D742 /* RFAlbumsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAD05947168ABE300085D742 /* RFAlbumsView.xib */; };
 		CAD0594C168AF3C20085D742 /* RFSpacebarMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0594B168AF3C20085D742 /* RFSpacebarMenuItem.m */; };
@@ -191,7 +191,6 @@
 		CAF8BA0C1681890A005990A8 /* RFSongsView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8BA0B16818909005990A8 /* RFSongsView.m */; };
 		CAF8BA0E1681891C005990A8 /* RFSongsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF8BA0D1681891C005990A8 /* RFSongsView.xib */; };
 		CAF8BA121681949E005990A8 /* RFSongViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8BA101681949D005990A8 /* RFSongViewCell.m */; };
-		CAF8BA131681949E005990A8 /* RFSongViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF8BA111681949E005990A8 /* RFSongViewCell.xib */; };
 		CAFD00FA163923BF009AA0DB /* Basic.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CAFD00F9163923BF009AA0DB /* Basic.qtz */; };
 /* End PBXBuildFile section */
 
@@ -247,6 +246,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CA014DC616F53BA700253769 /* RFTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFTableRowView.h; sourceTree = "<group>"; };
+		CA014DC716F53BA700253769 /* RFTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFTableRowView.m; sourceTree = "<group>"; };
 		CA0243E71667314E00589839 /* bgPattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bgPattern.png; path = Graphics/bgPattern.png; sourceTree = SOURCE_ROOT; };
 		CA0243E81667314E00589839 /* bgPattern@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bgPattern@2x.png"; path = "Graphics/bgPattern@2x.png"; sourceTree = SOURCE_ROOT; };
 		CA041B3015B3F8380062B33A /* NSObject+RFExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RFExtensions.h"; sourceTree = "<group>"; };
@@ -363,6 +364,8 @@
 		CAB968A5164D01EF00362EC8 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		CAB968AF164D32B000362EC8 /* Occluded Light.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = "Occluded Light.qtz"; sourceTree = "<group>"; };
 		CAB968B1164D35FB00362EC8 /* High Particles.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = "High Particles.qtz"; sourceTree = "<group>"; };
+		CAC1C63D1703C3EC00E0877A /* RFCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFCollectionView.h; sourceTree = "<group>"; };
+		CAC1C63E1703C3EC00E0877A /* RFCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFCollectionView.m; sourceTree = "<group>"; };
 		CACA5295164A30D9005EF3E5 /* backButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backButton@2x.png"; path = "Graphics/backButton@2x.png"; sourceTree = SOURCE_ROOT; };
 		CACA5296164A30D9005EF3E5 /* backButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backButtonPressed@2x.png"; path = "Graphics/backButtonPressed@2x.png"; sourceTree = SOURCE_ROOT; };
 		CACA5299164A3171005EF3E5 /* RFBackButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBackButtonCell.h; sourceTree = "<group>"; };
@@ -419,11 +422,8 @@
 		CAD05937168AA93F0085D742 /* RFArtistsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFArtistsView.xib; sourceTree = "<group>"; };
 		CAD05938168AA9400085D742 /* RFArtistViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFArtistViewCell.h; sourceTree = "<group>"; };
 		CAD05939168AA9410085D742 /* RFArtistViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFArtistViewCell.m; sourceTree = "<group>"; };
-		CAD0593A168AA9410085D742 /* RFArtistViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFArtistViewCell.xib; sourceTree = "<group>"; };
 		CAD0593F168AB0590085D742 /* RFTrackEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFTrackEntity.h; sourceTree = "<group>"; };
 		CAD05940168AB0590085D742 /* RFTrackEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFTrackEntity.m; sourceTree = "<group>"; };
-		CAD05942168AB6640085D742 /* RFLibraryViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFLibraryViewCell.h; sourceTree = "<group>"; };
-		CAD05943168AB6640085D742 /* RFLibraryViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFLibraryViewCell.m; sourceTree = "<group>"; };
 		CAD05945168ABE2D0085D742 /* RFAlbumsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFAlbumsView.h; sourceTree = "<group>"; };
 		CAD05946168ABE2F0085D742 /* RFAlbumsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFAlbumsView.m; sourceTree = "<group>"; };
 		CAD05947168ABE300085D742 /* RFAlbumsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFAlbumsView.xib; sourceTree = "<group>"; };
@@ -504,7 +504,6 @@
 		CAF8BA0D1681891C005990A8 /* RFSongsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFSongsView.xib; sourceTree = "<group>"; };
 		CAF8BA0F1681949D005990A8 /* RFSongViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFSongViewCell.h; sourceTree = "<group>"; };
 		CAF8BA101681949D005990A8 /* RFSongViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFSongViewCell.m; sourceTree = "<group>"; };
-		CAF8BA111681949E005990A8 /* RFSongViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFSongViewCell.xib; sourceTree = "<group>"; };
 		CAFD00F9163923BF009AA0DB /* Basic.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = Basic.qtz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -536,6 +535,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA014DCC16F552A800253769 /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				CAF8BA0A16818909005990A8 /* RFSongsView.h */,
+				CAF8BA0B16818909005990A8 /* RFSongsView.m */,
+				CAF8BA0D1681891C005990A8 /* RFSongsView.xib */,
+				CAF8BA0F1681949D005990A8 /* RFSongViewCell.h */,
+				CAF8BA101681949D005990A8 /* RFSongViewCell.m */,
+				CA3862FC16A137F300D0B2BE /* RFSongViewCellSmall.xib */,
+				CAD05935168AA93E0085D742 /* RFArtistsView.h */,
+				CAD05936168AA93E0085D742 /* RFArtistsView.m */,
+				CAD05937168AA93F0085D742 /* RFArtistsView.xib */,
+				CAD05938168AA9400085D742 /* RFArtistViewCell.h */,
+				CAD05939168AA9410085D742 /* RFArtistViewCell.m */,
+			);
+			name = Lists;
+			sourceTree = "<group>";
+		};
 		CA17A0EC15A6941900ACBA13 = {
 			isa = PBXGroup;
 			children = (
@@ -870,6 +887,7 @@
 		CACFF60B163A985600BC243A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CA014DCC16F552A800253769 /* Lists */,
 				CAF8BA231682A546005990A8 /* PlaylistViews */,
 				CA890D0C1635003E00BE8ACE /* AUHostController.h */,
 				CA890D0D1635003E00BE8ACE /* AUHostController.m */,
@@ -879,8 +897,8 @@
 				CACFF60E163A98EC00BC243A /* RFLibraryViewController.xib */,
 				CA9C237B16816A8C00AFA71A /* RFLibraryView.h */,
 				CA9C237C16816A8C00AFA71A /* RFLibraryView.m */,
-				CAD05942168AB6640085D742 /* RFLibraryViewCell.h */,
-				CAD05943168AB6640085D742 /* RFLibraryViewCell.m */,
+				CA014DC616F53BA700253769 /* RFTableRowView.h */,
+				CA014DC716F53BA700253769 /* RFTableRowView.m */,
 				CACFF615163A9E8500BC243A /* RFSettingsViewController.h */,
 				CACFF616163A9E8500BC243A /* RFSettingsViewController.m */,
 				CACFF617163A9E8500BC243A /* RFSettingsViewController.xib */,
@@ -939,28 +957,17 @@
 				CAD05945168ABE2D0085D742 /* RFAlbumsView.h */,
 				CAD05946168ABE2F0085D742 /* RFAlbumsView.m */,
 				CAD05947168ABE300085D742 /* RFAlbumsView.xib */,
-				CAD05935168AA93E0085D742 /* RFArtistsView.h */,
-				CAD05936168AA93E0085D742 /* RFArtistsView.m */,
-				CAD05937168AA93F0085D742 /* RFArtistsView.xib */,
-				CAD05938168AA9400085D742 /* RFArtistViewCell.h */,
-				CAD05939168AA9410085D742 /* RFArtistViewCell.m */,
-				CAD0593A168AA9410085D742 /* RFArtistViewCell.xib */,
 				CA9C237E16816BD900AFA71A /* RFPlaylistView.h */,
 				CA9C237F16816BD900AFA71A /* RFPlaylistView.m */,
 				CA9C238116816C1A00AFA71A /* RFPlaylistView.xib */,
 				CAF8BA0216817341005990A8 /* RFCoverViewCell.h */,
 				CAF8BA0316817341005990A8 /* RFCoverViewCell.m */,
 				CAF8BA0516817353005990A8 /* RFCoverViewCell.xib */,
-				CAF8BA0A16818909005990A8 /* RFSongsView.h */,
-				CAF8BA0B16818909005990A8 /* RFSongsView.m */,
-				CAF8BA0D1681891C005990A8 /* RFSongsView.xib */,
-				CAF8BA0F1681949D005990A8 /* RFSongViewCell.h */,
-				CAF8BA101681949D005990A8 /* RFSongViewCell.m */,
-				CAF8BA111681949E005990A8 /* RFSongViewCell.xib */,
-				CA3862FC16A137F300D0B2BE /* RFSongViewCellSmall.xib */,
 				CA5BEB271699695600B821B8 /* RFPlaylistEditor.h */,
 				CA5BEB281699695600B821B8 /* RFPlaylistEditor.m */,
 				CA5BEB2A1699697300B821B8 /* RFPlaylistEditor.xib */,
+				CAC1C63D1703C3EC00E0877A /* RFCollectionView.h */,
+				CAC1C63E1703C3EC00E0877A /* RFCollectionView.m */,
 			);
 			name = PlaylistViews;
 			sourceTree = "<group>";
@@ -1140,9 +1147,7 @@
 				CA9C238216816C1A00AFA71A /* RFPlaylistView.xib in Resources */,
 				CAF8BA0616817353005990A8 /* RFCoverViewCell.xib in Resources */,
 				CAF8BA0E1681891C005990A8 /* RFSongsView.xib in Resources */,
-				CAF8BA131681949E005990A8 /* RFSongViewCell.xib in Resources */,
 				CAD0593C168AA9420085D742 /* RFArtistsView.xib in Resources */,
-				CAD0593E168AA9420085D742 /* RFArtistViewCell.xib in Resources */,
 				CAD05949168ABE310085D742 /* RFAlbumsView.xib in Resources */,
 				CA3F291D168EDBC400C01E80 /* shuffleIcon@2x.png in Resources */,
 				CA3F291E168EDBC400C01E80 /* shuffleIconOn@2x.png in Resources */,
@@ -1227,7 +1232,6 @@
 				CAD0593B168AA9420085D742 /* RFArtistsView.m in Sources */,
 				CAD0593D168AA9420085D742 /* RFArtistViewCell.m in Sources */,
 				CAD05941168AB0590085D742 /* RFTrackEntity.m in Sources */,
-				CAD05944168AB6660085D742 /* RFLibraryViewCell.m in Sources */,
 				CAD05948168ABE310085D742 /* RFAlbumsView.m in Sources */,
 				CAD0594C168AF3C20085D742 /* RFSpacebarMenuItem.m in Sources */,
 				CA2090B016917772001261A2 /* JUCollectionView+Dragging.m in Sources */,
@@ -1235,6 +1239,8 @@
 				CA569D4E16958D4F00212770 /* NSString+RFExtensions.m in Sources */,
 				CA569D531696328600212770 /* NSDictionary+SDExtensions.m in Sources */,
 				CA5BEB291699695600B821B8 /* RFPlaylistEditor.m in Sources */,
+				CA014DC816F53BA700253769 /* RFTableRowView.m in Sources */,
+				CAC1C63F1703C3EC00E0877A /* RFCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,4 +10,8 @@
 
 @interface RFArtistsView : RFLibraryView
 
+@property (weak) IBOutlet NSTableView *tableView;
+
+- (void)loadArtists;
+
 @end

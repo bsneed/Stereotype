@@ -36,25 +36,16 @@
     [self.collectionView reloadData];
 }
 
-/**
- * This method is invoked to ask the data source for the number of cells inside the collection view.
- **/
-- (NSUInteger)numberOfCellsInCollectionView:(JUCollectionView *)collectionView
+/*- (NSUInteger)numberOfCellsInCollectionView:(JUCollectionView *)collectionView
 {
     return 10;//items.count;
 }
 
-/**
- * This method is involed to ask the data source for a cell to display at the given index. You should first try to dequeue an old cell before creating a new one!
- **/
 - (JUCollectionViewCell *)collectionView:(JUCollectionView *)collectionView cellForIndex:(NSUInteger)index
 {
     RFSongViewCell *cell = (RFSongViewCell *)[collectionView dequeueReusableCellWithIdentifier:@"playlistEditorCell"];
     if (!cell)
-    {
         cell = [RFSongViewCell loadFromNibNamed:@"RFSongViewCellSmall"];
-        cell.cellIdentifier = @"playlistEditorCell";
-    }
     
     cell.imageView.image = blankArtImage;
     
@@ -65,12 +56,8 @@
     //[cell.detailTextLabel setStringValue:@""];
     //[cell.playlistLabel setStringValue:name];
     
-    /*NSString *url = track.url;
-    if (url && [url length] > 0)
-        cell.imageView.image = [NSImage imageFromAlbum:track.albumTitle artist:track.artist url:[NSURL URLWithString:url]];
-    */
     return cell;
-}
+}*/
 
 /**
  * Invoked when the user double clicked on the given cell.

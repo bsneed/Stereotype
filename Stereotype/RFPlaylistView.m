@@ -26,11 +26,11 @@
     blankArtImage = [NSImage imageNamed:@"albumArt"];
     self.title = @"Playlists";
 
-    self.collectionView.cellSize = NSMakeSize(203, 212);
-    self.collectionView.desiredNumberOfColumns = 2;
+    self.collectionView.itemPrototype = [RFCoverViewCell loadFromNib];
+    self.collectionView.delegate = self;
     
     [self loadPlaylists];
-    [self setupNotificationListening];    
+    [self setupNotificationListening];
 }
 
 - (void)loadPlaylists
@@ -44,6 +44,7 @@
         filterPredicate = [NSPredicate predicateWithFormat:@"name contains[cd] %@", self.searchString];
     }
     self.items = [database allObjectsForEntity:@"RFPlaylistEntity" sortDescriptors:sortDescriptors filteredBy:filterPredicate];
+    self.collectionView.content = self.items;
 }
 
 - (void)setupNotificationListening
@@ -67,26 +68,13 @@
 
 #pragma mark - CollectionView delegate/datasource
 
-/**
- * This method is invoked to ask the data source for the number of cells inside the collection view.
- **/
-- (NSUInteger)numberOfCellsInCollectionView:(JUCollectionView *)collectionView { return self.items.count; }
-
-/**
- * This method is involed to ask the data source for a cell to display at the given index. You should first try to dequeue an old cell before creating a new one!
- **/
-- (JUCollectionViewCell *)collectionView:(JUCollectionView *)collectionView cellForIndex:(NSUInteger)index
+- (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView cellForObject:(id)object
 {
-    RFCoverViewCell *cell = (RFCoverViewCell *)[collectionView dequeueReusableCellWithIdentifier:@"coverViewCell"];
-    if (!cell)
-    {
-        cell = [RFCoverViewCell loadFromNib];
-        cell.cellIdentifier = @"coverViewCell";
-    }
+    RFCoverViewCell *cell = [RFCoverViewCell loadFromNib];
     
     cell.imageView.image = blankArtImage;
     
-    RFPlaylistEntity *playlist = [self.items objectAtIndex:index];
+    RFPlaylistEntity *playlist = object;
     NSString *name = playlist.name;
     
     [cell.textLabel setStringValue:@""];
@@ -110,12 +98,9 @@
     return cell;
 }
 
-/**
- * Invoked when the user double clicked on the given cell.
- **/
-- (void)collectionView:(JUCollectionView *)collectionView didDoubleClickedCellAtIndex:(NSUInteger)index
+- (void)collectionView:(RFCollectionView *)collectionView doubleClickOnObject:(id)object;
 {
-    RFPlaylistEntity *selectedItem = [self.items objectAtIndex:index];
+    RFPlaylistEntity *selectedItem = (RFPlaylistEntity *)object;
     
     RFSongsView *playlistView = [RFSongsView loadFromNib];
     playlistView.title = selectedItem.name;
@@ -123,138 +108,5 @@
     playlistView.playlist = selectedItem;
     playlistView.viewStyle = RFSongsViewStylePlaylist;
 }
-
-- (NSArray *)selectedPaths
-{
-    // Write data to the pasteboard
-    NSMutableArray *fileList = [[NSMutableArray alloc] init];
-    
-    NSArray *items = [self.items objectsAtIndexes:self.collectionView.selection];
-    for (NSUInteger i = 0; i < items.count; i++)
-    {
-        RFPlaylistEntity *playlist = [items objectAtIndex:i];
-        NSSortDescriptor *sortDescriptor;
-        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
-        NSArray *sortDescriptors = @[sortDescriptor];
-        NSArray *items = [[playlist.items allObjects] sortedArrayUsingDescriptors:sortDescriptors];
-
-        for (NSUInteger i = 0; i < items.count; i++)
-        {
-            RFItemEntity *item = [items objectAtIndex:i];
-            NSString *filePath = [[NSURL URLWithString:item.track.url] path];
-            [fileList addObject:filePath];
-        }
-    }
-    
-    return fileList;
-}
-
-- (NSDragOperation)collectionView:(JUCollectionView *)collectionView draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context;
-{
-    /*if (context == NSDraggingContextOutsideApplication)
-    {
-        //NSLog(@"drag outside the application occurred.");
-        return NSDragOperationDelete;
-    }
-    else
-    if (context == NSDraggingContextWithinApplication)
-    {
-        //NSLog(@"drag inside the application occurred.");
-        return NSDragOperationCopy;
-    }
-    else
-        NSLog(@"some unknown drag context was sent.");*/
-    return NSDragOperationCopy;
-}
-
-- (void)collectionView:(JUCollectionView *)collectionView draggingSession:(NSDraggingSession *)session movedToPoint:(NSPoint)screenPoint
-{
-    if (!NSPointInRect(screenPoint, self.window.frame))
-    {
-        if (!lastCursor)
-            lastCursor = [NSCursor currentCursor];
-        [collectionView showPoofCursor];
-        session.animatesToStartingPositionsOnCancelOrFail = NO;
-    }
-    else
-    {
-        [lastCursor set];
-        lastCursor = nil;
-        //[collectionView showNormalCursor];
-        session.animatesToStartingPositionsOnCancelOrFail = YES;
-    }
-}
-
-- (void)collectionView:(JUCollectionView *)collectionView draggingSession:(NSDraggingSession *)session endedAtPoint:(NSPoint)screenPoint operation:(NSDragOperation)operation;
-{
-    /*if (operation == NSDragOperationDelete)
-        NSLog(@"item deleted");
-    else
-    if (operation == NSDragOperationNone && !NSPointInRect(screenPoint, self.window.frame))
-    {
-        NSLog(@"item none'd.  lol.");
-        [collectionView showPoofAnimation];
-        [collectionView showNormalCursor];
-    }
-    else
-    if (operation == NSDragOperationCopy)
-        NSLog(@"item rearranged or copied");*/
-    
-    [collectionView showNormalCursor];
-    lastCursor = nil;
-}
-
-/*- (NSDragOperation)collectionView:(JUCollectionView *)collectionView draggingEntered:(id < NSDraggingInfo >)sender
-{
-    NSLog(@"someone is dragging over us %@", sender);
-    if ([sender draggingSourceOperationMask] == NSDragOperationNone)
-    {
-        NSLog(@"if drop happens, items will be deleted.");
-    }
-    else
-    if ([sender draggingSourceOperationMask] == NSDragOperationCopy)
-        NSLog(@"if drop happens, items will be rearranged or added.");
-    
-    return NSDragOperationCopy;
-}
-
-- (void)collectionView:(JUCollectionView *)collectionView draggingEnded:(id < NSDraggingInfo >)sender
-{
-    NSLog(@"someone dropped on us, %@", sender);
-    if ([sender draggingSourceOperationMask] == NSDragOperationNone)
-    {
-        NSLog(@"will delete items.");
-    }
-    else
-    if ([sender draggingSourceOperationMask] == NSDragOperationCopy)
-        NSLog(@"rearranged or add items.");
-}
-
-- (void)collectionView:(JUCollectionView *)collectionView draggingExited:(id < NSDraggingInfo >)sender
-{
-    NSLog(@"someone stopped dragging over us");
-
-    if ([sender draggingSourceOperationMask] == NSDragOperationNone)
-    {
-        NSLog(@"if drop happens, items will be deleted.");
-    }
-    else
-    if ([sender draggingSourceOperationMask] == NSDragOperationCopy)
-        NSLog(@"if drop happens, items will be rearranged or added.");
-}
-
-
-- (BOOL)collectionView:(JUCollectionView *)collectionView prepareForDragOperation:(id < NSDraggingInfo >)sender
-{
-    //NSLog(@"prepare");
-    return YES;
-}
-
-- (BOOL)collectionView:(JUCollectionView *)collectionView performDragOperation:(id < NSDraggingInfo >)sender
-{
-    //NSLog(@"perform");
-    return YES;
-}
-*/
 
 @end

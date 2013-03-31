@@ -22,6 +22,7 @@ typedef enum
 @property (nonatomic, strong) NSString *artist;
 @property (nonatomic, strong) NSString *album;
 @property (nonatomic, assign) RFSongsViewStyle viewStyle;
+@property (weak) IBOutlet NSTableView *tableView;
 
 - (void)loadAllSongs;
 

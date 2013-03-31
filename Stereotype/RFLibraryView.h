@@ -24,7 +24,6 @@
 
 @property (weak) IBOutlet NSScrollView *scrollView;
 
-@property (weak) IBOutlet JUCollectionView *collectionView;
 @property (nonatomic, weak) RFLibraryViewController *navigationController;
 
 @property (nonatomic, strong) NSString *searchString;
