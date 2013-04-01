@@ -27,24 +27,83 @@
 {
     if (self.delegate && [self.delegate conformsToProtocol:@protocol(RFCollectionViewDelegate)])
     {
-        NSCollectionViewItem *item = [(NSObject<RFCollectionViewDelegate> *)self.delegate collectionView:self cellForObject:object];
-        if ([item.view isKindOfClass:[RFCollectionViewCellView class]])
-        {
-            RFCollectionViewCellView *cellView = (RFCollectionViewCellView *)(item.view);
+        RFCollectionViewItem *item = [(NSObject<RFCollectionViewDelegate> *)self.delegate collectionView:self cellForObject:object];
+        //RFCollectionViewCellView *cellView = [[RFCollectionViewCellView alloc] initWithFrame:NSMakeRect(0, 0, 203, 212)];
 
-            cellView.collectionView = self;
-            cellView.representedObject = object;
-        }
+        item.view.collectionView = self;
+        item.view.collectionItem = item;
+        item.view.representedObject = object;
+        
+        //item.view = cellView;
         return item;
     }
 
     return nil;
 }
 
+/*- (void)setSelectionIndexes:(NSIndexSet *)indexes
+{
+    [super setSelectionIndexes:indexes];
+    
+    [self.content enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        RFCollectionViewItem *item = (RFCollectionViewItem *)[self itemAtIndex:idx];
+        [(RFCollectionViewCellView *)item.view setSelected:NO];
+    }];
+    
+    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        RFCollectionViewItem *item = (RFCollectionViewItem *)[self itemAtIndex:idx];
+        [(RFCollectionViewCellView *)item.view setSelected:YES];
+    }];
+}*/
+
+@end
+
+@implementation RFCollectionViewItem
+
+- (id)initWithSize:(NSSize)size
+{
+    self = [super init];
+    
+    _size = size;
+    [self view];
+
+    return self;
+}
+
+- (void)loadView
+{
+    [self setView:[[RFCollectionViewCellView alloc] initWithFrame:NSMakeRect(0, 0, _size.width, _size.height)]];
+}
+
+- (void)setView:(RFCollectionViewCellView *)view
+{
+    [super setView:view];
+}
+
+- (RFCollectionViewCellView *)view
+{
+    return (RFCollectionViewCellView *)[super view];
+}
+
+- (void)setSelected:(BOOL)selected
+{
+    [super setSelected:selected];
+    [(RFCollectionViewCellView *)self.view setSelected:selected];
+    [self.view setNeedsDisplay:YES];
+}
+
 @end
 
 @implementation RFCollectionViewCellView
 
+- (void)setSelected:(BOOL)selected
+{
+    if (selected != _selected)
+    {
+        _selected = selected;
+        [self setNeedsDisplay:YES];
+    }
+}
 - (NSView *)hitTest:(NSPoint)aPoint
 {
     // don't allow any mouse clicks for subviews in this view
@@ -70,6 +129,16 @@
             [(NSObject<RFCollectionViewDelegate> *)self.collectionView.delegate collectionView:self.collectionView doubleClickOnObject:self.representedObject];
 		}
 	}
+}
+
+- (void)drawRect:(NSRect)dirtyRect
+{
+    if ([self.collectionView.delegate respondsToSelector:@selector(collectionView:collectionItem:drawRectForObject:dirtyRect:)])
+    {
+        [(NSObject<RFCollectionViewDelegate> *)self.collectionView.delegate collectionView:self.collectionView collectionItem:self.collectionItem drawRectForObject:self.representedObject dirtyRect:dirtyRect];
+    }
+    else
+        [super drawRect:dirtyRect];
 }
 
 @end

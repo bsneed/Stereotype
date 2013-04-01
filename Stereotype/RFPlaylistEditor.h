@@ -7,11 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "JUCollectionView.h"
 
-@interface RFPlaylistEditor : NSView<JUCollectionViewDelegate, JUCollectionViewDataSource>
+@interface RFPlaylistEditor : NSView
 
-@property (weak) IBOutlet JUCollectionView *collectionView;
+//@property (weak) IBOutlet JUCollectionView *collectionView;
 @property (weak) IBOutlet NSTextField *textField;
 @property (weak) IBOutlet NSButton *doneButton;
 

@@ -8,7 +8,6 @@
 
 #import "RFPlaylistEditor.h"
 #import "RFSongViewCell.h"
-#import "JUCollectionView+Dragging.h"
 #import "NSImage+QuickLook.h"
 
 @implementation RFPlaylistEditor
@@ -22,7 +21,7 @@
     blankArtImage = [NSImage imageNamed:@"albumArt"];
     items = [[NSMutableArray alloc] init];
     
-    self.collectionView.delegate = self;
+    /*self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.allowsSelection = YES;
     self.collectionView.allowsMultipleSelection = YES;
@@ -33,7 +32,7 @@
     
     [self.collectionView registerForDraggedTypes:@[NSFilenamesPboardType]];
     
-    [self.collectionView reloadData];
+    [self.collectionView reloadData];*/
 }
 
 /*- (NSUInteger)numberOfCellsInCollectionView:(JUCollectionView *)collectionView
@@ -59,10 +58,7 @@
     return cell;
 }*/
 
-/**
- * Invoked when the user double clicked on the given cell.
- **/
-- (void)collectionView:(JUCollectionView *)collectionView didDoubleClickedCellAtIndex:(NSUInteger)index
+/*- (void)collectionView:(JUCollectionView *)collectionView didDoubleClickedCellAtIndex:(NSUInteger)index
 {
 }
 
@@ -190,6 +186,6 @@ NSCursor *lastCursor = nil;
     NSLog(@"we got %@", urls);
 
     return YES;
-}
+}*/
 
 @end

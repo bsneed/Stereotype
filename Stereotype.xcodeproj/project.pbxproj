@@ -27,7 +27,6 @@
 		CA17A13015A69CC100ACBA13 /* smallButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA17A12E15A69CC100ACBA13 /* smallButton@2x.png */; };
 		CA1B97A3164E225A00055C19 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1B97A2164E225A00055C19 /* GLKit.framework */; };
 		CA1B97A5164E227F00055C19 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1B97A4164E227F00055C19 /* OpenGL.framework */; };
-		CA2090B016917772001261A2 /* JUCollectionView+Dragging.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2090AF16917772001261A2 /* JUCollectionView+Dragging.m */; };
 		CA2091581693EB4E001261A2 /* RFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2091571693EB4E001261A2 /* RFImageView.m */; };
 		CA33AA6A1637968600397481 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA33AA691637968600397481 /* Quartz.framework */; };
 		CA33AA6C163796A600397481 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA33AA6B163796A600397481 /* Accelerate.framework */; };
@@ -122,9 +121,6 @@
 		CACFF6AF163FD8F000BC243A /* backIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CACFF6AE163FD8F000BC243A /* backIcon@2x.png */; };
 		CAD0585E16846EE80085D742 /* RFApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0585D16846EE80085D742 /* RFApplication.m */; };
 		CAD0586116850B7A0085D742 /* RFURLDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0586016850B7A0085D742 /* RFURLDownloader.m */; };
-		CAD05920168859010085D742 /* JUCollectionView+Selection.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0591A168859010085D742 /* JUCollectionView+Selection.m */; };
-		CAD05921168859010085D742 /* JUCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0591C168859010085D742 /* JUCollectionView.m */; };
-		CAD05922168859010085D742 /* JUCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0591E168859010085D742 /* JUCollectionViewCell.m */; };
 		CAD0593116896BE00085D742 /* NSObject+SPInvocationGrabbing.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0592E16896BE00085D742 /* NSObject+SPInvocationGrabbing.m */; };
 		CAD0593216896BE00085D742 /* SPMediaKeyTap.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0593016896BE00085D742 /* SPMediaKeyTap.m */; };
 		CAD05934168A94F70085D742 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD05933168A94F60085D742 /* Carbon.framework */; };
@@ -277,8 +273,6 @@
 		CA17A12E15A69CC100ACBA13 /* smallButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "smallButton@2x.png"; path = "Graphics/smallButton@2x.png"; sourceTree = SOURCE_ROOT; };
 		CA1B97A2164E225A00055C19 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		CA1B97A4164E227F00055C19 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		CA2090AE16917772001261A2 /* JUCollectionView+Dragging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JUCollectionView+Dragging.h"; sourceTree = "<group>"; };
-		CA2090AF16917772001261A2 /* JUCollectionView+Dragging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JUCollectionView+Dragging.m"; sourceTree = "<group>"; };
 		CA2091561693EB4E001261A2 /* RFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFImageView.h; sourceTree = "<group>"; };
 		CA2091571693EB4E001261A2 /* RFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFImageView.m; sourceTree = "<group>"; };
 		CA33AA691637968600397481 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
@@ -405,13 +399,6 @@
 		CAD0585D16846EE80085D742 /* RFApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFApplication.m; sourceTree = "<group>"; };
 		CAD0585F16850B7A0085D742 /* RFURLDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFURLDownloader.h; sourceTree = "<group>"; };
 		CAD0586016850B7A0085D742 /* RFURLDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFURLDownloader.m; sourceTree = "<group>"; };
-		CAD05919168859010085D742 /* JUCollectionView+Selection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JUCollectionView+Selection.h"; sourceTree = "<group>"; };
-		CAD0591A168859010085D742 /* JUCollectionView+Selection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JUCollectionView+Selection.m"; sourceTree = "<group>"; };
-		CAD0591B168859010085D742 /* JUCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUCollectionView.h; sourceTree = "<group>"; };
-		CAD0591C168859010085D742 /* JUCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUCollectionView.m; sourceTree = "<group>"; };
-		CAD0591D168859010085D742 /* JUCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUCollectionViewCell.h; sourceTree = "<group>"; };
-		CAD0591E168859010085D742 /* JUCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUCollectionViewCell.m; sourceTree = "<group>"; };
-		CAD0591F168859010085D742 /* JUCollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUCollectionViewDelegate.h; sourceTree = "<group>"; };
 		CAD0592D16896BE00085D742 /* NSObject+SPInvocationGrabbing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SPInvocationGrabbing.h"; sourceTree = "<group>"; };
 		CAD0592E16896BE00085D742 /* NSObject+SPInvocationGrabbing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SPInvocationGrabbing.m"; sourceTree = "<group>"; };
 		CAD0592F16896BE00085D742 /* SPMediaKeyTap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPMediaKeyTap.h; sourceTree = "<group>"; };
@@ -854,7 +841,6 @@
 				CA3EC2311662227D00D427CA /* VPPCoreData */,
 				CACFF672163C8F8200BC243A /* BFImage */,
 				CAD6019316708ACA0098C9A8 /* LBProgressBar */,
-				CAD05918168859010085D742 /* JUCollectionView */,
 				CAD0592C16896BE00085D742 /* SPMediaKeyTap */,
 			);
 			name = Externals;
@@ -913,22 +899,6 @@
 				CACFF674163C8F8200BC243A /* BFImage.m */,
 			);
 			path = BFImage;
-			sourceTree = "<group>";
-		};
-		CAD05918168859010085D742 /* JUCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				CA2090AE16917772001261A2 /* JUCollectionView+Dragging.h */,
-				CA2090AF16917772001261A2 /* JUCollectionView+Dragging.m */,
-				CAD05919168859010085D742 /* JUCollectionView+Selection.h */,
-				CAD0591A168859010085D742 /* JUCollectionView+Selection.m */,
-				CAD0591B168859010085D742 /* JUCollectionView.h */,
-				CAD0591C168859010085D742 /* JUCollectionView.m */,
-				CAD0591D168859010085D742 /* JUCollectionViewCell.h */,
-				CAD0591E168859010085D742 /* JUCollectionViewCell.m */,
-				CAD0591F168859010085D742 /* JUCollectionViewDelegate.h */,
-			);
-			path = JUCollectionView;
 			sourceTree = "<group>";
 		};
 		CAD0592C16896BE00085D742 /* SPMediaKeyTap */ = {
@@ -1224,9 +1194,6 @@
 				CAF8BA121681949E005990A8 /* RFSongViewCell.m in Sources */,
 				CAD0585E16846EE80085D742 /* RFApplication.m in Sources */,
 				CAD0586116850B7A0085D742 /* RFURLDownloader.m in Sources */,
-				CAD05920168859010085D742 /* JUCollectionView+Selection.m in Sources */,
-				CAD05921168859010085D742 /* JUCollectionView.m in Sources */,
-				CAD05922168859010085D742 /* JUCollectionViewCell.m in Sources */,
 				CAD0593116896BE00085D742 /* NSObject+SPInvocationGrabbing.m in Sources */,
 				CAD0593216896BE00085D742 /* SPMediaKeyTap.m in Sources */,
 				CAD0593B168AA9420085D742 /* RFArtistsView.m in Sources */,
@@ -1234,7 +1201,6 @@
 				CAD05941168AB0590085D742 /* RFTrackEntity.m in Sources */,
 				CAD05948168ABE310085D742 /* RFAlbumsView.m in Sources */,
 				CAD0594C168AF3C20085D742 /* RFSpacebarMenuItem.m in Sources */,
-				CA2090B016917772001261A2 /* JUCollectionView+Dragging.m in Sources */,
 				CA2091581693EB4E001261A2 /* RFImageView.m in Sources */,
 				CA569D4E16958D4F00212770 /* NSString+RFExtensions.m in Sources */,
 				CA569D531696328600212770 /* NSDictionary+SDExtensions.m in Sources */,

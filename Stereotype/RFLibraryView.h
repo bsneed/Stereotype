@@ -7,16 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "JUCollectionView.h"
 #import "NSImage+QuickLook.h"
 
 @class RFLibraryViewController;
 
-@interface RFLibraryView : NSView<JUCollectionViewDelegate, JUCollectionViewDataSource>
+@interface RFLibraryView : NSView
 {
     VPPCoreData *database;
     id observer;
     NSString *_searchString;
+    NSOperationQueue *_imageQueue;
 }
 
 @property (nonatomic, strong) NSString *title;

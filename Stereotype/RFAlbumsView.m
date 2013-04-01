@@ -24,10 +24,8 @@
     self.title = @"Albums";
     blankArtImage = [NSImage imageNamed:@"albumArt"];
 
-    self.collectionView.itemPrototype = [RFCoverViewCell loadFromNib];
+    self.collectionView.itemPrototype = [[RFCoverViewCell alloc] init];
     self.collectionView.delegate = self;
-    self.collectionView.maxNumberOfColumns = 2;
-    self.collectionView.maxNumberOfRows = 8;
 
     [self loadAlbums];
     [self setupNotificationListening];
@@ -89,38 +87,39 @@
 
 - (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView cellForObject:(id)object
 {
-    RFCoverViewCell *cell = [RFCoverViewCell loadFromNib];
+    RFCoverViewCell *cell = [[RFCoverViewCell alloc] init];
     
     cell.imageView.image = blankArtImage;
     
     RFTrackEntity *track = (RFTrackEntity *)object;
     
-    [cell.textLabel setStringValue:@"Unknown Album"];
-    [cell.detailTextLabel setStringValue:@"Unknown Artist"];
-    [cell.playlistLabel setStringValue:@""];
+    cell.albumTitle = @"Unknown Album";
+    cell.artistName = @"Unknown Artist";
+    cell.playlistName = @"";
     
     if (track.albumTitle && track.albumTitle.length > 0)
-        [cell.textLabel setStringValue:track.albumTitle];
+        cell.albumTitle = track.albumTitle;
     
     if (track.compilation.boolValue)
-        [cell.detailTextLabel setStringValue:@"Various Artists"];
+        cell.artistName = @"Various Artists";
     else
     if (track.albumArtist && track.albumArtist.length > 0)
-        [cell.detailTextLabel setStringValue:track.albumArtist];
+        cell.artistName = track.albumArtist;
     else
     if (track.artist && track.artist.length > 0)
-        [cell.detailTextLabel setStringValue:track.artist];
+        cell.artistName = track.artist;
     
-    /*NSString *url = track.url;
+    NSString *url = track.url;
     if (url && [url length] > 0)
     {
-        [self performReturnBlockInBackground:^id{
+        [_imageQueue addOperationWithBlock:^{
             NSImage *image = [NSImage imageFromAlbum:track.albumTitle artist:track.artist url:[NSURL URLWithString:url]];
-            return image;
-        } completion:^(id userObject) {
-            cell.imageView.image = (NSImage *)userObject;
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                cell.image = (NSImage *)image;
+                [cell.view setNeedsDisplay:YES];
+            }];
         }];
-    }*/
+    }
     
     return cell;
 }
@@ -134,6 +133,156 @@
     [self.navigationController pushView:songsView];
     songsView.album = selectedItem.albumTitle;
     songsView.viewStyle = RFSongsViewStyleAlbum;    
+}
+
+- (void)collectionView:(RFCollectionView *)collectionView collectionItem:(RFCoverViewCell *)item drawRectForObject:(id)object dirtyRect:(NSRect)dirtyRect
+{
+    //// General Declarations
+    CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
+    
+    //// Color Declarations
+    NSColor* startColor = [NSColor colorWithCalibratedRed: 0.644 green: 0 blue: 0.367 alpha: 1];
+    NSColor* endColor = [NSColor colorWithCalibratedRed: 0.306 green: 0.07 blue: 0.203 alpha: 1];
+    NSColor* topHighlightColor = [NSColor colorWithCalibratedRed: 1 green: 1 blue: 1 alpha: 0.399];
+    NSColor* bottomShadowColor = [NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 0.3];
+    NSColor* nameTextColor = [NSColor colorWithCalibratedRed: 1 green: 1 blue: 1 alpha: 1];
+    NSColor* subtitleColor = [NSColor colorWithCalibratedRed: 0.653 green: 0.648 blue: 0.648 alpha: 1];
+    
+    //// Gradient Declarations
+    NSGradient* gradient = [[NSGradient alloc] initWithStartingColor: startColor endingColor: endColor];
+    
+    //// Shadow Declarations
+    NSShadow* highlightShadow = [[NSShadow alloc] init];
+    [highlightShadow setShadowColor: topHighlightColor];
+    [highlightShadow setShadowOffset: NSMakeSize(0.1, -1.1)];
+    [highlightShadow setShadowBlurRadius: 0];
+    NSShadow* backgroundShadow = [[NSShadow alloc] init];
+    [backgroundShadow setShadowColor: bottomShadowColor];
+    [backgroundShadow setShadowOffset: NSMakeSize(0.1, -2.1)];
+    [backgroundShadow setShadowBlurRadius: 8.5];
+    NSShadow* textShadow = [[NSShadow alloc] init];
+    [textShadow setShadowColor: bottomShadowColor];
+    [textShadow setShadowOffset: NSMakeSize(0.1, -1.0)];
+    [textShadow setShadowBlurRadius: 1.0];
+    
+    //// Abstracted Attributes
+    NSString* nameTextContent = item.albumTitle;
+    NSString* subtitleTextContent = item.artistName;
+    
+    if (item.selected)
+    {
+        //// selectionRectangle Drawing
+        NSBezierPath* selectionRectanglePath = [NSBezierPath bezierPathWithRoundedRect: NSMakeRect(28, 45, 146, 146) xRadius: 9 yRadius: 9];
+        [NSGraphicsContext saveGraphicsState];
+        [backgroundShadow set];
+        CGContextBeginTransparencyLayer(context, NULL);
+        [gradient drawInBezierPath: selectionRectanglePath angle: -90];
+        CGContextEndTransparencyLayer(context);
+        
+        ////// selectionRectangle Inner Shadow
+        NSRect selectionRectangleBorderRect = NSInsetRect([selectionRectanglePath bounds], -highlightShadow.shadowBlurRadius, -highlightShadow.shadowBlurRadius);
+        selectionRectangleBorderRect = NSOffsetRect(selectionRectangleBorderRect, -highlightShadow.shadowOffset.width, -highlightShadow.shadowOffset.height);
+        selectionRectangleBorderRect = NSInsetRect(NSUnionRect(selectionRectangleBorderRect, [selectionRectanglePath bounds]), -1, -1);
+        
+        NSBezierPath* selectionRectangleNegativePath = [NSBezierPath bezierPathWithRect: selectionRectangleBorderRect];
+        [selectionRectangleNegativePath appendBezierPath: selectionRectanglePath];
+        [selectionRectangleNegativePath setWindingRule: NSEvenOddWindingRule];
+        
+        [NSGraphicsContext saveGraphicsState];
+        {
+            NSShadow* highlightShadowWithOffset = [highlightShadow copy];
+            CGFloat xOffset = highlightShadowWithOffset.shadowOffset.width + round(selectionRectangleBorderRect.size.width);
+            CGFloat yOffset = highlightShadowWithOffset.shadowOffset.height;
+            highlightShadowWithOffset.shadowOffset = NSMakeSize(xOffset + copysign(0.1, xOffset), yOffset + copysign(0.1, yOffset));
+            [highlightShadowWithOffset set];
+            [[NSColor grayColor] setFill];
+            [selectionRectanglePath addClip];
+            NSAffineTransform* transform = [NSAffineTransform transform];
+            [transform translateXBy: -round(selectionRectangleBorderRect.size.width) yBy: 0];
+            [[transform transformBezierPath: selectionRectangleNegativePath] fill];
+        }
+        [NSGraphicsContext restoreGraphicsState];
+        
+        [NSGraphicsContext restoreGraphicsState];
+    }
+    
+    
+    if (item.image)
+    {
+        //// imageRectangle Drawing
+        [NSGraphicsContext saveGraphicsState];
+        [backgroundShadow set];
+        CGContextBeginTransparencyLayer(context, NULL);
+        //[gradient drawInBezierPath: imageRectanglePath angle: -90];
+        
+        // image Drawing code here.
+        [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+        CGRect imageRect = CGRectMake(0, 0, item.image.size.width, item.image.size.height);
+        NSRect imageRectangleFromPath = NSMakeRect(34, 51, 134, 134);
+        CGRect drawRect = GTMCGScaleRectangleToSize(imageRect, imageRectangleFromPath.size, GTMScaleProportionally);
+        NSRect centeredRect = NSIntegralRect([item.image centerRect:drawRect inRect:imageRectangleFromPath]);
+        centeredRect.origin.x += 34;
+        centeredRect.origin.y += 51;
+        [item.image drawInRect:centeredRect fromRect:imageRect operation:NSCompositeCopy fraction:1.0];
+        
+        
+        CGContextEndTransparencyLayer(context);
+        
+        NSRect rect = centeredRect;
+        rect.origin.x += 0.5;
+        rect.origin.y += 0.5;
+        rect.size.width -= 1;
+        rect.size.height -= 1;
+        NSBezierPath* rectanglePath = [NSBezierPath bezierPathWithRect:rect];
+        [[NSColor blackColor] setStroke];
+        [rectanglePath setLineWidth: 1];
+        [rectanglePath stroke];
+        
+        NSBezierPath *line = [NSBezierPath bezierPath];
+        [line moveToPoint:NSMakePoint(centeredRect.origin.x + 1, centeredRect.origin.y + (centeredRect.size.height - 1.5))];
+        [line lineToPoint:NSMakePoint(centeredRect.origin.x + (centeredRect.size.width - 1), centeredRect.origin.y + (centeredRect.size.height - 1.5))];
+        [line setLineWidth:1.0]; /// Make it easy to see
+        [[NSColor colorWithCalibratedWhite:1.0 alpha:0.25] set]; /// Make future drawing the color of lineColor.
+        [line stroke];
+        
+        [NSGraphicsContext restoreGraphicsState];
+    }
+    
+    //// nameText Drawing
+    NSRect nameTextRect = NSMakeRect(10, 22, 182, 20);
+    [NSGraphicsContext saveGraphicsState];
+    [textShadow set];
+    NSMutableParagraphStyle* nameTextStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
+    [nameTextStyle setAlignment: NSCenterTextAlignment];
+    [nameTextStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+
+    
+    NSDictionary* nameTextFontAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                            [NSFont controlContentFontOfSize: [NSFont systemFontSize]], NSFontAttributeName,
+                                            nameTextColor, NSForegroundColorAttributeName,
+                                            nameTextStyle, NSParagraphStyleAttributeName, nil];
+    
+    [nameTextContent drawInRect: nameTextRect withAttributes: nameTextFontAttributes];
+    [NSGraphicsContext restoreGraphicsState];
+    
+    
+    
+    //// subtitleText Drawing
+    NSRect subtitleTextRect = NSMakeRect(10, 3, 182, 20);
+    [NSGraphicsContext saveGraphicsState];
+    [textShadow set];
+    NSMutableParagraphStyle* subtitleTextStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
+    [subtitleTextStyle setAlignment: NSCenterTextAlignment];
+    [subtitleTextStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+
+    NSDictionary* subtitleTextFontAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                [NSFont controlContentFontOfSize: [NSFont smallSystemFontSize]], NSFontAttributeName,
+                                                subtitleColor, NSForegroundColorAttributeName,
+                                                subtitleTextStyle, NSParagraphStyleAttributeName, nil];
+    
+    [subtitleTextContent drawInRect: subtitleTextRect withAttributes: subtitleTextFontAttributes];
+    [NSGraphicsContext restoreGraphicsState];
+
 }
 
 @end

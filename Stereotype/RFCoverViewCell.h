@@ -9,12 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import "RFCollectionView.h"
 
-@interface RFCoverViewCell : NSCollectionViewItem
+@interface RFCoverViewCell : RFCollectionViewItem
 
-@property (weak) IBOutlet NSImageView *imageView;
-@property (weak) IBOutlet NSImageView *selectionImageView;
-@property (weak) IBOutlet NSTextField *textLabel;
-@property (weak) IBOutlet NSTextField *detailTextLabel;
-@property (weak) IBOutlet NSTextField *playlistLabel;
+@property (nonatomic, strong) NSImage *image;
+@property (nonatomic, strong) NSString *albumTitle;
+@property (nonatomic, strong) NSString *artistName;
+@property (nonatomic, strong) NSString *playlistName;
 
 @end

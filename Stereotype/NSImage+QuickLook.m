@@ -14,6 +14,53 @@
 
 static BOOL useImageCache = YES;
 
+CGRect GTMCGRectScale(CGRect inRect, CGFloat xScale, CGFloat yScale)
+{
+    return CGRectMake(inRect.origin.x, inRect.origin.y,
+                      inRect.size.width * xScale, inRect.size.height * yScale);
+}
+
+CGRect GTMCGScaleRectangleToSize(CGRect scalee, CGSize size, GTMScaling scaling)
+{
+    switch (scaling) {
+        case GTMScaleProportionally: {
+            CGFloat height = CGRectGetHeight(scalee);
+            CGFloat width = CGRectGetWidth(scalee);
+            if (isnormal(height) && isnormal(width) && (height > size.height || width > size.width))
+            {
+                CGFloat horiz = size.width / width;
+                CGFloat vert = size.height / height;
+                CGFloat newScale = horiz < vert ? horiz : vert;
+                scalee = GTMCGRectScale(scalee, newScale, newScale);
+            }
+            break;
+        }
+            
+        case GTMScaleToFit:
+            scalee.size = size;
+            break;
+            
+        case GTMScaleNone:
+        default:
+            // Do nothing
+            break;
+    }
+    return scalee;
+}
+
+- (NSRect) centerRect: (NSRect) smallRect
+               inRect: (NSRect) bigRect
+{
+    NSRect centerRect;
+    centerRect.size = smallRect.size;
+    
+    centerRect.origin.x = (bigRect.size.width - smallRect.size.width) / 2.0;
+    centerRect.origin.y = (bigRect.size.height - smallRect.size.height) / 2.0;
+    
+    return (centerRect);
+    
+} // centerRect
+
 + (NSImage *)imageWithPreviewOfFileAtPath:(NSURL *)fileURL ofSize:(NSSize)size asIcon:(BOOL)icon
 {
 	if (!fileURL)
