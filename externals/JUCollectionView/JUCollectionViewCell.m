@@ -26,7 +26,7 @@
 @synthesize selectionColor, selected, drawSelection;
 @synthesize hovering;
 
-/*- (void)drawRect:(NSRect)dirtyRect
+- (void)drawRect:(NSRect)dirtyRect
 {
     if(image)
     {
@@ -62,7 +62,7 @@
         [path setLineWidth:4.0];
         [path stroke];
     }
-}*/
+}
 
 - (void)setImage:(NSImage *)newImage
 {

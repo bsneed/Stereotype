@@ -7,13 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "RFCollectionView.h"
+#import "JUCollectionViewCell.h"
 
-@interface RFCoverViewCell : RFCollectionViewItem
+@interface RFCoverViewCell : JUCollectionViewCell
 
-@property (nonatomic, strong) NSImage *image;
-@property (nonatomic, strong) NSString *albumTitle;
-@property (nonatomic, strong) NSString *artistName;
-@property (nonatomic, strong) NSString *playlistName;
+@property (nonatomic, copy) NSString *albumTitle;
+@property (nonatomic, copy) NSString *artistName;
+@property (nonatomic, copy) NSString *playlistName;
+@property (nonatomic, copy) NSString *url;
 
 @end

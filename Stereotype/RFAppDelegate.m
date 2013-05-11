@@ -7,46 +7,25 @@
 //
 
 #import "RFAppDelegate.h"
-#import "NSObject+RFExtensions.h"
-#import "NSImage+QuickLook.h"
-#import "AUHostController.h"
-#import "RFPlayerView.h"
 #import "RFCompositionView.h"
 #import "RFMetadata.h"
 #import "RFPlaylistEditor.h"
 #import "NSURL+RFExtensions.h"
 
-#import "VPPCoreData.h"
-
 @implementation RFAppDelegate
 {
     RFAudioPlayer *audioPlayer;
-    
     RFLibrary *library;
-
     NSArray *playlist;
-    NSInteger trackIndex;
-    
     NSTimer *updateTimer;
-
     RFCompositionView *visualizer;
-    NSTimeInterval currentTime;
-    
     BOOL movedWhenDrawerOpen;
     CGFloat lastXPosition;
     CGFloat openXPosition;
     BOOL drawerOpen;
-    
     RFSettingsModel *settings;
-    
     NSDictionary *currentTrackInfo;
-    
-    NSMutableArray *urlArray;
-    
-    NSArray *outputDevices;
-    
     BOOL importing;
-    
     SPMediaKeyTap *keyTap;
 }
 

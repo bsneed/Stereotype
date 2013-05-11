@@ -12,7 +12,7 @@
 
 @implementation NSImage (QuickLook)
 
-static BOOL useImageCache = YES;
+static BOOL useImageCache = NO;
 
 CGRect GTMCGRectScale(CGRect inRect, CGFloat xScale, CGFloat yScale)
 {

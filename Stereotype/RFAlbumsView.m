@@ -22,13 +22,18 @@
     [super awakeFromNib];
     
     self.title = @"Albums";
+    self.collectionView.cellSize = NSMakeSize(203, 212);
+    self.collectionView.allowsDragging = YES;
+    self.collectionView.allowsMultipleSelection = YES;
     blankArtImage = [NSImage imageNamed:@"albumArt"];
-
-    self.collectionView.itemPrototype = [[RFCoverViewCell alloc] init];
-    self.collectionView.delegate = self;
 
     [self loadAlbums];
     [self setupNotificationListening];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:observer];
 }
 
 - (void)setupNotificationListening
@@ -70,7 +75,7 @@
     NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"albumArtist != nil"]];
     
     self.items = filteredItems;
-    self.collectionView.content = self.items;
+    [self.collectionView reloadData];
 }
 
 - (void)setSearchString:(NSString *)searchString
@@ -85,7 +90,72 @@
 
 #pragma mark - CollectionView delegate/datasource
 
-- (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView cellForObject:(id)object
+- (NSUInteger)numberOfCellsInCollectionView:(JUCollectionView *)collectionView
+{
+    return self.items.count;
+}
+
+- (JUCollectionViewCell *)collectionView:(JUCollectionView *)collectionView cellForIndex:(NSUInteger)index;
+{
+    static NSString *cellIdentifier = @"coverViewCell";
+    RFCoverViewCell *cell = (RFCoverViewCell *)[collectionView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell)
+        cell = [[RFCoverViewCell alloc] initWithReuseIdentifier:cellIdentifier];
+    
+    RFTrackEntity *track = (RFTrackEntity *)[self.items objectAtIndex:index];
+    
+    cell.image = nil;
+    cell.albumTitle = @"Unknown Album";
+    cell.artistName = @"Unknown Artist";
+    cell.playlistName = @"";
+    cell.selected = NO;
+    
+    if (track.albumTitle && track.albumTitle.length > 0)
+        cell.albumTitle = track.albumTitle;
+    
+    if (track.compilation.boolValue)
+        cell.artistName = @"Various Artists";
+    else
+    if (track.albumArtist && track.albumArtist.length > 0)
+        cell.artistName = track.albumArtist;
+    else
+    if (track.artist && track.artist.length > 0)
+        cell.artistName = track.artist;
+    
+    NSString *url = track.url;
+    if (url && [url length] > 0)
+    {
+        cell.url = url;
+        __weak typeof(cell) weakCell = cell;
+        [_imageQueue addOperationWithBlock:^{
+            NSImage *image = [NSImage imageFromAlbum:track.albumTitle artist:track.artist url:[NSURL URLWithString:url]];
+            if ([weakCell.url isEqualToString:track.url])
+            {
+                weakCell.image = (NSImage *)image;
+                
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [weakCell setNeedsDisplay:YES];
+                }];
+            }
+        }];
+    }
+    
+    return cell;
+}
+
+- (void)collectionView:(JUCollectionView *)collectionView didDoubleClickedCellAtIndex:(NSUInteger)index
+{
+    RFTrackEntity *selectedItem = (RFTrackEntity *)[self.items objectAtIndex:index];
+    
+    RFSongsView *songsView = [RFSongsView loadFromNib];
+    songsView.title = selectedItem.albumTitle;
+    [self.navigationController pushView:songsView];
+    songsView.album = selectedItem.albumTitle;
+    songsView.viewStyle = RFSongsViewStyleAlbum;
+}
+
+
+/*- (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView cellForObject:(id)object
 {
     RFCoverViewCell *cell = [[RFCoverViewCell alloc] init];
     
@@ -283,6 +353,6 @@
     [subtitleTextContent drawInRect: subtitleTextRect withAttributes: subtitleTextFontAttributes];
     [NSGraphicsContext restoreGraphicsState];
 
-}
+}*/
 
 @end

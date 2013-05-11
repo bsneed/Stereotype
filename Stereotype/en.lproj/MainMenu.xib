@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C3012</string>
+		<string key="IBDocument.SystemVersion">12D78</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">3084</string>
@@ -783,7 +783,7 @@
 									<string key="NSFrame">{{118, 33}, {69, 15}}</string>
 									<reference key="NSSuperview" ref="318651518"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="804057111"/>
+									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:3944</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="936254933">
@@ -950,7 +950,7 @@
 								<object class="NSButton" id="436978516">
 									<reference key="NSNextResponder" ref="318651518"/>
 									<int key="NSvFlags">268</int>
-									<string key="NSFrame">{{93, 152}, {31, 31}}</string>
+									<string key="NSFrame">{{92, 151}, {32, 32}}</string>
 									<reference key="NSSuperview" ref="318651518"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="382737454"/>
@@ -1027,7 +1027,7 @@
 								<object class="NSButton" id="314957792">
 									<reference key="NSNextResponder" ref="318651518"/>
 									<int key="NSvFlags">268</int>
-									<string key="NSFrame">{{10, 152}, {31, 31}}</string>
+									<string key="NSFrame">{{10, 151}, {32, 32}}</string>
 									<reference key="NSSuperview" ref="318651518"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="318781388"/>
@@ -2848,7 +2848,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">804</int>
+			<int key="maxID">808</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

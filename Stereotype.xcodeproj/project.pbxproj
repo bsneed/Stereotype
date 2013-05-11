@@ -88,11 +88,14 @@
 		CA9C238216816C1A00AFA71A /* RFPlaylistView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA9C238116816C1A00AFA71A /* RFPlaylistView.xib */; };
 		CAA53DC415B5326C002A476E /* sourceListBg.png in Resources */ = {isa = PBXBuildFile; fileRef = CAA53DC215B5326C002A476E /* sourceListBg.png */; };
 		CAA53DC515B5326C002A476E /* sourceListBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAA53DC315B5326C002A476E /* sourceListBg@2x.png */; };
+		CAAAC9B1173CB2AF00FD3B14 /* JUCollectionView+Dragging.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAAC9A9173CB2AF00FD3B14 /* JUCollectionView+Dragging.m */; };
+		CAAAC9B2173CB2AF00FD3B14 /* JUCollectionView+Selection.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAAC9AB173CB2AF00FD3B14 /* JUCollectionView+Selection.m */; };
+		CAAAC9B3173CB2AF00FD3B14 /* JUCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAAC9AD173CB2AF00FD3B14 /* JUCollectionView.m */; };
+		CAAAC9B4173CB2AF00FD3B14 /* JUCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAAC9AF173CB2AF00FD3B14 /* JUCollectionViewCell.m */; };
 		CAB96879164C62EE00362EC8 /* NSURL+RFExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB96878164C62EE00362EC8 /* NSURL+RFExtensions.m */; };
 		CAB968A6164D01EF00362EC8 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CAB968A5164D01EF00362EC8 /* libc++.dylib */; };
 		CAB968B0164D32B000362EC8 /* Occluded Light.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CAB968AF164D32B000362EC8 /* Occluded Light.qtz */; };
 		CAB968B2164D35FB00362EC8 /* High Particles.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CAB968B1164D35FB00362EC8 /* High Particles.qtz */; };
-		CAC1C63F1703C3EC00E0877A /* RFCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC1C63E1703C3EC00E0877A /* RFCollectionView.m */; };
 		CACA5297164A30D9005EF3E5 /* backButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CACA5295164A30D9005EF3E5 /* backButton@2x.png */; };
 		CACA5298164A30D9005EF3E5 /* backButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CACA5296164A30D9005EF3E5 /* backButtonPressed@2x.png */; };
 		CACA529B164A3171005EF3E5 /* RFBackButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CACA529A164A3171005EF3E5 /* RFBackButtonCell.m */; };
@@ -183,7 +186,6 @@
 		CAF593BC15A92C92006E331A /* abeatbyKaiRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CAF593BB15A92C92006E331A /* abeatbyKaiRegular.otf */; };
 		CAF593BE15A92F6D006E331A /* scrubberBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF593BD15A92F6D006E331A /* scrubberBackground@2x.png */; };
 		CAF8BA0416817341005990A8 /* RFCoverViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8BA0316817341005990A8 /* RFCoverViewCell.m */; };
-		CAF8BA0616817353005990A8 /* RFCoverViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF8BA0516817353005990A8 /* RFCoverViewCell.xib */; };
 		CAF8BA0C1681890A005990A8 /* RFSongsView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8BA0B16818909005990A8 /* RFSongsView.m */; };
 		CAF8BA0E1681891C005990A8 /* RFSongsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF8BA0D1681891C005990A8 /* RFSongsView.xib */; };
 		CAF8BA121681949E005990A8 /* RFSongViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8BA101681949D005990A8 /* RFSongViewCell.m */; };
@@ -353,13 +355,20 @@
 		CA9C238116816C1A00AFA71A /* RFPlaylistView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFPlaylistView.xib; sourceTree = "<group>"; };
 		CAA53DC215B5326C002A476E /* sourceListBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sourceListBg.png; path = Graphics/sourceListBg.png; sourceTree = SOURCE_ROOT; };
 		CAA53DC315B5326C002A476E /* sourceListBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sourceListBg@2x.png"; path = "Graphics/sourceListBg@2x.png"; sourceTree = SOURCE_ROOT; };
+		CAAAC9A8173CB2AF00FD3B14 /* JUCollectionView+Dragging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JUCollectionView+Dragging.h"; sourceTree = "<group>"; };
+		CAAAC9A9173CB2AF00FD3B14 /* JUCollectionView+Dragging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JUCollectionView+Dragging.m"; sourceTree = "<group>"; };
+		CAAAC9AA173CB2AF00FD3B14 /* JUCollectionView+Selection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JUCollectionView+Selection.h"; sourceTree = "<group>"; };
+		CAAAC9AB173CB2AF00FD3B14 /* JUCollectionView+Selection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JUCollectionView+Selection.m"; sourceTree = "<group>"; };
+		CAAAC9AC173CB2AF00FD3B14 /* JUCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUCollectionView.h; sourceTree = "<group>"; };
+		CAAAC9AD173CB2AF00FD3B14 /* JUCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUCollectionView.m; sourceTree = "<group>"; };
+		CAAAC9AE173CB2AF00FD3B14 /* JUCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUCollectionViewCell.h; sourceTree = "<group>"; };
+		CAAAC9AF173CB2AF00FD3B14 /* JUCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUCollectionViewCell.m; sourceTree = "<group>"; };
+		CAAAC9B0173CB2AF00FD3B14 /* JUCollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUCollectionViewDelegate.h; sourceTree = "<group>"; };
 		CAB96877164C62EE00362EC8 /* NSURL+RFExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+RFExtensions.h"; sourceTree = "<group>"; };
 		CAB96878164C62EE00362EC8 /* NSURL+RFExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+RFExtensions.m"; sourceTree = "<group>"; };
 		CAB968A5164D01EF00362EC8 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		CAB968AF164D32B000362EC8 /* Occluded Light.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = "Occluded Light.qtz"; sourceTree = "<group>"; };
 		CAB968B1164D35FB00362EC8 /* High Particles.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = "High Particles.qtz"; sourceTree = "<group>"; };
-		CAC1C63D1703C3EC00E0877A /* RFCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFCollectionView.h; sourceTree = "<group>"; };
-		CAC1C63E1703C3EC00E0877A /* RFCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFCollectionView.m; sourceTree = "<group>"; };
 		CACA5295164A30D9005EF3E5 /* backButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backButton@2x.png"; path = "Graphics/backButton@2x.png"; sourceTree = SOURCE_ROOT; };
 		CACA5296164A30D9005EF3E5 /* backButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backButtonPressed@2x.png"; path = "Graphics/backButtonPressed@2x.png"; sourceTree = SOURCE_ROOT; };
 		CACA5299164A3171005EF3E5 /* RFBackButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBackButtonCell.h; sourceTree = "<group>"; };
@@ -485,7 +494,6 @@
 		CAF593BD15A92F6D006E331A /* scrubberBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "scrubberBackground@2x.png"; path = "Graphics/scrubberBackground@2x.png"; sourceTree = SOURCE_ROOT; };
 		CAF8BA0216817341005990A8 /* RFCoverViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFCoverViewCell.h; sourceTree = "<group>"; };
 		CAF8BA0316817341005990A8 /* RFCoverViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFCoverViewCell.m; sourceTree = "<group>"; };
-		CAF8BA0516817353005990A8 /* RFCoverViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFCoverViewCell.xib; sourceTree = "<group>"; };
 		CAF8BA0A16818909005990A8 /* RFSongsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFSongsView.h; sourceTree = "<group>"; };
 		CAF8BA0B16818909005990A8 /* RFSongsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFSongsView.m; sourceTree = "<group>"; };
 		CAF8BA0D1681891C005990A8 /* RFSongsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFSongsView.xib; sourceTree = "<group>"; };
@@ -842,6 +850,7 @@
 				CACFF672163C8F8200BC243A /* BFImage */,
 				CAD6019316708ACA0098C9A8 /* LBProgressBar */,
 				CAD0592C16896BE00085D742 /* SPMediaKeyTap */,
+				CAAAC9A7173CB2AF00FD3B14 /* JUCollectionView */,
 			);
 			name = Externals;
 			path = externals;
@@ -868,6 +877,22 @@
 				CA569D4D16958D4F00212770 /* NSString+RFExtensions.m */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		CAAAC9A7173CB2AF00FD3B14 /* JUCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				CAAAC9A8173CB2AF00FD3B14 /* JUCollectionView+Dragging.h */,
+				CAAAC9A9173CB2AF00FD3B14 /* JUCollectionView+Dragging.m */,
+				CAAAC9AA173CB2AF00FD3B14 /* JUCollectionView+Selection.h */,
+				CAAAC9AB173CB2AF00FD3B14 /* JUCollectionView+Selection.m */,
+				CAAAC9AC173CB2AF00FD3B14 /* JUCollectionView.h */,
+				CAAAC9AD173CB2AF00FD3B14 /* JUCollectionView.m */,
+				CAAAC9AE173CB2AF00FD3B14 /* JUCollectionViewCell.h */,
+				CAAAC9AF173CB2AF00FD3B14 /* JUCollectionViewCell.m */,
+				CAAAC9B0173CB2AF00FD3B14 /* JUCollectionViewDelegate.h */,
+			);
+			path = JUCollectionView;
 			sourceTree = "<group>";
 		};
 		CACFF60B163A985600BC243A /* Controllers */ = {
@@ -932,12 +957,9 @@
 				CA9C238116816C1A00AFA71A /* RFPlaylistView.xib */,
 				CAF8BA0216817341005990A8 /* RFCoverViewCell.h */,
 				CAF8BA0316817341005990A8 /* RFCoverViewCell.m */,
-				CAF8BA0516817353005990A8 /* RFCoverViewCell.xib */,
 				CA5BEB271699695600B821B8 /* RFPlaylistEditor.h */,
 				CA5BEB281699695600B821B8 /* RFPlaylistEditor.m */,
 				CA5BEB2A1699697300B821B8 /* RFPlaylistEditor.xib */,
-				CAC1C63D1703C3EC00E0877A /* RFCollectionView.h */,
-				CAC1C63E1703C3EC00E0877A /* RFCollectionView.m */,
 			);
 			name = PlaylistViews;
 			sourceTree = "<group>";
@@ -1115,7 +1137,6 @@
 				CA9C23781680731900AFA71A /* barBg@2x.png in Resources */,
 				CA9C237A1680756900AFA71A /* backArrow@2x.png in Resources */,
 				CA9C238216816C1A00AFA71A /* RFPlaylistView.xib in Resources */,
-				CAF8BA0616817353005990A8 /* RFCoverViewCell.xib in Resources */,
 				CAF8BA0E1681891C005990A8 /* RFSongsView.xib in Resources */,
 				CAD0593C168AA9420085D742 /* RFArtistsView.xib in Resources */,
 				CAD05949168ABE310085D742 /* RFAlbumsView.xib in Resources */,
@@ -1206,7 +1227,10 @@
 				CA569D531696328600212770 /* NSDictionary+SDExtensions.m in Sources */,
 				CA5BEB291699695600B821B8 /* RFPlaylistEditor.m in Sources */,
 				CA014DC816F53BA700253769 /* RFTableRowView.m in Sources */,
-				CAC1C63F1703C3EC00E0877A /* RFCollectionView.m in Sources */,
+				CAAAC9B1173CB2AF00FD3B14 /* JUCollectionView+Dragging.m in Sources */,
+				CAAAC9B2173CB2AF00FD3B14 /* JUCollectionView+Selection.m in Sources */,
+				CAAAC9B3173CB2AF00FD3B14 /* JUCollectionView.m in Sources */,
+				CAAAC9B4173CB2AF00FD3B14 /* JUCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

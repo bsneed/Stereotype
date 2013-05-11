@@ -40,7 +40,7 @@
 
 - (NSView *)findClickedViewInCell:(JUCollectionViewCell *)cell atPoint:(NSPoint)point
 {
-    NSView *result = nil;
+    NSView *result = cell;
     
     NSPoint localPoint = [cell convertPoint:point fromView:nil];
     
