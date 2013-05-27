@@ -10,4 +10,12 @@
 
 @interface RFTrackEntity (RFCollection)
 
+- (id)imageRepresentation;
+- (NSString *)imageRepresentationType;
+- (NSString *)imageSubtitle;
+- (NSString *)imageTitle;
+- (NSString *)imageUID;
+- (NSString *)imageVersion;
+- (BOOL)isSelectable;
+
 @end

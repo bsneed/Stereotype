@@ -7,10 +7,11 @@
 //
 
 #import "RFLibraryView.h"
-#import "JUCollectionView.h"
+#import "RFCollectionView.h"
 
-@interface RFAlbumsView : RFLibraryView<JUCollectionViewDelegate, JUCollectionViewDataSource>
 
-@property (weak) IBOutlet JUCollectionView *collectionView;
+@interface RFAlbumsView : RFLibraryView
+
+@property (weak) IBOutlet RFCollectionView *collectionView;
 
 @end

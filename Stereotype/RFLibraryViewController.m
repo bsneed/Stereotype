@@ -111,10 +111,38 @@
     [self.titleLabel setStringValue:aView.title];
 
     RFLibraryView *lastView = [libraryViews lastObject];
+    
     if (lastView)
     {
         [[self window] makeFirstResponder:aView];
+
+        /*dispatch_async(dispatch_get_main_queue(), ^{
+            [NSAnimationContext beginGrouping];
+            {
+                // Removes the old view after the animation
+                [[NSAnimationContext currentContext] setCompletionHandler:^{
+                    libraryView = aView;
+                    [self.titlePopup setHidden:YES];
+                }];
+                
+                [[NSAnimationContext currentContext] setDuration:0.3];
+                [[NSAnimationContext currentContext] setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+                
+                [lastView.animator setFrame:CGRectOffset(lastView.frame, -self.containerView.frame.size.width, 0)];
+                [aView.animator setFrame:CGRectOffset(aView.frame, -self.containerView.frame.size.width, 0)];
+                [lastView.animator setAlphaValue:0];
+                [aView.animator setAlphaValue:1.0];
+                [self.backButton.animator setAlphaValue:1.0];
+                [self.titlePopup.animator setAlphaValue:0];
+                [self.titleLabel.animator setAlphaValue:1.0];
+            }
+            [NSAnimationContext endGrouping];
+        });*/
+        
         [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+            [[NSAnimationContext currentContext] setDuration:0.3];
+            [[NSAnimationContext currentContext] setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+         
             [lastView.animator setFrame:CGRectOffset(lastView.frame, -self.containerView.frame.size.width, 0)];
             [aView.animator setFrame:CGRectOffset(aView.frame, -self.containerView.frame.size.width, 0)];
             [lastView.animator setAlphaValue:0];
@@ -152,7 +180,41 @@
 
     [self.titleLabel setStringValue:aView.title];
 
+    /*dispatch_async(dispatch_get_main_queue(), ^{
+        [NSAnimationContext beginGrouping];
+        {
+            // Removes the old view after the animation
+            [[NSAnimationContext currentContext] setCompletionHandler:^{
+                [currentView removeFromSuperview];
+                libraryView = aView;
+                if (libraryView.searchString && libraryView.searchString.length > 0)
+                    [self.searchField setStringValue:libraryView.searchString];
+            }];
+            
+            [[NSAnimationContext currentContext] setDuration:0.3];
+            [[NSAnimationContext currentContext] setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+            
+            if ([libraryViews count] <= 1)
+            {
+                [self.backButton.animator setAlphaValue:0];
+                [self.titlePopup setHidden:NO];
+                [self.titlePopup.animator setAlphaValue:1.0];
+                [self.titleLabel.animator setAlphaValue:0];
+            }
+            
+            [currentView.animator setFrame:CGRectOffset(currentView.frame, self.frame.size.width, 0)];
+            [aView.animator setFrame:CGRectOffset(aView.frame, self.frame.size.width, 0)];
+            [currentView.animator setAlphaValue:0];
+            [aView.animator setAlphaValue:1.0];
+        }
+        [NSAnimationContext endGrouping];
+    });*/
+    
+    
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        [[NSAnimationContext currentContext] setDuration:0.3];
+        [[NSAnimationContext currentContext] setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+
         if ([libraryViews count] <= 1)
         {
             [self.backButton.animator setAlphaValue:0];

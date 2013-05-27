@@ -28,7 +28,6 @@
 		CA1B97A3164E225A00055C19 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1B97A2164E225A00055C19 /* GLKit.framework */; };
 		CA1B97A5164E227F00055C19 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1B97A4164E227F00055C19 /* OpenGL.framework */; };
 		CA2091581693EB4E001261A2 /* RFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2091571693EB4E001261A2 /* RFImageView.m */; };
-		CA33AA6A1637968600397481 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA33AA691637968600397481 /* Quartz.framework */; };
 		CA33AA6C163796A600397481 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA33AA6B163796A600397481 /* Accelerate.framework */; };
 		CA3862FD16A137F400D0B2BE /* RFSongViewCellSmall.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA3862FC16A137F300D0B2BE /* RFSongViewCellSmall.xib */; };
 		CA38630316A29AD400D0B2BE /* Audiofile.icns in Resources */ = {isa = PBXBuildFile; fileRef = CA38630216A29AD400D0B2BE /* Audiofile.icns */; };
@@ -88,10 +87,6 @@
 		CA9C238216816C1A00AFA71A /* RFPlaylistView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA9C238116816C1A00AFA71A /* RFPlaylistView.xib */; };
 		CAA53DC415B5326C002A476E /* sourceListBg.png in Resources */ = {isa = PBXBuildFile; fileRef = CAA53DC215B5326C002A476E /* sourceListBg.png */; };
 		CAA53DC515B5326C002A476E /* sourceListBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAA53DC315B5326C002A476E /* sourceListBg@2x.png */; };
-		CAAAC9B1173CB2AF00FD3B14 /* JUCollectionView+Dragging.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAAC9A9173CB2AF00FD3B14 /* JUCollectionView+Dragging.m */; };
-		CAAAC9B2173CB2AF00FD3B14 /* JUCollectionView+Selection.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAAC9AB173CB2AF00FD3B14 /* JUCollectionView+Selection.m */; };
-		CAAAC9B3173CB2AF00FD3B14 /* JUCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAAC9AD173CB2AF00FD3B14 /* JUCollectionView.m */; };
-		CAAAC9B4173CB2AF00FD3B14 /* JUCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAAC9AF173CB2AF00FD3B14 /* JUCollectionViewCell.m */; };
 		CAB96879164C62EE00362EC8 /* NSURL+RFExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB96878164C62EE00362EC8 /* NSURL+RFExtensions.m */; };
 		CAB968A6164D01EF00362EC8 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CAB968A5164D01EF00362EC8 /* libc++.dylib */; };
 		CAB968B0164D32B000362EC8 /* Occluded Light.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CAB968AF164D32B000362EC8 /* Occluded Light.qtz */; };
@@ -100,6 +95,7 @@
 		CACA5298164A30D9005EF3E5 /* backButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CACA5296164A30D9005EF3E5 /* backButtonPressed@2x.png */; };
 		CACA529B164A3171005EF3E5 /* RFBackButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CACA529A164A3171005EF3E5 /* RFBackButtonCell.m */; };
 		CACA529E164A5B15005EF3E5 /* NSImageView+RFExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CACA529D164A5B14005EF3E5 /* NSImageView+RFExtensions.m */; };
+		CACAFCCE1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = CACAFCCD1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.m */; };
 		CACFF60F163A98EC00BC243A /* RFLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CACFF60D163A98EC00BC243A /* RFLibraryViewController.m */; };
 		CACFF610163A98EC00BC243A /* RFLibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CACFF60E163A98EC00BC243A /* RFLibraryViewController.xib */; };
 		CACFF618163A9E8500BC243A /* RFSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CACFF616163A9E8500BC243A /* RFSettingsViewController.m */; };
@@ -189,6 +185,10 @@
 		CAF8BA0C1681890A005990A8 /* RFSongsView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8BA0B16818909005990A8 /* RFSongsView.m */; };
 		CAF8BA0E1681891C005990A8 /* RFSongsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF8BA0D1681891C005990A8 /* RFSongsView.xib */; };
 		CAF8BA121681949E005990A8 /* RFSongViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8BA101681949D005990A8 /* RFSongViewCell.m */; };
+		CAF9C65A1751D49E00E0DA62 /* RFCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF9C6571751D49E00E0DA62 /* RFCollectionView.m */; };
+		CAF9C65B1751D49E00E0DA62 /* RFCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF9C6591751D49E00E0DA62 /* RFCollectionViewCell.m */; };
+		CAF9C6611751DA9300E0DA62 /* RFTrackEntity+RFCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF9C6601751DA9200E0DA62 /* RFTrackEntity+RFCollection.m */; };
+		CAF9C6621751DED600E0DA62 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA33AA691637968600397481 /* Quartz.framework */; };
 		CAFD00FA163923BF009AA0DB /* Basic.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CAFD00F9163923BF009AA0DB /* Basic.qtz */; };
 /* End PBXBuildFile section */
 
@@ -355,15 +355,6 @@
 		CA9C238116816C1A00AFA71A /* RFPlaylistView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFPlaylistView.xib; sourceTree = "<group>"; };
 		CAA53DC215B5326C002A476E /* sourceListBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sourceListBg.png; path = Graphics/sourceListBg.png; sourceTree = SOURCE_ROOT; };
 		CAA53DC315B5326C002A476E /* sourceListBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sourceListBg@2x.png"; path = "Graphics/sourceListBg@2x.png"; sourceTree = SOURCE_ROOT; };
-		CAAAC9A8173CB2AF00FD3B14 /* JUCollectionView+Dragging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JUCollectionView+Dragging.h"; sourceTree = "<group>"; };
-		CAAAC9A9173CB2AF00FD3B14 /* JUCollectionView+Dragging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JUCollectionView+Dragging.m"; sourceTree = "<group>"; };
-		CAAAC9AA173CB2AF00FD3B14 /* JUCollectionView+Selection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JUCollectionView+Selection.h"; sourceTree = "<group>"; };
-		CAAAC9AB173CB2AF00FD3B14 /* JUCollectionView+Selection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JUCollectionView+Selection.m"; sourceTree = "<group>"; };
-		CAAAC9AC173CB2AF00FD3B14 /* JUCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUCollectionView.h; sourceTree = "<group>"; };
-		CAAAC9AD173CB2AF00FD3B14 /* JUCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUCollectionView.m; sourceTree = "<group>"; };
-		CAAAC9AE173CB2AF00FD3B14 /* JUCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUCollectionViewCell.h; sourceTree = "<group>"; };
-		CAAAC9AF173CB2AF00FD3B14 /* JUCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUCollectionViewCell.m; sourceTree = "<group>"; };
-		CAAAC9B0173CB2AF00FD3B14 /* JUCollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUCollectionViewDelegate.h; sourceTree = "<group>"; };
 		CAB96877164C62EE00362EC8 /* NSURL+RFExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+RFExtensions.h"; sourceTree = "<group>"; };
 		CAB96878164C62EE00362EC8 /* NSURL+RFExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+RFExtensions.m"; sourceTree = "<group>"; };
 		CAB968A5164D01EF00362EC8 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -375,6 +366,9 @@
 		CACA529A164A3171005EF3E5 /* RFBackButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBackButtonCell.m; sourceTree = "<group>"; };
 		CACA529C164A5B14005EF3E5 /* NSImageView+RFExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImageView+RFExtensions.h"; sourceTree = "<group>"; };
 		CACA529D164A5B14005EF3E5 /* NSImageView+RFExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImageView+RFExtensions.m"; sourceTree = "<group>"; };
+		CACAFCCB1751F87C00521EE3 /* Stereotype.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Stereotype.entitlements; sourceTree = "<group>"; };
+		CACAFCCC1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RFPlaylistEntity+RFCollection.h"; sourceTree = "<group>"; };
+		CACAFCCD1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RFPlaylistEntity+RFCollection.m"; sourceTree = "<group>"; };
 		CACFF60C163A98EC00BC243A /* RFLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFLibraryViewController.h; sourceTree = "<group>"; };
 		CACFF60D163A98EC00BC243A /* RFLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFLibraryViewController.m; sourceTree = "<group>"; };
 		CACFF60E163A98EC00BC243A /* RFLibraryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFLibraryViewController.xib; sourceTree = "<group>"; };
@@ -499,6 +493,12 @@
 		CAF8BA0D1681891C005990A8 /* RFSongsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFSongsView.xib; sourceTree = "<group>"; };
 		CAF8BA0F1681949D005990A8 /* RFSongViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFSongViewCell.h; sourceTree = "<group>"; };
 		CAF8BA101681949D005990A8 /* RFSongViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFSongViewCell.m; sourceTree = "<group>"; };
+		CAF9C6561751D49E00E0DA62 /* RFCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RFCollectionView.h; path = ../../../../Downloads/ImageBrowser/RFCollectionView.h; sourceTree = "<group>"; };
+		CAF9C6571751D49E00E0DA62 /* RFCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RFCollectionView.m; path = ../../../../Downloads/ImageBrowser/RFCollectionView.m; sourceTree = "<group>"; };
+		CAF9C6581751D49E00E0DA62 /* RFCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RFCollectionViewCell.h; path = ../../../../Downloads/ImageBrowser/RFCollectionViewCell.h; sourceTree = "<group>"; };
+		CAF9C6591751D49E00E0DA62 /* RFCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RFCollectionViewCell.m; path = ../../../../Downloads/ImageBrowser/RFCollectionViewCell.m; sourceTree = "<group>"; };
+		CAF9C65F1751DA9200E0DA62 /* RFTrackEntity+RFCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RFTrackEntity+RFCollection.h"; sourceTree = "<group>"; };
+		CAF9C6601751DA9200E0DA62 /* RFTrackEntity+RFCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RFTrackEntity+RFCollection.m"; sourceTree = "<group>"; };
 		CAFD00F9163923BF009AA0DB /* Basic.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = Basic.qtz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -507,18 +507,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF5939A15A7DD1F006E331A /* QuartzCore.framework in Frameworks */,
+				CAF9C6621751DED600E0DA62 /* Quartz.framework in Frameworks */,
 				CAD05934168A94F70085D742 /* Carbon.framework in Frameworks */,
 				CA495488166B451F00033370 /* CoreData.framework in Frameworks */,
 				CA1B97A5164E227F00055C19 /* OpenGL.framework in Frameworks */,
 				CA1B97A3164E225A00055C19 /* GLKit.framework in Frameworks */,
 				CAB968A6164D01EF00362EC8 /* libc++.dylib in Frameworks */,
 				CA33AA6C163796A600397481 /* Accelerate.framework in Frameworks */,
-				CA33AA6A1637968600397481 /* Quartz.framework in Frameworks */,
 				CA890D0A1634FFBF00BE8ACE /* CoreAudio.framework in Frameworks */,
 				CA890D0B1634FFBF00BE8ACE /* CoreAudioKit.framework in Frameworks */,
 				CA890D061634FFB100BE8ACE /* AudioToolbox.framework in Frameworks */,
 				CA890D071634FFB100BE8ACE /* AudioUnit.framework in Frameworks */,
-				CAF5939A15A7DD1F006E331A /* QuartzCore.framework in Frameworks */,
 				CAF5939815A7DCF0006E331A /* CoreGraphics.framework in Frameworks */,
 				CAF5939615A7DCE0006E331A /* QuickLook.framework in Frameworks */,
 				CA17A0FC15A6941A00ACBA13 /* Cocoa.framework in Frameworks */,
@@ -630,6 +630,7 @@
 			children = (
 				CA17A11915A6971A00ACBA13 /* Button Images */,
 				CA17A10315A6941A00ACBA13 /* Stereotype-Info.plist */,
+				CACAFCCB1751F87C00521EE3 /* Stereotype.entitlements */,
 				CA17A10415A6941A00ACBA13 /* InfoPlist.strings */,
 				CA17A10715A6941A00ACBA13 /* main.m */,
 				CA17A10915A6941A00ACBA13 /* Stereotype-Prefix.pch */,
@@ -768,6 +769,10 @@
 				CAD0594B168AF3C20085D742 /* RFSpacebarMenuItem.m */,
 				CA2091561693EB4E001261A2 /* RFImageView.h */,
 				CA2091571693EB4E001261A2 /* RFImageView.m */,
+				CAF9C6561751D49E00E0DA62 /* RFCollectionView.h */,
+				CAF9C6571751D49E00E0DA62 /* RFCollectionView.m */,
+				CAF9C6581751D49E00E0DA62 /* RFCollectionViewCell.h */,
+				CAF9C6591751D49E00E0DA62 /* RFCollectionViewCell.m */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -850,7 +855,6 @@
 				CACFF672163C8F8200BC243A /* BFImage */,
 				CAD6019316708ACA0098C9A8 /* LBProgressBar */,
 				CAD0592C16896BE00085D742 /* SPMediaKeyTap */,
-				CAAAC9A7173CB2AF00FD3B14 /* JUCollectionView */,
 			);
 			name = Externals;
 			path = externals;
@@ -877,22 +881,6 @@
 				CA569D4D16958D4F00212770 /* NSString+RFExtensions.m */,
 			);
 			name = Extensions;
-			sourceTree = "<group>";
-		};
-		CAAAC9A7173CB2AF00FD3B14 /* JUCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				CAAAC9A8173CB2AF00FD3B14 /* JUCollectionView+Dragging.h */,
-				CAAAC9A9173CB2AF00FD3B14 /* JUCollectionView+Dragging.m */,
-				CAAAC9AA173CB2AF00FD3B14 /* JUCollectionView+Selection.h */,
-				CAAAC9AB173CB2AF00FD3B14 /* JUCollectionView+Selection.m */,
-				CAAAC9AC173CB2AF00FD3B14 /* JUCollectionView.h */,
-				CAAAC9AD173CB2AF00FD3B14 /* JUCollectionView.m */,
-				CAAAC9AE173CB2AF00FD3B14 /* JUCollectionViewCell.h */,
-				CAAAC9AF173CB2AF00FD3B14 /* JUCollectionViewCell.m */,
-				CAAAC9B0173CB2AF00FD3B14 /* JUCollectionViewDelegate.h */,
-			);
-			path = JUCollectionView;
 			sourceTree = "<group>";
 		};
 		CACFF60B163A985600BC243A /* Controllers */ = {
@@ -949,9 +937,13 @@
 		CAF8BA231682A546005990A8 /* PlaylistViews */ = {
 			isa = PBXGroup;
 			children = (
+				CAF9C65F1751DA9200E0DA62 /* RFTrackEntity+RFCollection.h */,
+				CAF9C6601751DA9200E0DA62 /* RFTrackEntity+RFCollection.m */,
 				CAD05945168ABE2D0085D742 /* RFAlbumsView.h */,
 				CAD05946168ABE2F0085D742 /* RFAlbumsView.m */,
 				CAD05947168ABE300085D742 /* RFAlbumsView.xib */,
+				CACAFCCC1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.h */,
+				CACAFCCD1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.m */,
 				CA9C237E16816BD900AFA71A /* RFPlaylistView.h */,
 				CA9C237F16816BD900AFA71A /* RFPlaylistView.m */,
 				CA9C238116816C1A00AFA71A /* RFPlaylistView.xib */,
@@ -1227,10 +1219,10 @@
 				CA569D531696328600212770 /* NSDictionary+SDExtensions.m in Sources */,
 				CA5BEB291699695600B821B8 /* RFPlaylistEditor.m in Sources */,
 				CA014DC816F53BA700253769 /* RFTableRowView.m in Sources */,
-				CAAAC9B1173CB2AF00FD3B14 /* JUCollectionView+Dragging.m in Sources */,
-				CAAAC9B2173CB2AF00FD3B14 /* JUCollectionView+Selection.m in Sources */,
-				CAAAC9B3173CB2AF00FD3B14 /* JUCollectionView.m in Sources */,
-				CAAAC9B4173CB2AF00FD3B14 /* JUCollectionViewCell.m in Sources */,
+				CAF9C65A1751D49E00E0DA62 /* RFCollectionView.m in Sources */,
+				CAF9C65B1751D49E00E0DA62 /* RFCollectionViewCell.m in Sources */,
+				CAF9C6611751DA9300E0DA62 /* RFTrackEntity+RFCollection.m in Sources */,
+				CACAFCCE1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1328,7 +1320,8 @@
 		CA17A11615A6941A00ACBA13 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_ENTITLEMENTS = Stereotype/Stereotype.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stereotype/Stereotype-Prefix.pch";
@@ -1339,10 +1332,12 @@
 					"\"$(SRCROOT)/Stereotype\"",
 					"\"$(SRCROOT)\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				MOMC_SUPPRESS_INVERSE_TRANSIENT_ERROR = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.8;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1350,7 +1345,8 @@
 		CA17A11715A6941A00ACBA13 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_ENTITLEMENTS = Stereotype/Stereotype.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stereotype/Stereotype-Prefix.pch";
@@ -1361,10 +1357,12 @@
 					"\"$(SRCROOT)/Stereotype\"",
 					"\"$(SRCROOT)\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				MOMC_SUPPRESS_INVERSE_TRANSIENT_ERROR = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.8;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

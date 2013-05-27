@@ -211,6 +211,7 @@
 				<string key="NSFrameSize">{406, 336}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="953213837"/>
+				<bool key="NSViewIsLayerTreeHost">YES</bool>
 				<string key="NSClassName">RFArtistsView</string>
 			</object>
 		</array>

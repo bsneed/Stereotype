@@ -217,6 +217,7 @@
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="134708134"/>
+				<bool key="NSViewIsLayerTreeHost">YES</bool>
 				<string key="NSClassName">RFSongsView</string>
 			</object>
 		</array>
@@ -465,7 +466,6 @@
 							</array>
 							<string key="NSFrame">{{1, 1}, {403, 62}}</string>
 							<reference key="NSNextKeyView" ref="120797408"/>
-							<bool key="NSViewIsLayerTreeHost">YES</bool>
 						</object>
 						<reference key="destination" ref="120797408"/>
 					</object>

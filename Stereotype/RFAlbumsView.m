@@ -22,8 +22,6 @@
     [super awakeFromNib];
     
     self.title = @"Albums";
-    self.collectionView.cellSize = NSMakeSize(203, 212);
-    self.collectionView.allowsDragging = YES;
     self.collectionView.allowsMultipleSelection = YES;
     blankArtImage = [NSImage imageNamed:@"albumArt"];
 
@@ -90,7 +88,28 @@
 
 #pragma mark - CollectionView delegate/datasource
 
-- (NSUInteger)numberOfCellsInCollectionView:(JUCollectionView *)collectionView
+- (NSUInteger)numberOfItemsInImageBrowser:(IKImageBrowserView *)aBrowser
+{
+    return self.items.count;
+}
+
+- (id)imageBrowser:(IKImageBrowserView *)aBrowser itemAtIndex:(NSUInteger)index
+{
+    return [self.items objectAtIndex:index];
+}
+
+- (void)imageBrowser:(IKImageBrowserView *)aBrowser cellWasDoubleClickedAtIndex:(NSUInteger)index;
+{
+    RFTrackEntity *selectedItem = (RFTrackEntity *)[self.items objectAtIndex:index];
+    
+    RFSongsView *songsView = [RFSongsView loadFromNib];
+    songsView.title = selectedItem.albumTitle;
+    [self.navigationController pushView:songsView];
+    songsView.album = selectedItem.albumTitle;
+    songsView.viewStyle = RFSongsViewStyleAlbum;
+}
+
+/*- (NSUInteger)numberOfCellsInCollectionView:(JUCollectionView *)collectionView
 {
     return self.items.count;
 }

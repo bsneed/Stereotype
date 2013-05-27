@@ -25,7 +25,7 @@
     
     blankArtImage = [NSImage imageNamed:@"albumArt"];
     self.title = @"Playlists";
-    self.collectionView.cellSize = NSMakeSize(203, 212);
+    self.collectionView.allowsMultipleSelection = YES;
 
     [self loadPlaylists];
     [self setupNotificationListening];
@@ -71,6 +71,28 @@
 
 #pragma mark - CollectionView delegate/datasource
 
+- (NSUInteger)numberOfItemsInImageBrowser:(IKImageBrowserView *)aBrowser
+{
+    return self.items.count;
+}
+
+- (id)imageBrowser:(IKImageBrowserView *)aBrowser itemAtIndex:(NSUInteger)index
+{
+    return [self.items objectAtIndex:index];
+}
+
+- (void)imageBrowser:(IKImageBrowserView *)aBrowser cellWasDoubleClickedAtIndex:(NSUInteger)index;
+{
+    RFPlaylistEntity *selectedItem = (RFPlaylistEntity *)[self.items objectAtIndex:index];
+    
+    RFSongsView *playlistView = [RFSongsView loadFromNib];
+    playlistView.title = selectedItem.name;
+    [self.navigationController pushView:playlistView];
+    playlistView.playlist = selectedItem;
+    playlistView.viewStyle = RFSongsViewStylePlaylist;
+}
+
+/*
 - (NSUInteger)numberOfCellsInCollectionView:(JUCollectionView *)collectionView
 {
     return self.items.count;
@@ -106,13 +128,15 @@
         if (url && [url length] > 0)
         {
             cell.url = url;
+            __weak typeof(cell) weakCell = cell;
             [_imageQueue addOperationWithBlock:^{
                 NSImage *image = [NSImage imageFromAlbum:firstItem.track.albumTitle artist:firstItem.track.artist url:[NSURL URLWithString:url]];
-                cell.image = (NSImage *)image;
-                if ([cell.url isEqualToString:url])
+                if ([weakCell.url isEqualToString:firstItem.track.url])
                 {
+                    weakCell.image = (NSImage *)image;
+                    
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        [cell setNeedsDisplay:YES];
+                        [weakCell setNeedsDisplay:YES];
                     }];
                 }
             }];
