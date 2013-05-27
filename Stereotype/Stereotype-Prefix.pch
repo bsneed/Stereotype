@@ -11,5 +11,5 @@
 #import "RFTrackEntity.h"
 #import "RFItemEntity.h"
 
-//#define memcpy A_memcpy
+#define memcpy A_memcpy
 #endif

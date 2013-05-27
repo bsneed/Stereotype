@@ -96,6 +96,7 @@
 		CACA529B164A3171005EF3E5 /* RFBackButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CACA529A164A3171005EF3E5 /* RFBackButtonCell.m */; };
 		CACA529E164A5B15005EF3E5 /* NSImageView+RFExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CACA529D164A5B14005EF3E5 /* NSImageView+RFExtensions.m */; };
 		CACAFCCE1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = CACAFCCD1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.m */; };
+		CACAFCD71754067200521EE3 /* libamac64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CACAFCD61754067200521EE3 /* libamac64.a */; };
 		CACFF60F163A98EC00BC243A /* RFLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CACFF60D163A98EC00BC243A /* RFLibraryViewController.m */; };
 		CACFF610163A98EC00BC243A /* RFLibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CACFF60E163A98EC00BC243A /* RFLibraryViewController.xib */; };
 		CACFF618163A9E8500BC243A /* RFSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CACFF616163A9E8500BC243A /* RFSettingsViewController.m */; };
@@ -140,7 +141,6 @@
 		CAEE3E4D164F48650057E141 /* RFCompositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEE3E4C164F48650057E141 /* RFCompositionView.m */; };
 		CAEE3E50164F4CBC0057E141 /* RFArtworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEE3E4F164F4CBC0057E141 /* RFArtworkView.m */; };
 		CAF14770165640D80061FC46 /* RFTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF1476F165640D80061FC46 /* RFTextFieldCell.m */; };
-		CAF58D1116575BA300C13F36 /* libamac64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF58D1016575BA300C13F36 /* libamac64.a */; };
 		CAF5934D15A6B280006E331A /* smallButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5934B15A6B280006E331A /* smallButtonPressed.png */; };
 		CAF5934E15A6B280006E331A /* smallButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5934C15A6B280006E331A /* smallButtonPressed@2x.png */; };
 		CAF5935215A6B840006E331A /* bottomBg.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5935015A6B840006E331A /* bottomBg.png */; };
@@ -279,7 +279,7 @@
 		CA33AA691637968600397481 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		CA33AA6B163796A600397481 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		CA3862FC16A137F300D0B2BE /* RFSongViewCellSmall.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFSongViewCellSmall.xib; sourceTree = "<group>"; };
-		CA38630216A29AD400D0B2BE /* Audiofile.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Audiofile.icns; sourceTree = "<group>"; };
+		CA38630216A29AD400D0B2BE /* Audiofile.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Audiofile.icns; path = ../Audiofile.icns; sourceTree = "<group>"; };
 		CA3C8B25163918FA007BA30C /* wowlab_Bugaboo.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = wowlab_Bugaboo.qtz; sourceTree = "<group>"; };
 		CA3C8B2716391A81007BA30C /* wowlab_aquaflow.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = wowlab_aquaflow.qtz; sourceTree = "<group>"; };
 		CA3C8B2916391B23007BA30C /* wowlab_Stream.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = wowlab_Stream.qtz; sourceTree = "<group>"; };
@@ -368,6 +368,8 @@
 		CACAFCCB1751F87C00521EE3 /* Stereotype.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Stereotype.entitlements; sourceTree = "<group>"; };
 		CACAFCCC1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RFPlaylistEntity+RFCollection.h"; sourceTree = "<group>"; };
 		CACAFCCD1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RFPlaylistEntity+RFCollection.m"; sourceTree = "<group>"; };
+		CACAFCD51754067200521EE3 /* asmlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asmlib.h; sourceTree = "<group>"; };
+		CACAFCD61754067200521EE3 /* libamac64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libamac64.a; sourceTree = "<group>"; };
 		CACFF60C163A98EC00BC243A /* RFLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFLibraryViewController.h; sourceTree = "<group>"; };
 		CACFF60D163A98EC00BC243A /* RFLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFLibraryViewController.m; sourceTree = "<group>"; };
 		CACFF60E163A98EC00BC243A /* RFLibraryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFLibraryViewController.xib; sourceTree = "<group>"; };
@@ -436,8 +438,6 @@
 		CAEE3E4F164F4CBC0057E141 /* RFArtworkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFArtworkView.m; sourceTree = "<group>"; };
 		CAF1476E165640D80061FC46 /* RFTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFTextFieldCell.h; sourceTree = "<group>"; };
 		CAF1476F165640D80061FC46 /* RFTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFTextFieldCell.m; sourceTree = "<group>"; };
-		CAF58D0F16575BA300C13F36 /* asmlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asmlib.h; sourceTree = "<group>"; };
-		CAF58D1016575BA300C13F36 /* libamac64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libamac64.a; sourceTree = "<group>"; };
 		CAF5934B15A6B280006E331A /* smallButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = smallButtonPressed.png; path = Graphics/smallButtonPressed.png; sourceTree = SOURCE_ROOT; };
 		CAF5934C15A6B280006E331A /* smallButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "smallButtonPressed@2x.png"; path = "Graphics/smallButtonPressed@2x.png"; sourceTree = SOURCE_ROOT; };
 		CAF5935015A6B840006E331A /* bottomBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bottomBg.png; path = Graphics/bottomBg.png; sourceTree = SOURCE_ROOT; };
@@ -473,7 +473,7 @@
 		CAF5939915A7DD1F006E331A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CAF5939B15A80790006E331A /* volumeDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = volumeDot.png; path = Graphics/volumeDot.png; sourceTree = SOURCE_ROOT; };
 		CAF5939C15A80790006E331A /* volumeDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "volumeDot@2x.png"; path = "Graphics/volumeDot@2x.png"; sourceTree = SOURCE_ROOT; };
-		CAF593A315A90988006E331A /* Stereotype.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Stereotype.icns; sourceTree = "<group>"; };
+		CAF593A315A90988006E331A /* Stereotype.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Stereotype.icns; sourceTree = SOURCE_ROOT; };
 		CAF593A515A91C85006E331A /* RFSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFSlider.h; sourceTree = "<group>"; };
 		CAF593A615A91C85006E331A /* RFSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFSlider.m; sourceTree = "<group>"; };
 		CAF593A715A91C85006E331A /* RFSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFSliderCell.h; sourceTree = "<group>"; };
@@ -519,8 +519,8 @@
 				CAF5939815A7DCF0006E331A /* CoreGraphics.framework in Frameworks */,
 				CAF5939615A7DCE0006E331A /* QuickLook.framework in Frameworks */,
 				CA17A0FC15A6941A00ACBA13 /* Cocoa.framework in Frameworks */,
-				CAF58D1116575BA300C13F36 /* libamac64.a in Frameworks */,
 				CA495485166B44D700033370 /* SFBAudioEngine.framework in Frameworks */,
+				CACAFCD71754067200521EE3 /* libamac64.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,10 +548,6 @@
 		CA17A0EC15A6941900ACBA13 = {
 			isa = PBXGroup;
 			children = (
-				CA38630216A29AD400D0B2BE /* Audiofile.icns */,
-				CAF58D0F16575BA300C13F36 /* asmlib.h */,
-				CAF58D1016575BA300C13F36 /* libamac64.a */,
-				CAF593A315A90988006E331A /* Stereotype.icns */,
 				CA890CB61634FF7900BE8ACE /* Externals */,
 				CA17A10115A6941A00ACBA13 /* Stereotype */,
 				CA17A0FA15A6941A00ACBA13 /* Frameworks */,
@@ -626,6 +622,8 @@
 			isa = PBXGroup;
 			children = (
 				CA17A11915A6971A00ACBA13 /* Button Images */,
+				CA38630216A29AD400D0B2BE /* Audiofile.icns */,
+				CAF593A315A90988006E331A /* Stereotype.icns */,
 				CA17A10315A6941A00ACBA13 /* Stereotype-Info.plist */,
 				CACAFCCB1751F87C00521EE3 /* Stereotype.entitlements */,
 				CA17A10415A6941A00ACBA13 /* InfoPlist.strings */,
@@ -852,6 +850,7 @@
 				CACFF672163C8F8200BC243A /* BFImage */,
 				CAD6019316708ACA0098C9A8 /* LBProgressBar */,
 				CAD0592C16896BE00085D742 /* SPMediaKeyTap */,
+				CACAFCD41754067200521EE3 /* asmlib */,
 			);
 			name = Externals;
 			path = externals;
@@ -878,6 +877,15 @@
 				CA569D4D16958D4F00212770 /* NSString+RFExtensions.m */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		CACAFCD41754067200521EE3 /* asmlib */ = {
+			isa = PBXGroup;
+			children = (
+				CACAFCD51754067200521EE3 /* asmlib.h */,
+				CACAFCD61754067200521EE3 /* libamac64.a */,
+			);
+			path = asmlib;
 			sourceTree = "<group>";
 		};
 		CACFF60B163A985600BC243A /* Controllers */ = {
@@ -1325,6 +1333,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Stereotype\"",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/externals/asmlib\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1350,6 +1359,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Stereotype\"",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/externals/asmlib\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
