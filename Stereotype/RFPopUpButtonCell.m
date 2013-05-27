@@ -11,7 +11,6 @@
 
 @implementation RFPopUpButtonCell
 
-//- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 - (void)drawBorderAndBackgroundWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
     NSImage *bgImage = [NSImage imageNamed:@"popupBg"];
@@ -39,18 +38,6 @@
 @end
 
 @implementation RFPopUpButtonNoBgCell
-
-//- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-/*- (void)drawBorderAndBackgroundWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{
-    NSImage *bgImage = [NSImage imageNamed:@"popupBg"];
-    NSImage *stretchedBg = [bgImage stretchableImageWithLeftCapWidth:20 topCapHeight:4];
-    [stretchedBg setFlipped:YES];
-    if (self.isEnabled)
-        [stretchedBg drawInRect:cellFrame fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0];
-    else
-        [stretchedBg drawInRect:cellFrame fromRect:NSZeroRect operation:NSCompositeCopy fraction:0.5];
-}*/
 
 - (void)drawTitleWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
