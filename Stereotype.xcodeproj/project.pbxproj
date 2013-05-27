@@ -181,7 +181,6 @@
 		CAF593BA15A92102006E331A /* scrubberKnob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF593B815A92102006E331A /* scrubberKnob@2x.png */; };
 		CAF593BC15A92C92006E331A /* abeatbyKaiRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CAF593BB15A92C92006E331A /* abeatbyKaiRegular.otf */; };
 		CAF593BE15A92F6D006E331A /* scrubberBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF593BD15A92F6D006E331A /* scrubberBackground@2x.png */; };
-		CAF8BA0416817341005990A8 /* RFCoverViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8BA0316817341005990A8 /* RFCoverViewCell.m */; };
 		CAF8BA0C1681890A005990A8 /* RFSongsView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8BA0B16818909005990A8 /* RFSongsView.m */; };
 		CAF8BA0E1681891C005990A8 /* RFSongsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF8BA0D1681891C005990A8 /* RFSongsView.xib */; };
 		CAF8BA121681949E005990A8 /* RFSongViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8BA101681949D005990A8 /* RFSongViewCell.m */; };
@@ -486,8 +485,6 @@
 		CAF593B815A92102006E331A /* scrubberKnob@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "scrubberKnob@2x.png"; path = "Graphics/scrubberKnob@2x.png"; sourceTree = SOURCE_ROOT; };
 		CAF593BB15A92C92006E331A /* abeatbyKaiRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = abeatbyKaiRegular.otf; sourceTree = "<group>"; };
 		CAF593BD15A92F6D006E331A /* scrubberBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "scrubberBackground@2x.png"; path = "Graphics/scrubberBackground@2x.png"; sourceTree = SOURCE_ROOT; };
-		CAF8BA0216817341005990A8 /* RFCoverViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFCoverViewCell.h; sourceTree = "<group>"; };
-		CAF8BA0316817341005990A8 /* RFCoverViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFCoverViewCell.m; sourceTree = "<group>"; };
 		CAF8BA0A16818909005990A8 /* RFSongsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFSongsView.h; sourceTree = "<group>"; };
 		CAF8BA0B16818909005990A8 /* RFSongsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFSongsView.m; sourceTree = "<group>"; };
 		CAF8BA0D1681891C005990A8 /* RFSongsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFSongsView.xib; sourceTree = "<group>"; };
@@ -947,8 +944,6 @@
 				CA9C237E16816BD900AFA71A /* RFPlaylistView.h */,
 				CA9C237F16816BD900AFA71A /* RFPlaylistView.m */,
 				CA9C238116816C1A00AFA71A /* RFPlaylistView.xib */,
-				CAF8BA0216817341005990A8 /* RFCoverViewCell.h */,
-				CAF8BA0316817341005990A8 /* RFCoverViewCell.m */,
 				CA5BEB271699695600B821B8 /* RFPlaylistEditor.h */,
 				CA5BEB281699695600B821B8 /* RFPlaylistEditor.m */,
 				CA5BEB2A1699697300B821B8 /* RFPlaylistEditor.xib */,
@@ -1202,7 +1197,6 @@
 				CAD601A21670A25D0098C9A8 /* RFPlaylistEntity.m in Sources */,
 				CA9C237D16816A8C00AFA71A /* RFLibraryView.m in Sources */,
 				CA9C238016816BD900AFA71A /* RFPlaylistView.m in Sources */,
-				CAF8BA0416817341005990A8 /* RFCoverViewCell.m in Sources */,
 				CAF8BA0C1681890A005990A8 /* RFSongsView.m in Sources */,
 				CAF8BA121681949E005990A8 /* RFSongViewCell.m in Sources */,
 				CAD0585E16846EE80085D742 /* RFApplication.m in Sources */,
