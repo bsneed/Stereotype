@@ -1,7 +1,11 @@
 build
-Frameworks
-*.mode1v3
+*.mode*
 *.pbxuser
+*.perspectivev3
+*.log
+*.xcworkspace
+xcuserdata
+docset-installed.txt
 .DS_Store
+Temp/
 *~.*
-
