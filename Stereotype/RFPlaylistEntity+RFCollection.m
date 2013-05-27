@@ -40,7 +40,18 @@
 
 - (NSString *)imageSubtitle
 {
-    return nil;
+    NSUInteger count = self.items.count;
+    NSString *subtitle = nil;
+    if (count == 0)
+        subtitle = @"no songs";
+    else
+    if (count == 1)
+        subtitle = @"1 song";
+    else
+    if (count > 1)
+        subtitle = [NSString stringWithFormat:@"%lu songs", (unsigned long)count];
+    
+    return subtitle;
 }
 
 - (NSString *)imageTitle
