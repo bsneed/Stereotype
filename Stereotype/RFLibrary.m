@@ -11,7 +11,6 @@
 #import "RFMetadata.h"
 #import "NSDictionary+SDExtensions.h"
 
-#import "VPPCoreData.h"
 #import "RFTrackEntity.h"
 #import "RFPlaylistEntity.h"
 
@@ -19,7 +18,7 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
 
 @implementation RFLibrary
 {
-    VPPCoreData *database;
+    RFCoreData *database;
 }
 
 + (id)sharedInstance
@@ -34,28 +33,13 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
 {
 	self = [super init];
 	
-    database = [VPPCoreData sharedInstance];
+    database = [RFCoreData sharedInstance];
     
 	return self;
 }
 
 - (void)dealloc
 {
-}
-
-- (RFPlaylistEntity *)masterPlaylist
-{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"masterLibrary == YES"];
-    RFPlaylistEntity *masterPlaylist = [database findObjectFromEntity:@"RFPlaylistEntity" withPredicate:predicate];
-    if (!masterPlaylist)
-    {
-        RFPlaylistEntity *masterPlaylist = [database getNewObjectForEntity:@"RFPlaylistEntity"];
-        masterPlaylist.masterLibrary = [NSNumber numberWithBool:YES];
-        masterPlaylist.smartPlaylistQuery = @"ANY url != nil";
-        masterPlaylist.name = @"Library";
-        [[VPPCoreData sharedInstance] saveAllChanges];
-    }
-    return masterPlaylist;
 }
 
 - (NSArray *)masterPlaylistItems
@@ -70,15 +54,13 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
 
 - (NSURL *)iTunesLibraryURL
 {
-    NSString *normalLibraryPath = [@"~/Music/iTunes/iTunes Music Library.xml" stringByExpandingTildeInPath];
-    NSString *olderLibraryPath = [@"~/Documents/iTunes/iTunes Music Library.xml" stringByExpandingTildeInPath];
-	
+    NSArray *libraryDatabases = [[[NSUserDefaults standardUserDefaults] persistentDomainForName:@"com.apple.iApps"] objectForKey:@"iTunesRecentDatabases"];
     NSURL *libraryURL = nil;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:normalLibraryPath])
-        libraryURL = [self resolvedFileURLWithPath:normalLibraryPath];
-    else
-        if ([[NSFileManager defaultManager] fileExistsAtPath:olderLibraryPath])
-            libraryURL = [self resolvedFileURLWithPath:olderLibraryPath];
+    if ([libraryDatabases count] > 0)
+    {
+        NSString *stringPath = [libraryDatabases objectAtIndex:0];
+        libraryURL = [NSURL URLWithString:stringPath];//[self resolvedFileURLWithPath:stringPath];
+    }
     
     return libraryURL;
 }
@@ -209,6 +191,24 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
     });
 }
 
+- (NSArray *)existingURLs
+{
+    static NSString* persistentIDKey = @"url";
+    NSMutableArray *results = [NSMutableArray array];
+
+    NSFetchRequest *trackRequest = [NSFetchRequest fetchRequestWithEntityName:@"RFTrackEntity"];
+    [trackRequest setResultType:NSDictionaryResultType];
+    [trackRequest setPropertiesToFetch:@[persistentIDKey]];
+    NSError *error = nil;
+    [results addObjectsFromArray:[database.currentContext executeFetchRequest:trackRequest error:&error]];
+    if (error)
+        NSLog(@"some shit went wrong.");
+            //SMKGenericErrorLog(@"Error fetching iTunes persistent ID's for tracks", error);
+
+    return [results valueForKey:persistentIDKey];
+}
+
+
 - (void)scanDirectory:(NSURL *)directoryToScan skipExisting:(BOOL)skipExisting progressBlock:(RFLibraryImportProgressBlock)progressBlock
 {
     // Create a local file manager instance
@@ -225,6 +225,7 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
                                                                 errorHandler:nil];
     
     NSMutableArray *allURLs = [[NSMutableArray alloc] init];
+    NSArray *existingURLs = [self existingURLs];
     
     if (progressBlock)
     {
@@ -285,7 +286,11 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
             });
         }
         
-        [self importFile:theURL skipExisting:skipExisting saveAfter:NO];
+        NSString *existingURL = [theURL absoluteString];
+        NSUInteger index = [existingURLs indexOfObject:existingURL];
+
+        if (index == NSNotFound)
+            [self importFile:theURL skipExisting:NO saveAfter:NO];
     }
     
     [database saveAllChanges];
@@ -297,7 +302,14 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
     if (!libraryURL)
         return;
     
-    NSDictionary *masterLibrary = [NSDictionary dictionaryWithContentsOfURL:libraryURL];
+    NSError *error = nil;
+    NSDictionary *masterLibrary = [NSPropertyListSerialization propertyListWithData:[NSData dataWithContentsOfURL:libraryURL] options:NSPropertyListImmutable format:NULL error:&error];
+    if (error)
+    {
+        NSLog(@"Unable to read iTunes library.");
+        return;
+    }
+    
 	NSDictionary *tracks = [masterLibrary dictionaryForKey:@"Tracks"];
 	NSArray *masterPlaylists = [masterLibrary arrayForKey:@"Playlists"];
     
@@ -477,7 +489,7 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
     [downloads enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         NSURL *actualURL = [NSURL URLWithString:key];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"url == %@", [actualURL absoluteString]];
-        RFTrackEntity *entity = [[VPPCoreData sharedInstance] findObjectFromEntity:@"RFTrackEntity" withPredicate:predicate];
+        RFTrackEntity *entity = [[RFCoreData sharedInstance] findObjectFromEntity:@"RFTrackEntity" withPredicate:predicate];
         
         if (entity)
         {
@@ -512,7 +524,7 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
                     // set this last since updates are triggered by it.
                     entity.url = [actualURL absoluteString];
 
-                    [[VPPCoreData sharedInstance] saveAllChanges];
+                    [[RFCoreData sharedInstance] saveAllChanges];
                 }
             }
             

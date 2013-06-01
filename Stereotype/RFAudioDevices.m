@@ -18,7 +18,7 @@
 + (RFAudioDeviceFormat *)formatForDescription:(AudioStreamBasicDescription *)aDescription
 {
     RFAudioDeviceFormat *format = [[RFAudioDeviceFormat alloc] init];
-    memcpy(&format->streamDesc, aDescription, sizeof(AudioStreamBasicDescription));
+    A_memcpy(&format->streamDesc, aDescription, sizeof(AudioStreamBasicDescription));
     return format;
 }
 

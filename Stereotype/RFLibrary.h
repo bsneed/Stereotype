@@ -24,8 +24,6 @@ typedef void(^RFLibraryImportProgressBlock)(NSString *text, float percentDone);
 
 - (NSArray *)urlArrayToStringArray:(NSArray *)urlArray;
 
-- (RFPlaylistEntity *)masterPlaylist;
-//- (NSArray *)masterPlaylistTracks;
 - (NSUInteger)totalTrackCount;
 
 - (void)importFile:(NSURL *)fileURL skipExisting:(BOOL)skipExisting saveAfter:(BOOL)saveAfter;

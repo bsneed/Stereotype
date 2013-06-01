@@ -6,10 +6,9 @@
     #import <Cocoa/Cocoa.h>
 #import "NSObject+RFExtensions.h"
 #import "asmlib.h"
-#import "VPPCoreData.h"
+#import "RFCoreData.h"
 #import "RFPlaylistEntity.h"
 #import "RFTrackEntity.h"
 #import "RFItemEntity.h"
 
-#define memcpy A_memcpy
 #endif

@@ -22,7 +22,7 @@
 
 @implementation RFLibraryViewController
 {
-    VPPCoreData *database;
+    RFCoreData *database;
     NSMutableArray *libraryViews;
     
     RFLibraryView *libraryView;
@@ -30,7 +30,7 @@
 
 - (void)awakeFromNib
 {
-    database = [VPPCoreData sharedInstance];
+    database = [RFCoreData sharedInstance];
     libraryViews = [[NSMutableArray alloc] init];
     _viewStyle = INT_MAX;
     

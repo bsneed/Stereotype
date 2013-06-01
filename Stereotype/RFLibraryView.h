@@ -13,7 +13,7 @@
 
 @interface RFLibraryView : NSView
 {
-    VPPCoreData *database;
+    RFCoreData *database;
     id observer;
     NSString *_searchString;
     NSOperationQueue *_imageQueue;

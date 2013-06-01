@@ -17,7 +17,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
-        database = [VPPCoreData sharedInstance];
+        database = [RFCoreData sharedInstance];
     }
     
     return self;
@@ -28,7 +28,7 @@
     self = [super initWithCoder:aDecoder];
     if (self)
     {
-        database = [VPPCoreData sharedInstance];
+        database = [RFCoreData sharedInstance];
     }
     return self;
 }

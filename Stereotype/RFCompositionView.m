@@ -188,8 +188,8 @@
     {
         if (sampleCount > EXTAUDIOBUFFERSIZE)
             sampleCount = EXTAUDIOBUFFERSIZE;
-        memcpy(buffers[0], aBuffer[0], sampleCount * sizeof(float));
-        memcpy(buffers[1], aBuffer[1], sampleCount * sizeof(float));
+        A_memcpy(buffers[0], aBuffer[0], sampleCount * sizeof(float));
+        A_memcpy(buffers[1], aBuffer[1], sampleCount * sizeof(float));
         numberOfBuffers = count;
         samples = sampleCount;
     }

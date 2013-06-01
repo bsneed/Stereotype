@@ -36,11 +36,6 @@
 		CA3C8B2A16391B23007BA30C /* wowlab_Stream.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CA3C8B2916391B23007BA30C /* wowlab_Stream.qtz */; };
 		CA3C8B2C16391C79007BA30C /* wowlab_Snow.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CA3C8B2B16391C79007BA30C /* wowlab_Snow.qtz */; };
 		CA3EC2151662205E00D427CA /* StereotypeDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CA3EC2131662205E00D427CA /* StereotypeDB.xcdatamodeld */; };
-		CA3EC2401662227D00D427CA /* NSManagedObject+VPPCDActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3EC2341662227D00D427CA /* NSManagedObject+VPPCDActiveRecord.m */; };
-		CA3EC2411662227D00D427CA /* NSManagedObjectContext+VPPCDActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3EC2361662227D00D427CA /* NSManagedObjectContext+VPPCDActiveRecord.m */; };
-		CA3EC2421662227D00D427CA /* NSManagedObjectContext+VPPCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3EC2381662227D00D427CA /* NSManagedObjectContext+VPPCoreData.m */; };
-		CA3EC2431662227D00D427CA /* NSSortDescriptor+VPPCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3EC23A1662227D00D427CA /* NSSortDescriptor+VPPCoreData.m */; };
-		CA3EC2441662227D00D427CA /* VPPCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3EC23D1662227D00D427CA /* VPPCoreData.m */; };
 		CA3F291D168EDBC400C01E80 /* shuffleIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA3F291B168EDBC400C01E80 /* shuffleIcon@2x.png */; };
 		CA3F291E168EDBC400C01E80 /* shuffleIconOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA3F291C168EDBC400C01E80 /* shuffleIconOn@2x.png */; };
 		CA3F2922168EE02E00C01E80 /* repeatIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA3F291F168EE02E00C01E80 /* repeatIcon@2x.png */; };
@@ -61,6 +56,7 @@
 		CA569D4E16958D4F00212770 /* NSString+RFExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CA569D4D16958D4F00212770 /* NSString+RFExtensions.m */; };
 		CA569D50169594A200212770 /* topDrag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA569D4F169594A200212770 /* topDrag@2x.png */; };
 		CA569D531696328600212770 /* NSDictionary+SDExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CA569D521696328600212770 /* NSDictionary+SDExtensions.m */; };
+		CA5BC6E317597AF3006E8673 /* RFCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5BC6E217597AF3006E8673 /* RFCoreData.m */; };
 		CA5BEB251699613000B821B8 /* bottomShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = CA5BEB231699613000B821B8 /* bottomShadow.png */; };
 		CA5BEB261699613000B821B8 /* bottomShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA5BEB241699613000B821B8 /* bottomShadow@2x.png */; };
 		CA5BEB291699695600B821B8 /* RFPlaylistEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5BEB281699695600B821B8 /* RFPlaylistEditor.m */; };
@@ -285,19 +281,6 @@
 		CA3C8B2916391B23007BA30C /* wowlab_Stream.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = wowlab_Stream.qtz; sourceTree = "<group>"; };
 		CA3C8B2B16391C79007BA30C /* wowlab_Snow.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = wowlab_Snow.qtz; sourceTree = "<group>"; };
 		CA3EC2141662205E00D427CA /* StereotypeDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StereotypeDB.xcdatamodel; sourceTree = "<group>"; };
-		CA3EC2331662227D00D427CA /* NSManagedObject+VPPCDActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+VPPCDActiveRecord.h"; sourceTree = "<group>"; };
-		CA3EC2341662227D00D427CA /* NSManagedObject+VPPCDActiveRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+VPPCDActiveRecord.m"; sourceTree = "<group>"; };
-		CA3EC2351662227D00D427CA /* NSManagedObjectContext+VPPCDActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+VPPCDActiveRecord.h"; sourceTree = "<group>"; };
-		CA3EC2361662227D00D427CA /* NSManagedObjectContext+VPPCDActiveRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+VPPCDActiveRecord.m"; sourceTree = "<group>"; };
-		CA3EC2371662227D00D427CA /* NSManagedObjectContext+VPPCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+VPPCoreData.h"; sourceTree = "<group>"; };
-		CA3EC2381662227D00D427CA /* NSManagedObjectContext+VPPCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+VPPCoreData.m"; sourceTree = "<group>"; };
-		CA3EC2391662227D00D427CA /* NSSortDescriptor+VPPCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSortDescriptor+VPPCoreData.h"; sourceTree = "<group>"; };
-		CA3EC23A1662227D00D427CA /* NSSortDescriptor+VPPCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSortDescriptor+VPPCoreData.m"; sourceTree = "<group>"; };
-		CA3EC23B1662227D00D427CA /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
-		CA3EC23C1662227D00D427CA /* VPPCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPPCoreData.h; sourceTree = "<group>"; };
-		CA3EC23D1662227D00D427CA /* VPPCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPPCoreData.m; sourceTree = "<group>"; };
-		CA3EC23E1662227D00D427CA /* VPPCoreDataActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPPCoreDataActiveRecord.h; sourceTree = "<group>"; };
-		CA3EC23F1662227D00D427CA /* VPPCoreDataActiveRecordProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPPCoreDataActiveRecordProtocol.h; sourceTree = "<group>"; };
 		CA3F291B168EDBC400C01E80 /* shuffleIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shuffleIcon@2x.png"; path = "Graphics/shuffleIcon@2x.png"; sourceTree = SOURCE_ROOT; };
 		CA3F291C168EDBC400C01E80 /* shuffleIconOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shuffleIconOn@2x.png"; path = "Graphics/shuffleIconOn@2x.png"; sourceTree = SOURCE_ROOT; };
 		CA3F291F168EE02E00C01E80 /* repeatIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "repeatIcon@2x.png"; path = "Graphics/repeatIcon@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -321,6 +304,8 @@
 		CA569D4F169594A200212770 /* topDrag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "topDrag@2x.png"; path = "Graphics/topDrag@2x.png"; sourceTree = SOURCE_ROOT; };
 		CA569D511696328600212770 /* NSDictionary+SDExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SDExtensions.h"; sourceTree = "<group>"; };
 		CA569D521696328600212770 /* NSDictionary+SDExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SDExtensions.m"; sourceTree = "<group>"; };
+		CA5BC6E117597AF3006E8673 /* RFCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFCoreData.h; sourceTree = "<group>"; };
+		CA5BC6E217597AF3006E8673 /* RFCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFCoreData.m; sourceTree = "<group>"; };
 		CA5BEB231699613000B821B8 /* bottomShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bottomShadow.png; path = Graphics/bottomShadow.png; sourceTree = SOURCE_ROOT; };
 		CA5BEB241699613000B821B8 /* bottomShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottomShadow@2x.png"; path = "Graphics/bottomShadow@2x.png"; sourceTree = SOURCE_ROOT; };
 		CA5BEB271699695600B821B8 /* RFPlaylistEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFPlaylistEditor.h; sourceTree = "<group>"; };
@@ -782,36 +767,10 @@
 				CAD601A11670A25D0098C9A8 /* RFPlaylistEntity.m */,
 				CAD6019A1670A21E0098C9A8 /* RFItemEntity.h */,
 				CAD6019B1670A21E0098C9A8 /* RFItemEntity.m */,
+				CA5BC6E117597AF3006E8673 /* RFCoreData.h */,
+				CA5BC6E217597AF3006E8673 /* RFCoreData.m */,
 			);
 			name = Database;
-			sourceTree = "<group>";
-		};
-		CA3EC2311662227D00D427CA /* VPPCoreData */ = {
-			isa = PBXGroup;
-			children = (
-				CA3EC2321662227D00D427CA /* Categories */,
-				CA3EC23B1662227D00D427CA /* SynthesizeSingleton.h */,
-				CA3EC23C1662227D00D427CA /* VPPCoreData.h */,
-				CA3EC23D1662227D00D427CA /* VPPCoreData.m */,
-				CA3EC23E1662227D00D427CA /* VPPCoreDataActiveRecord.h */,
-				CA3EC23F1662227D00D427CA /* VPPCoreDataActiveRecordProtocol.h */,
-			);
-			path = VPPCoreData;
-			sourceTree = "<group>";
-		};
-		CA3EC2321662227D00D427CA /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				CA3EC2331662227D00D427CA /* NSManagedObject+VPPCDActiveRecord.h */,
-				CA3EC2341662227D00D427CA /* NSManagedObject+VPPCDActiveRecord.m */,
-				CA3EC2351662227D00D427CA /* NSManagedObjectContext+VPPCDActiveRecord.h */,
-				CA3EC2361662227D00D427CA /* NSManagedObjectContext+VPPCDActiveRecord.m */,
-				CA3EC2371662227D00D427CA /* NSManagedObjectContext+VPPCoreData.h */,
-				CA3EC2381662227D00D427CA /* NSManagedObjectContext+VPPCoreData.m */,
-				CA3EC2391662227D00D427CA /* NSSortDescriptor+VPPCoreData.h */,
-				CA3EC23A1662227D00D427CA /* NSSortDescriptor+VPPCoreData.m */,
-			);
-			path = Categories;
 			sourceTree = "<group>";
 		};
 		CA495470166B44A500033370 /* Products */ = {
@@ -846,7 +805,6 @@
 			isa = PBXGroup;
 			children = (
 				CA49546F166B44A500033370 /* SFBAudioEngine.xcodeproj */,
-				CA3EC2311662227D00D427CA /* VPPCoreData */,
 				CACFF672163C8F8200BC243A /* BFImage */,
 				CAD6019316708ACA0098C9A8 /* LBProgressBar */,
 				CAD0592C16896BE00085D742 /* SPMediaKeyTap */,
@@ -1195,11 +1153,6 @@
 				CA4D5D24166014F500214280 /* RFAudioDevices.m in Sources */,
 				CA4D5D3116606A8100214280 /* RFAudioUnitContainer.m in Sources */,
 				CA3EC2151662205E00D427CA /* StereotypeDB.xcdatamodeld in Sources */,
-				CA3EC2401662227D00D427CA /* NSManagedObject+VPPCDActiveRecord.m in Sources */,
-				CA3EC2411662227D00D427CA /* NSManagedObjectContext+VPPCDActiveRecord.m in Sources */,
-				CA3EC2421662227D00D427CA /* NSManagedObjectContext+VPPCoreData.m in Sources */,
-				CA3EC2431662227D00D427CA /* NSSortDescriptor+VPPCoreData.m in Sources */,
-				CA3EC2441662227D00D427CA /* VPPCoreData.m in Sources */,
 				CAD6019616708ACA0098C9A8 /* LBProgressBar.m in Sources */,
 				CAD6019C1670A21E0098C9A8 /* RFItemEntity.m in Sources */,
 				CAD601A21670A25D0098C9A8 /* RFPlaylistEntity.m in Sources */,
@@ -1225,6 +1178,7 @@
 				CAF9C65B1751D49E00E0DA62 /* RFCollectionViewCell.m in Sources */,
 				CAF9C6611751DA9300E0DA62 /* RFTrackEntity+RFCollection.m in Sources */,
 				CACAFCCE1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.m in Sources */,
+				CA5BC6E317597AF3006E8673 /* RFCoreData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

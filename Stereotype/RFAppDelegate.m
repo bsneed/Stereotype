@@ -102,7 +102,8 @@ static RFAppDelegate *__appDelegateInstance = nil;
     
     [self.spaceMenuItem setTitleWithMnemonic:@"Play/Pause               "];
     
-    [VPPCoreData sharedInstance].dbFilename = @"StereotypeDB";
+    [RFCoreData sharedInstance].databaseFilename = @"StereotypeDB2.sqlite";
+    [RFCoreData sharedInstance].databasePath = [@"~/Music/Stereotype" stringByExpandingTildeInPath];
     
     settings = [RFSettingsModel sharedInstance];    
     audioPlayer = [RFAudioPlayer sharedInstance];
@@ -434,8 +435,6 @@ static RFAppDelegate *__appDelegateInstance = nil;
 
 - (void)checkLibrarySetup
 {
-    [library masterPlaylist];
-    
     NSUInteger trackCount = [library totalTrackCount];
     if (!trackCount)
     {
