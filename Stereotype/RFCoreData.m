@@ -171,6 +171,14 @@
 
 - (void)mergeChanges:(NSNotification *)notification
 {
+    if (![NSThread currentThread].isMainThread)
+    {
+        [self performBlockOnMainThread:^{
+            [self mergeChanges:notification];
+        }];
+        return;
+    }
+    
     [self.currentContext mergeChangesFromContextDidSaveNotification:notification];
 }
 
