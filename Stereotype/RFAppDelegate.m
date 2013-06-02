@@ -196,6 +196,14 @@ static RFAppDelegate *__appDelegateInstance = nil;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    if (![NSThread currentThread].isMainThread)
+    {
+        [self performBlockOnMainThread:^{
+            [self observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        }];
+        return;
+    }
+    
     if ([keyPath isEqualToString:@"elapsedTimeInSeconds"])
     {
         if ([audioPlayer isPlaying])
