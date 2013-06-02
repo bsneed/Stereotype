@@ -107,6 +107,9 @@
     [clipPath addClip];
     [clipPath setClip];
     
+    if (clipPath.isEmpty)
+        NSLog(@"empty");
+    
     [gradient drawInBezierPath:allStripes angle:0];
 }
 
@@ -118,7 +121,8 @@
     
     //white shadow
     NSBezierPath* shadow = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(0.5, 0, self.bounds.size.width-1, self.bounds.size.height-1) xRadius:DEFAULT_radius yRadius:DEFAULT_radius];
-    [NSBezierPath clipRect:NSMakeRect(0, self.bounds.size.height/2, self.bounds.size.width, self.bounds.size.height/2)];
+    NSRect clipRect = NSMakeRect(0, self.bounds.size.height/2, self.bounds.size.width, self.bounds.size.height/2);
+    [NSBezierPath clipRect:clipRect];
     [[NSColor colorWithCalibratedWhite:1.0 alpha:0.2] set];
     [shadow stroke];
     
@@ -158,7 +162,10 @@
     [self drawBezel];
     
     if (value) {
-        NSRect bounds = NSMakeRect(DEFAULT_inset, DEFAULT_inset, self.frame.size.width*value-2*DEFAULT_inset, (self.frame.size.height-2*DEFAULT_inset)-1);
+        NSRect frame = self.frame;
+        CGFloat width = ((frame.size.width / self.maxValue) * (value * 100)) - DEFAULT_inset;
+        //NSRect bounds = NSMakeRect(DEFAULT_inset, DEFAULT_inset, (frame.size.width * value) - (2 * DEFAULT_inset), (frame.size.height-2*DEFAULT_inset)-1);
+        NSRect bounds = NSMakeRect(DEFAULT_inset, DEFAULT_inset, width, (frame.size.height-2*DEFAULT_inset)-1);
         
         [self drawProgressWithBounds:bounds];
         [self drawStripesInBounds:bounds];
