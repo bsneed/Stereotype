@@ -509,7 +509,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
             highestRate = rate;
     }
     
-    audioPlayer->SetInputOutputSampleRatesShouldMatch(_upsampling);
+    audioPlayer->SetInputOutputSampleRatesShouldMatch(!_upsampling);
 
     BOOL wasPlaying = [self isPlaying];
     if (wasPlaying)
