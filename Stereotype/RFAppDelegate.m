@@ -764,9 +764,11 @@ static RFAppDelegate *__appDelegateInstance = nil;
     [self.importProgress startAnimation:nil];
 
     [library importDirectories:@[directory] progressBlock:^(NSString *text, float percentDone) {
-        [self.importProgress setDoubleValue:percentDone];
+        if (percentDone >= 0 && percentDone <= 100)
+            [self.importProgress setDoubleValue:percentDone];
         [self.importLabel setStringValue:text];
     } doneBlock:^{
+        [self.importProgress stopAnimation:nil];
         [self.importPanel orderOut:nil];
         [self.window makeKeyAndOrderFront:nil];
         [self.artworkView adjustChildWindow:NO];
@@ -790,7 +792,8 @@ static RFAppDelegate *__appDelegateInstance = nil;
     [self.importProgress startAnimation:nil];
     
     RFLibraryImportProgressBlock progressBlock = ^(NSString *text, float percentDone) {
-        [self.importProgress setDoubleValue:percentDone];
+        if (percentDone >= 0 && percentDone <= 100)
+            [self.importProgress setDoubleValue:percentDone];
         [self.importLabel setStringValue:text];
     };
     
@@ -799,6 +802,7 @@ static RFAppDelegate *__appDelegateInstance = nil;
     
     [library importDirectories:@[iTunesMusicPath, iTunesPodcastsPath] progressBlock:progressBlock doneBlock:^{
         [library importiTunesPlaylistsWithProgressBlock:progressBlock doneBlock:^{
+            [self.importProgress stopAnimation:nil];
             [self.importPanel orderOut:nil];
             [self.window makeKeyAndOrderFront:nil];
             [self.artworkView adjustChildWindow:NO];
