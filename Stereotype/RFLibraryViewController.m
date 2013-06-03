@@ -139,6 +139,8 @@
             [NSAnimationContext endGrouping];
         });*/
         
+        [self.backButton setHidden:NO];
+        
         [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
             [[NSAnimationContext currentContext] setDuration:0.3];
             [[NSAnimationContext currentContext] setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
@@ -229,6 +231,7 @@
         [aView.animator setAlphaValue:1.0];
     } completionHandler:^{
         [currentView removeFromSuperview];
+        [self.backButton setHidden:YES];
         libraryView = aView;
         if (libraryView.searchString && libraryView.searchString.length > 0)
             [self.searchField setStringValue:libraryView.searchString];

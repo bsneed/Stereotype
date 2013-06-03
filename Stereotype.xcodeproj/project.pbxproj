@@ -61,6 +61,8 @@
 		CA5BEB261699613000B821B8 /* bottomShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA5BEB241699613000B821B8 /* bottomShadow@2x.png */; };
 		CA5BEB291699695600B821B8 /* RFPlaylistEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5BEB281699695600B821B8 /* RFPlaylistEditor.m */; };
 		CA5BEB2B1699697300B821B8 /* RFPlaylistEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA5BEB2A1699697300B821B8 /* RFPlaylistEditor.xib */; };
+		CA759ED8175CFF1200A72609 /* RFCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA759ED5175CFF1200A72609 /* RFCollectionView.m */; };
+		CA759ED9175CFF1200A72609 /* RFCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA759ED7175CFF1200A72609 /* RFCollectionViewCell.m */; };
 		CA890CB51634942600BE8ACE /* drawerBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA890CB41634942600BE8ACE /* drawerBg@2x.png */; };
 		CA890D061634FFB100BE8ACE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA890D041634FFB100BE8ACE /* AudioToolbox.framework */; };
 		CA890D071634FFB100BE8ACE /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA890D051634FFB100BE8ACE /* AudioUnit.framework */; };
@@ -180,8 +182,6 @@
 		CAF8BA0C1681890A005990A8 /* RFSongsView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8BA0B16818909005990A8 /* RFSongsView.m */; };
 		CAF8BA0E1681891C005990A8 /* RFSongsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF8BA0D1681891C005990A8 /* RFSongsView.xib */; };
 		CAF8BA121681949E005990A8 /* RFSongViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8BA101681949D005990A8 /* RFSongViewCell.m */; };
-		CAF9C65A1751D49E00E0DA62 /* RFCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF9C6571751D49E00E0DA62 /* RFCollectionView.m */; };
-		CAF9C65B1751D49E00E0DA62 /* RFCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF9C6591751D49E00E0DA62 /* RFCollectionViewCell.m */; };
 		CAF9C6611751DA9300E0DA62 /* RFTrackEntity+RFCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF9C6601751DA9200E0DA62 /* RFTrackEntity+RFCollection.m */; };
 		CAF9C6621751DED600E0DA62 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA33AA691637968600397481 /* Quartz.framework */; };
 		CAFD00FA163923BF009AA0DB /* Basic.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CAFD00F9163923BF009AA0DB /* Basic.qtz */; };
@@ -311,6 +311,10 @@
 		CA5BEB271699695600B821B8 /* RFPlaylistEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFPlaylistEditor.h; sourceTree = "<group>"; };
 		CA5BEB281699695600B821B8 /* RFPlaylistEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFPlaylistEditor.m; sourceTree = "<group>"; };
 		CA5BEB2A1699697300B821B8 /* RFPlaylistEditor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFPlaylistEditor.xib; sourceTree = "<group>"; };
+		CA759ED4175CFF1200A72609 /* RFCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFCollectionView.h; sourceTree = "<group>"; };
+		CA759ED5175CFF1200A72609 /* RFCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFCollectionView.m; sourceTree = "<group>"; };
+		CA759ED6175CFF1200A72609 /* RFCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFCollectionViewCell.h; sourceTree = "<group>"; };
+		CA759ED7175CFF1200A72609 /* RFCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFCollectionViewCell.m; sourceTree = "<group>"; };
 		CA890CB41634942600BE8ACE /* drawerBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "drawerBg@2x.png"; path = "Graphics/drawerBg@2x.png"; sourceTree = SOURCE_ROOT; };
 		CA890D041634FFB100BE8ACE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		CA890D051634FFB100BE8ACE /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -475,10 +479,6 @@
 		CAF8BA0D1681891C005990A8 /* RFSongsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RFSongsView.xib; sourceTree = "<group>"; };
 		CAF8BA0F1681949D005990A8 /* RFSongViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFSongViewCell.h; sourceTree = "<group>"; };
 		CAF8BA101681949D005990A8 /* RFSongViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFSongViewCell.m; sourceTree = "<group>"; };
-		CAF9C6561751D49E00E0DA62 /* RFCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RFCollectionView.h; path = ../../../../Downloads/ImageBrowser/RFCollectionView.h; sourceTree = "<group>"; };
-		CAF9C6571751D49E00E0DA62 /* RFCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RFCollectionView.m; path = ../../../../Downloads/ImageBrowser/RFCollectionView.m; sourceTree = "<group>"; };
-		CAF9C6581751D49E00E0DA62 /* RFCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RFCollectionViewCell.h; path = ../../../../Downloads/ImageBrowser/RFCollectionViewCell.h; sourceTree = "<group>"; };
-		CAF9C6591751D49E00E0DA62 /* RFCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RFCollectionViewCell.m; path = ../../../../Downloads/ImageBrowser/RFCollectionViewCell.m; sourceTree = "<group>"; };
 		CAF9C65F1751DA9200E0DA62 /* RFTrackEntity+RFCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RFTrackEntity+RFCollection.h"; sourceTree = "<group>"; };
 		CAF9C6601751DA9200E0DA62 /* RFTrackEntity+RFCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RFTrackEntity+RFCollection.m"; sourceTree = "<group>"; };
 		CAFD00F9163923BF009AA0DB /* Basic.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = Basic.qtz; sourceTree = "<group>"; };
@@ -749,10 +749,10 @@
 				CAD0594B168AF3C20085D742 /* RFSpacebarMenuItem.m */,
 				CA2091561693EB4E001261A2 /* RFImageView.h */,
 				CA2091571693EB4E001261A2 /* RFImageView.m */,
-				CAF9C6561751D49E00E0DA62 /* RFCollectionView.h */,
-				CAF9C6571751D49E00E0DA62 /* RFCollectionView.m */,
-				CAF9C6581751D49E00E0DA62 /* RFCollectionViewCell.h */,
-				CAF9C6591751D49E00E0DA62 /* RFCollectionViewCell.m */,
+				CA759ED4175CFF1200A72609 /* RFCollectionView.h */,
+				CA759ED5175CFF1200A72609 /* RFCollectionView.m */,
+				CA759ED6175CFF1200A72609 /* RFCollectionViewCell.h */,
+				CA759ED7175CFF1200A72609 /* RFCollectionViewCell.m */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -1174,11 +1174,11 @@
 				CA569D531696328600212770 /* NSDictionary+SDExtensions.m in Sources */,
 				CA5BEB291699695600B821B8 /* RFPlaylistEditor.m in Sources */,
 				CA014DC816F53BA700253769 /* RFTableRowView.m in Sources */,
-				CAF9C65A1751D49E00E0DA62 /* RFCollectionView.m in Sources */,
-				CAF9C65B1751D49E00E0DA62 /* RFCollectionViewCell.m in Sources */,
 				CAF9C6611751DA9300E0DA62 /* RFTrackEntity+RFCollection.m in Sources */,
 				CACAFCCE1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.m in Sources */,
 				CA5BC6E317597AF3006E8673 /* RFCoreData.m in Sources */,
+				CA759ED8175CFF1200A72609 /* RFCollectionView.m in Sources */,
+				CA759ED9175CFF1200A72609 /* RFCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

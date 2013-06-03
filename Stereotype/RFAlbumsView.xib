@@ -49,10 +49,11 @@
 									<object class="NSView" id="403226431">
 										<reference key="NSNextResponder" ref="698718583"/>
 										<int key="NSvFlags">274</int>
+										<array class="NSMutableArray" key="NSSubviews"/>
 										<string key="NSFrameSize">{406, 336}</string>
 										<reference key="NSSuperview" ref="698718583"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="1072819842"/>
+										<reference key="NSNextKeyView" ref="941592038"/>
 										<string key="NSReuseIdentifierKey">_NS:13</string>
 									</object>
 								</array>
@@ -119,6 +120,17 @@
 				<reference key="NSNextKeyView" ref="696549309"/>
 				<string key="NSClassName">RFAlbumsView</string>
 			</object>
+			<object class="NSCustomView" id="941592038">
+				<reference key="NSNextResponder"/>
+				<int key="NSvFlags">268</int>
+				<array class="NSMutableArray" key="NSSubviews"/>
+				<string key="NSFrameSize">{55, 46}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
+				<bool key="NSViewIsLayerTreeHost">YES</bool>
+				<string key="NSReuseIdentifierKey">_NS:9</string>
+				<string key="NSClassName">NSView</string>
+			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -153,6 +165,14 @@
 						<reference key="destination" ref="1005"/>
 					</object>
 					<int key="connectionID">41</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">mouseOverView</string>
+						<reference key="source" ref="403226431"/>
+						<reference key="destination" ref="941592038"/>
+					</object>
+					<int key="connectionID">45</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -202,6 +222,7 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">35</int>
 						<reference key="object" ref="403226431"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="696549309"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -213,6 +234,12 @@
 						<int key="objectID">37</int>
 						<reference key="object" ref="622853132"/>
 						<reference key="parent" ref="696549309"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">42</int>
+						<reference key="object" ref="941592038"/>
+						<array class="NSMutableArray" key="children"/>
+						<reference key="parent" ref="0"/>
 					</object>
 				</array>
 			</object>
@@ -226,41 +253,16 @@
 				<string key="35.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="36.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="37.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="42.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">41</int>
+			<int key="maxID">49</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">IKImageBrowserView</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="_dataSource">id</string>
-						<string key="_delegate">id</string>
-						<string key="_dragDestinationDelegate">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="_dataSource">
-							<string key="name">_dataSource</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_delegate">
-							<string key="name">_delegate</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_dragDestinationDelegate">
-							<string key="name">_dragDestinationDelegate</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/IKImageBrowserView.h</string>
-					</object>
-				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">RFAlbumsView</string>
 					<string key="superclassName">RFLibraryView</string>
@@ -283,6 +285,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">RFCollectionView</string>
 					<string key="superclassName">IKImageBrowserView</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">mouseOverView</string>
+						<string key="NS.object.0">NSView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">mouseOverView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">mouseOverView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/RFCollectionView.h</string>
