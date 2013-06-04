@@ -113,10 +113,15 @@
         if ([fileManager fileExistsAtPath: [storePath stringByDeletingLastPathComponent]] == NO)
         {
             // Go and create the last path component.
+            NSError *error;
             [fileManager createDirectoryAtPath:[storePath stringByDeletingLastPathComponent]
                    withIntermediateDirectories: YES
                                     attributes: nil
-                                         error: nil];
+                                         error: &error];
+            if (error)
+            {
+                NSLog(@"Could not create missing path for %@. Error: %@", storePath, error);
+            }
         }
 
         storeURL = [NSURL fileURLWithPath:storePath];
