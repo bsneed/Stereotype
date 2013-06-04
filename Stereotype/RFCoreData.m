@@ -107,11 +107,22 @@
     if ([NSSQLiteStoreType isEqualToString:self.persistentStoreType])
     {
         NSString *storePath = [self.databasePath stringByAppendingPathComponent:self.databaseFilename];
+
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+
+        if ([fileManager fileExistsAtPath: [storePath stringByDeletingLastPathComponent]] == NO)
+        {
+            // Go and create the last path component.
+            [fileManager createDirectoryAtPath:[storePath stringByDeletingLastPathComponent]
+                   withIntermediateDirectories: YES
+                                    attributes: nil
+                                         error: nil];
+        }
+
         storeURL = [NSURL fileURLWithPath:storePath];
-        
+
         if (self.initialDatabaseFilename)
         {
-            NSFileManager *fileManager = [NSFileManager defaultManager];
             if (![fileManager fileExistsAtPath:storePath])
             {
                 NSString *initialStorePath = [[NSBundle mainBundle] pathForResource:self.initialDatabaseFilename ofType:nil];
@@ -122,7 +133,7 @@
     }
     
     NSError *error = nil;
-    
+
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:self.persistentStoreType configuration:nil URL:storeURL options:nil error:&error])
     {
