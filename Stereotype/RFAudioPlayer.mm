@@ -924,9 +924,9 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         return NO;
     }
     
-    BOOL useMemoryInputSource = NO;
+    BOOL useMemoryInputSource = YES;
     
-    InputSource *inputSource = InputSource::CreateInputSourceForURL((__bridge CFURLRef)url, useMemoryInputSource ? InputSourceFlagLoadFilesInMemory : 0, nullptr);
+    InputSource *inputSource = InputSource::CreateInputSourceForURL((__bridge CFURLRef)url, useMemoryInputSource ? InputSourceFlagMemoryMapFiles : 0, nullptr);
     if (inputSource == nullptr)
     {
         return NO;

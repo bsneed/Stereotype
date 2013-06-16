@@ -28,18 +28,21 @@
     id object = nil;
     if (count > index)
         object = [self objectAtIndex:index];
-    
-    for (NSUInteger i = 0; i < count; ++i)
-    {
-        // Select a random element between i and end of array to swap with.
-        NSUInteger nElements = count - i;
-        NSUInteger n = (arc4random() % nElements) + i;
-        [self exchangeObjectAtIndex:i withObjectAtIndex:n];
-    }
-    
-    [self removeObject:object];
-    [self insertObject:object atIndex:index];
-}
 
+    if (object)
+    {
+        for (NSUInteger i = 0; i < count; ++i)
+        {
+            // Select a random element between i and end of array to swap with.
+            NSUInteger nElements = count - i;
+            NSUInteger n = (arc4random() % nElements) + i;
+            [self exchangeObjectAtIndex:i withObjectAtIndex:n];
+        }
+        
+        [self removeObject:object];
+        [self insertObject:object atIndex:index];
+
+    }
+}
 
 @end

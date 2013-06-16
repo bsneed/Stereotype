@@ -354,7 +354,6 @@
 		CACA529A164A3171005EF3E5 /* RFBackButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBackButtonCell.m; sourceTree = "<group>"; };
 		CACA529C164A5B14005EF3E5 /* NSImageView+RFExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImageView+RFExtensions.h"; sourceTree = "<group>"; };
 		CACA529D164A5B14005EF3E5 /* NSImageView+RFExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImageView+RFExtensions.m"; sourceTree = "<group>"; };
-		CACAFCCB1751F87C00521EE3 /* Stereotype.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Stereotype.entitlements; sourceTree = "<group>"; };
 		CACAFCCC1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RFPlaylistEntity+RFCollection.h"; sourceTree = "<group>"; };
 		CACAFCCD1753FDDF00521EE3 /* RFPlaylistEntity+RFCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RFPlaylistEntity+RFCollection.m"; sourceTree = "<group>"; };
 		CACAFCD51754067200521EE3 /* asmlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asmlib.h; sourceTree = "<group>"; };
@@ -610,7 +609,6 @@
 				CA38630216A29AD400D0B2BE /* Audiofile.icns */,
 				CAF593A315A90988006E331A /* Stereotype.icns */,
 				CA17A10315A6941A00ACBA13 /* Stereotype-Info.plist */,
-				CACAFCCB1751F87C00521EE3 /* Stereotype.entitlements */,
 				CA17A10415A6941A00ACBA13 /* InfoPlist.strings */,
 				CA17A10715A6941A00ACBA13 /* main.m */,
 				CA17A10915A6941A00ACBA13 /* Stereotype-Prefix.pch */,
@@ -948,6 +946,11 @@
 				CLASSPREFIX = RF;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = redf.net;
+				TargetAttributes = {
+					CA17A0F615A6941A00ACBA13 = {
+						DevelopmentTeam = 75C92E9Q7J;
+					};
+				};
 			};
 			buildConfigurationList = CA17A0F115A6941900ACBA13 /* Build configuration list for PBXProject "Stereotype" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1276,8 +1279,7 @@
 		CA17A11615A6941A00ACBA13 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Stereotype/Stereotype.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stereotype/Stereotype-Prefix.pch";
@@ -1293,7 +1295,7 @@
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				MOMC_SUPPRESS_INVERSE_TRANSIENT_ERROR = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2480FAEF-453D-4C03-A82E-F0A733FA16A6";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1302,8 +1304,7 @@
 		CA17A11715A6941A00ACBA13 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Stereotype/Stereotype.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stereotype/Stereotype-Prefix.pch";
@@ -1319,7 +1320,7 @@
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				MOMC_SUPPRESS_INVERSE_TRANSIENT_ERROR = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2480FAEF-453D-4C03-A82E-F0A733FA16A6";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
