@@ -60,7 +60,7 @@ static RFSettingsModel *_settingsModel = nil;
     self.activeDrawer = [defaults integerForKey:@"activeDrawerIndex"];
     self.filterNames = [defaults arrayForKey:@"filterNames"];
     self.libraryViewStyle = [defaults integerForKey:@"libraryViewStyle"];
-    self.shuffle = [defaults boolForKey:@"shuffle"];
+    self.shuffleMode = [defaults integerForKey:@"shuffleMode"];
     self.repeatMode = [defaults integerForKey:@"repeatMode"];
     
     if (!self.filterNames)
@@ -93,7 +93,7 @@ static RFSettingsModel *_settingsModel = nil;
     [defaults setInteger:self.activeDrawer forKey:@"activeDrawerIndex"];
     [defaults setObject:self.filterNames forKey:@"filterNames"];
     [defaults setInteger:self.libraryViewStyle forKey:@"libraryViewStyle"];
-    [defaults setBool:self.shuffle forKey:@"shuffle"];
+    [defaults setInteger:self.shuffleMode forKey:@"shuffleMode"];
     [defaults setInteger:self.repeatMode forKey:@"repeatMode"];
     
     [defaults synchronize];

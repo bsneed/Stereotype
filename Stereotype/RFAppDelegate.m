@@ -156,7 +156,7 @@ static RFAppDelegate *__appDelegateInstance = nil;
     
     self.useVisualizer = settings.useVisualizer;
     
-    [self setShuffle:settings.shuffle];
+    [self setShuffleMode:settings.shuffleMode];
     [self setRepeatMode:settings.repeatMode];
     
     [self updateDisplayInfo:nil];
@@ -639,13 +639,15 @@ static RFAppDelegate *__appDelegateInstance = nil;
     }
 }
 
-- (void)setShuffle:(BOOL)shuffle
+- (void)setShuffleMode:(ShuffleMode)shuffleMode
 {
-    audioPlayer.shuffle = shuffle;
-    settings.shuffle = shuffle;
+    audioPlayer.shuffleMode = shuffleMode;
+    settings.shuffleMode = shuffleMode;
     NSImage *image = nil;
-    if (shuffle)
+    if (shuffleMode == eShuffleModeOn)
         image = [NSImage imageNamed:@"shuffleIconOn"];
+    else if (shuffleMode == eShuffleModeAlbum)
+        image = [NSImage imageNamed:@"shuffleIconAlbum"];
     else
         image = [NSImage imageNamed:@"shuffleIcon"];
     [self.shuffleButton setImage:image];
@@ -686,7 +688,7 @@ static RFAppDelegate *__appDelegateInstance = nil;
 
 - (IBAction)shuffleAction:(id)sender
 {
-    [self setShuffle:!audioPlayer.shuffle];
+    [self setShuffleMode:!audioPlayer.shuffleMode];
 }
 
 - (IBAction)openSettingsAction:(id)sender

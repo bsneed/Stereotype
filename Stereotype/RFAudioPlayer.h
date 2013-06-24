@@ -22,12 +22,19 @@
 - (void)audioPlayerQueueEmpty:(RFAudioPlayer *)player;
 @end
 
-typedef enum
+typedef NS_ENUM(NSUInteger, RepeatMode)
 {
     eRepeatModeOff = 0,
     eRepeatModeOn = 1,
     eRepeatModeSingle = 2
-} RepeatMode;
+};
+
+typedef NS_ENUM(NSUInteger, ShuffleMode)
+{
+    eShuffleModeOff = 0,
+    eShuffleModeOn = 1,
+    eShuffleModeAlbum = 2
+};
 
 @interface RFAudioPlayer : NSObject
 
@@ -40,7 +47,7 @@ typedef enum
 @property (nonatomic, readonly) NSArray *queue;
 @property (nonatomic, readonly) NSInteger queueIndex;
 @property (nonatomic, assign) RepeatMode repeatMode;
-@property (nonatomic, assign) BOOL shuffle;
+@property (nonatomic, assign) ShuffleMode shuffleMode;
 @property (nonatomic, readonly) NSURL *currentURL;
 @property (nonatomic, readonly) BOOL playing;
 

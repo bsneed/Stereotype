@@ -185,6 +185,8 @@
 		CAF9C6611751DA9300E0DA62 /* RFTrackEntity+RFCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF9C6601751DA9200E0DA62 /* RFTrackEntity+RFCollection.m */; };
 		CAF9C6621751DED600E0DA62 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA33AA691637968600397481 /* Quartz.framework */; };
 		CAFD00FA163923BF009AA0DB /* Basic.qtz in Resources */ = {isa = PBXBuildFile; fileRef = CAFD00F9163923BF009AA0DB /* Basic.qtz */; };
+		E2EA60BC1777FD1B00646498 /* shuffleIconAlbum.png in Resources */ = {isa = PBXBuildFile; fileRef = E2EA60BA1777FD1B00646498 /* shuffleIconAlbum.png */; };
+		E2EA60BD1777FD1B00646498 /* shuffleIconAlbum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E2EA60BB1777FD1B00646498 /* shuffleIconAlbum@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -481,6 +483,8 @@
 		CAF9C65F1751DA9200E0DA62 /* RFTrackEntity+RFCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RFTrackEntity+RFCollection.h"; sourceTree = "<group>"; };
 		CAF9C6601751DA9200E0DA62 /* RFTrackEntity+RFCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RFTrackEntity+RFCollection.m"; sourceTree = "<group>"; };
 		CAFD00F9163923BF009AA0DB /* Basic.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = Basic.qtz; sourceTree = "<group>"; };
+		E2EA60BA1777FD1B00646498 /* shuffleIconAlbum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shuffleIconAlbum.png; path = Graphics/shuffleIconAlbum.png; sourceTree = SOURCE_ROOT; };
+		E2EA60BB1777FD1B00646498 /* shuffleIconAlbum@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shuffleIconAlbum@2x.png"; path = "Graphics/shuffleIconAlbum@2x.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -677,8 +681,10 @@
 				CA3F2921168EE02E00C01E80 /* repeatIconOn1@2x.png */,
 				CA3F292B168EE23A00C01E80 /* shuffleIcon.png */,
 				CA3F292C168EE23A00C01E80 /* shuffleIconOn.png */,
+				E2EA60BA1777FD1B00646498 /* shuffleIconAlbum.png */,
 				CA3F291B168EDBC400C01E80 /* shuffleIcon@2x.png */,
 				CA3F291C168EDBC400C01E80 /* shuffleIconOn@2x.png */,
+				E2EA60BB1777FD1B00646498 /* shuffleIconAlbum@2x.png */,
 				CACA5295164A30D9005EF3E5 /* backButton@2x.png */,
 				CACA5296164A30D9005EF3E5 /* backButtonPressed@2x.png */,
 				CACFF6AE163FD8F000BC243A /* backIcon@2x.png */,
@@ -1112,6 +1118,8 @@
 				CA5BEB2B1699697300B821B8 /* RFPlaylistEditor.xib in Resources */,
 				CA3862FD16A137F400D0B2BE /* RFSongViewCellSmall.xib in Resources */,
 				CA38630316A29AD400D0B2BE /* Audiofile.icns in Resources */,
+				E2EA60BC1777FD1B00646498 /* shuffleIconAlbum.png in Resources */,
+				E2EA60BD1777FD1B00646498 /* shuffleIconAlbum@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1279,7 +1287,7 @@
 		CA17A11615A6941A00ACBA13 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stereotype/Stereotype-Prefix.pch";
@@ -1295,7 +1303,6 @@
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				MOMC_SUPPRESS_INVERSE_TRANSIENT_ERROR = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2480FAEF-453D-4C03-A82E-F0A733FA16A6";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1304,7 +1311,7 @@
 		CA17A11715A6941A00ACBA13 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stereotype/Stereotype-Prefix.pch";
@@ -1320,7 +1327,6 @@
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				MOMC_SUPPRESS_INVERSE_TRANSIENT_ERROR = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2480FAEF-453D-4C03-A82E-F0A733FA16A6";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};

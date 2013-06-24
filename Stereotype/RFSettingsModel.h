@@ -24,7 +24,7 @@
 @property (nonatomic, assign) NSInteger activeDrawer;
 @property (nonatomic, strong) NSArray *filterNames;
 @property (nonatomic, assign) int libraryViewStyle;
-@property (nonatomic, assign) BOOL shuffle;
+@property (nonatomic, assign) int shuffleMode;
 @property (nonatomic, assign) int repeatMode;
 
 + (RFSettingsModel *)sharedInstance;
