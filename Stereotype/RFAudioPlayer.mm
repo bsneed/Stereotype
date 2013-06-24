@@ -610,14 +610,10 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
     _shuffleMode = shuffleMode;
     if (_shuffleMode == eShuffleModeOn || _shuffleMode == eShuffleModeAlbum)
     {
-        [workingQueue shufflePreservingIndex:_queueIndex];
+        [workingQueue shufflePreservingIndex:_queueIndex withAlbumMode:_shuffleMode == eShuffleModeAlbum];
         audioPlayer->ClearQueuedDecoders();
         [self queueNextTrack];
     }
-//    else
-//    if (_shuffleMode == eShuffleModeAlbum)
-//    {
-//    }
     else
     {
         id currentItem = [workingQueue objectAtIndex:_queueIndex];
@@ -648,8 +644,8 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
     
     originalQueue = [queue copy];
     workingQueue = [queue mutableCopy];
-    if (self.shuffleMode)
-        [workingQueue shufflePreservingIndex:index];
+    if (self.shuffleMode == eShuffleModeOn || self.shuffleMode == eShuffleModeAlbum)
+        [workingQueue shufflePreservingIndex:index withAlbumMode:_shuffleMode == eShuffleModeAlbum];
     _queueIndex = index;
     [self loadQueuedURLAtIndex:_queueIndex];
 }

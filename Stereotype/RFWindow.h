@@ -3,7 +3,7 @@
 //  frequence
 //
 //  Created by Brandon Sneed on 11/23/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 redf.net. All rights reserved.
 //
 
 #import <AppKit/AppKit.h>

@@ -3,7 +3,7 @@
 //  Stereotype
 //
 //  Created by Brandon Sneed on 4/21/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 redf.net. All rights reserved.
 //
 
 #import "RFLargeButtonCell.h"

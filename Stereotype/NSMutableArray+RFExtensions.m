@@ -3,14 +3,14 @@
 //  Stereotype
 //
 //  Created by Brandon Sneed on 12/26/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 RedF. All rights reserved.
 //
 
 #import "NSMutableArray+RFExtensions.h"
 
 @implementation NSMutableArray (RFExtensions)
 
-- (void)shuffle
+- (void)shuffleWithAlbumMode:(BOOL)albumShuffleMode
 {
     NSUInteger count = [self count];
     for (NSUInteger i = 0; i < count; ++i) 
@@ -22,7 +22,7 @@
     }
 }
 
-- (void)shufflePreservingIndex:(NSUInteger)index
+- (void)shufflePreservingIndex:(NSUInteger)index withAlbumMode:(BOOL)albumShuffleMode
 {
     NSUInteger count = [self count];
     id object = nil;

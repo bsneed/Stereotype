@@ -3,14 +3,14 @@
 //  Stereotype
 //
 //  Created by Brandon Sneed on 12/26/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 redf.net. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 @interface NSMutableArray (RFExtensions)
 
-- (void)shuffle;
-- (void)shufflePreservingIndex:(NSUInteger)index;
+- (void)shuffleWithAlbumMode:(BOOL)albumShuffleMode;
+- (void)shufflePreservingIndex:(NSUInteger)index withAlbumMode:(BOOL)albumShuffleMode;
 
 @end

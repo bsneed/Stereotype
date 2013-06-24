@@ -688,7 +688,11 @@ static RFAppDelegate *__appDelegateInstance = nil;
 
 - (IBAction)shuffleAction:(id)sender
 {
-    [self setShuffleMode:!audioPlayer.shuffleMode];
+    ShuffleMode currentMode = audioPlayer.shuffleMode;
+    currentMode++;
+    if (currentMode > eShuffleModeAlbum)
+        currentMode = eShuffleModeOff;
+    [self setShuffleMode:currentMode];
 }
 
 - (IBAction)openSettingsAction:(id)sender
