@@ -807,18 +807,27 @@ static RFAppDelegate *__appDelegateInstance = nil;
     
     NSURL *iTunesMusicPath = [library iTunesMusicPathURL];
     NSURL *iTunesPodcastsPath = [library iTunesPodcastPathURL];
-    
-    [library importDirectories:@[iTunesMusicPath, iTunesPodcastsPath] progressBlock:progressBlock doneBlock:^{
-        [library importiTunesPlaylistsWithProgressBlock:progressBlock doneBlock:^{
-            [self.importProgress stopAnimation:nil];
-            [self.importPanel orderOut:nil];
-            [self.window makeKeyAndOrderFront:nil];
-            [self.artworkView adjustChildWindow:NO];
-            importing = NO;
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:kLibraryUpdatedNotification object:nil];
+
+    NSMutableArray *paths = [[NSMutableArray alloc] init];
+    if (iTunesMusicPath)
+        [paths addObject:iTunesMusicPath];
+    if (iTunesPodcastsPath)
+        [paths addObject:iTunesPodcastsPath];
+
+    if (paths.count)
+    {
+        [library importDirectories:paths progressBlock:progressBlock doneBlock:^{
+            [library importiTunesPlaylistsWithProgressBlock:progressBlock doneBlock:^{
+                [self.importProgress stopAnimation:nil];
+                [self.importPanel orderOut:nil];
+                [self.window makeKeyAndOrderFront:nil];
+                [self.artworkView adjustChildWindow:NO];
+                importing = NO;
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:kLibraryUpdatedNotification object:nil];
+            }];
         }];
-    }];
+    }
 }
 
 - (IBAction)showHidePane:(id)sender
