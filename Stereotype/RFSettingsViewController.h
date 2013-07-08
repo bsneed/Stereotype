@@ -25,6 +25,7 @@
 @property (weak) IBOutlet NSButton *filter3WindowButton;
 
 @property (weak) IBOutlet NSButton *visualizerCheckbox;
+@property (weak) IBOutlet NSButton *tuningCheckbox;
 
 - (void)updateState;
 - (void)refreshDisplay;

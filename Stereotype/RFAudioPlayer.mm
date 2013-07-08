@@ -822,9 +822,60 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         NSString *filterName = [filterNames objectAtIndex:i];
         [self addNodeForEffectFilterName:filterName];
     }
-    
+
+    if (_use432hzAdjustment)
+        [self add432hzPitchAdjustment];
+
     if (playing)
         audioPlayer->Play();
+}
+
+- (void)add432hzPitchAdjustment
+{
+    NSString *filterName = @"Apple: AUNewTimePitch";
+    //NSString *filterName = @"The DSP Dimension/Stephan Bernsee: DiracFxAU";
+
+    //kAudioUnitSubType_Pitch
+    
+    if (!effectFilters)
+        effectFilters = [[NSMutableArray alloc] init];
+
+    if (filterName == nil || [filterName length] <= 0 || [filterName isEqualToString:@"None"])
+        return;
+
+    AudioComponentDescription fxDesc = { kAudioUnitType_FormatConverter, 0, 0, 0, 0 } ;
+    AudioComponent component = AudioComponentFindNext(NULL, &fxDesc);
+    while (component)
+    {
+        AudioComponentDescription componentDesc;
+        AudioComponentGetDescription(component, &componentDesc);
+
+        CFStringRef nameRef = nil;
+        AudioComponentCopyName(component, &nameRef);
+        NSLog(@"componentName = %@", nameRef);
+        NSString *name = [(__bridge NSString *)nameRef copy];
+        CFRelease(nameRef);
+
+        if ([name isEqualToString:filterName])
+        {
+            AudioUnit effectUnit = nil;
+            if (audioPlayer->AddEffect(componentDesc.componentType, componentDesc.componentSubType, componentDesc.componentManufacturer, componentDesc.componentFlags, componentDesc.componentFlagsMask, &effectUnit))
+            {
+                RFAudioUnitContainer *container = [[RFAudioUnitContainer alloc] initWithName:name audioUnit:effectUnit];
+
+                AudioUnitParameterID parameterID = kNewTimePitchParam_Pitch;
+                //AudioUnitParameterID parameterID = 0;
+                
+                [container setValue:-31.76665363342977 parameterID:parameterID scope:kAudioUnitScope_Global];
+                [container setValue:1.0 parameterID:kNewTimePitchParam_Rate scope:kAudioUnitScope_Global];
+
+                [effectFilters addObject:container];
+            }
+            break;
+        }
+
+        component = AudioComponentFindNext(component, &fxDesc);
+    }
 }
 
 - (void)addNodeForEffectFilterName:(NSString *)filterName
@@ -851,7 +902,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         if ([name isEqualToString:filterName])
         {
             AudioUnit effectUnit = nil;
-            if (audioPlayer->AddEffect(componentDesc.componentSubType, componentDesc.componentManufacturer, componentDesc.componentFlags, componentDesc.componentFlagsMask, &effectUnit))
+            if (audioPlayer->AddEffect(componentDesc.componentType, componentDesc.componentSubType, componentDesc.componentManufacturer, componentDesc.componentFlags, componentDesc.componentFlagsMask, &effectUnit))
             {
                 RFAudioUnitContainer *container = [[RFAudioUnitContainer alloc] initWithName:name audioUnit:effectUnit];
                 [effectFilters addObject:container];

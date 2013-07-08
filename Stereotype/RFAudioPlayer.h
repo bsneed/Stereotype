@@ -50,6 +50,7 @@ typedef NS_ENUM(NSUInteger, ShuffleMode)
 @property (nonatomic, assign) ShuffleMode shuffleMode;
 @property (nonatomic, readonly) NSURL *currentURL;
 @property (nonatomic, readonly) BOOL playing;
+@property (nonatomic, assign) BOOL use432hzAdjustment;
 
 @property (nonatomic, readonly) NSUInteger elapsedTimeInSeconds;
 
