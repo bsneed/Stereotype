@@ -134,6 +134,12 @@
     settings.useVisualizer = self.visualizerCheckbox.state;
 }
 
+- (IBAction)tuningAction:(id)sender
+{
+    [RFAudioPlayer sharedInstance].use432hzAdjustment = self.tuningCheckbox.state;
+    [self filterChanged:nil];
+}
+
 - (IBAction)exclusiveModeAction:(id)sender
 {
     settings.exclusiveMode = self.exclusiveModeCheckbox.state;

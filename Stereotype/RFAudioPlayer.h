@@ -43,6 +43,7 @@ typedef enum
 @property (nonatomic, assign) BOOL shuffle;
 @property (nonatomic, readonly) NSURL *currentURL;
 @property (nonatomic, readonly) BOOL playing;
+@property (nonatomic, assign) BOOL use432hzAdjustment;
 
 @property (nonatomic, readonly) NSUInteger elapsedTimeInSeconds;
 
