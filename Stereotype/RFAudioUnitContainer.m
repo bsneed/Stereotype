@@ -81,4 +81,22 @@
     return _unitWindow;
 }
 
+- (AudioUnitParameterValue)valueForParameterID:(AudioUnitParameterID)parameterID scope:(AudioUnitScope)scope
+{
+    AudioUnitParameterValue result = 0.0;
+    OSStatus error = AudioUnitGetParameter(_audioUnit, parameterID, scope, 0, &result);
+    if (error != noErr)
+        result = 0.0;
+
+    return result;
+}
+
+- (void)setValue:(AudioUnitParameterValue)value parameterID:(AudioUnitParameterID)parameterID scope:(AudioUnitScope)scope
+{
+    OSStatus error = AudioUnitSetParameter(_audioUnit, parameterID, scope, 0, value, 0);
+    if (error != noErr)
+        NSLog(@"there was an error setting the parameters for: %@", _name);
+}
+
+
 @end

@@ -19,4 +19,7 @@
 
 - (id)initWithName:(NSString *)name audioUnit:(AudioUnit)audioUnit;
 
+- (AudioUnitParameterValue)valueForParameterID:(AudioUnitParameterID)parameterID scope:(AudioUnitScope)scope;
+- (void)setValue:(AudioUnitParameterValue)value parameterID:(AudioUnitParameterID)parameterID scope:(AudioUnitScope)scope;
+
 @end
