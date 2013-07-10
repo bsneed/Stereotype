@@ -211,10 +211,10 @@
     return NO;
 }
 
-- (void)displayLayer:(CALayer *)layer
+- (void)setNeedsDisplay
 {
     dialLayer.affineTransform = CGAffineTransformMakeRotation(degreesToRadians(value));
+    [super setNeedsDisplay];
 }
-
 
 @end
