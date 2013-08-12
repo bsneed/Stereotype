@@ -10,7 +10,6 @@
 
 @interface RFDialSlider : NSControl
 {
-    CALayer *dialLayer;
     float value;
 }
 

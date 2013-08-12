@@ -12,16 +12,10 @@
 
 - (void)drawBezelWithFrame:(NSRect)frame inView:(NSView *)controlView
 {
-    NSImage *backgroundImage = [NSImage imageNamed:@"largeButton"];
-	if ([self isHighlighted])
-		backgroundImage = [NSImage imageNamed:@"largeButtonPressed"];
-	
-	[backgroundImage setFlipped: YES];
-	[backgroundImage setScalesWhenResized: YES];
-	[backgroundImage setSize:frame.size];
-	[backgroundImage drawInRect:frame fromRect:frame operation: NSCompositeSourceOver fraction: 1.0];
-    
-    /*if (![self isHighlighted])
+    NSGraphicsContext *context = [NSGraphicsContext currentContext];
+    context.shouldAntialias = YES;
+
+    if (![self isHighlighted])
     {
         //// Color Declarations
         NSColor* strokeColor = [NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 1];
@@ -126,7 +120,7 @@
         [strokeColor setStroke];
         [ovalPath setLineWidth: 3];
         [ovalPath stroke];
-    }*/
+    }
 	
 	[[self attributedTitle] drawInRect:[self titleRectForBounds:frame]];
 }

@@ -19,12 +19,8 @@
 		CA17A10C15A6941A00ACBA13 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CA17A10A15A6941A00ACBA13 /* Credits.rtf */; };
 		CA17A10F15A6941A00ACBA13 /* RFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA17A10E15A6941A00ACBA13 /* RFAppDelegate.m */; };
 		CA17A11215A6941A00ACBA13 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA17A11015A6941A00ACBA13 /* MainMenu.xib */; };
-		CA17A11C15A6972800ACBA13 /* largeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CA17A11A15A6972800ACBA13 /* largeButton.png */; };
-		CA17A11D15A6972800ACBA13 /* largeButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA17A11B15A6972800ACBA13 /* largeButton@2x.png */; };
 		CA17A12B15A69C3400ACBA13 /* RFSmallButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA17A12815A69C3400ACBA13 /* RFSmallButtonCell.m */; };
 		CA17A12C15A69C3400ACBA13 /* RFLargeButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA17A12A15A69C3400ACBA13 /* RFLargeButtonCell.m */; };
-		CA17A12F15A69CC100ACBA13 /* smallButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CA17A12D15A69CC100ACBA13 /* smallButton.png */; };
-		CA17A13015A69CC100ACBA13 /* smallButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA17A12E15A69CC100ACBA13 /* smallButton@2x.png */; };
 		CA1B97A3164E225A00055C19 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1B97A2164E225A00055C19 /* GLKit.framework */; };
 		CA1B97A5164E227F00055C19 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1B97A4164E227F00055C19 /* OpenGL.framework */; };
 		CA2091581693EB4E001261A2 /* RFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2091571693EB4E001261A2 /* RFImageView.m */; };
@@ -139,14 +135,10 @@
 		CAEE3E4D164F48650057E141 /* RFCompositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEE3E4C164F48650057E141 /* RFCompositionView.m */; };
 		CAEE3E50164F4CBC0057E141 /* RFArtworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEE3E4F164F4CBC0057E141 /* RFArtworkView.m */; };
 		CAF14770165640D80061FC46 /* RFTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF1476F165640D80061FC46 /* RFTextFieldCell.m */; };
-		CAF5934D15A6B280006E331A /* smallButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5934B15A6B280006E331A /* smallButtonPressed.png */; };
-		CAF5934E15A6B280006E331A /* smallButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5934C15A6B280006E331A /* smallButtonPressed@2x.png */; };
 		CAF5935215A6B840006E331A /* bottomBg.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5935015A6B840006E331A /* bottomBg.png */; };
 		CAF5935515A6B9B4006E331A /* bottomBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5935415A6B9B4006E331A /* bottomBg@2x.png */; };
 		CAF5935815A6BBCF006E331A /* topBg.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5935615A6BBCF006E331A /* topBg.png */; };
 		CAF5935915A6BBCF006E331A /* topBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5935715A6BBCF006E331A /* topBg@2x.png */; };
-		CAF5935C15A6BE5E006E331A /* largeButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5935A15A6BE5E006E331A /* largeButtonPressed.png */; };
-		CAF5935D15A6BE5E006E331A /* largeButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5935B15A6BE5E006E331A /* largeButtonPressed@2x.png */; };
 		CAF5936015A6E2F4006E331A /* RFWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF5935F15A6E2F4006E331A /* RFWindow.m */; };
 		CAF5936315A6E302006E331A /* RFDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF5936215A6E302006E331A /* RFDragView.m */; };
 		CAF5936615A6E33C006E331A /* RFPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF5936515A6E33C006E331A /* RFPlayerView.m */; };
@@ -167,8 +159,6 @@
 		CAF5939615A7DCE0006E331A /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF5939515A7DCE0006E331A /* QuickLook.framework */; };
 		CAF5939815A7DCF0006E331A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF5939715A7DCF0006E331A /* CoreGraphics.framework */; };
 		CAF5939A15A7DD1F006E331A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF5939915A7DD1F006E331A /* QuartzCore.framework */; };
-		CAF5939D15A80790006E331A /* volumeDot.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5939B15A80790006E331A /* volumeDot.png */; };
-		CAF5939E15A80790006E331A /* volumeDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5939C15A80790006E331A /* volumeDot@2x.png */; };
 		CAF593A415A90988006E331A /* Stereotype.icns in Resources */ = {isa = PBXBuildFile; fileRef = CAF593A315A90988006E331A /* Stereotype.icns */; };
 		CAF593A915A91C85006E331A /* RFSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF593A615A91C85006E331A /* RFSlider.m */; };
 		CAF593AA15A91C85006E331A /* RFSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF593A815A91C85006E331A /* RFSliderCell.m */; };
@@ -260,14 +250,10 @@
 		CA17A10D15A6941A00ACBA13 /* RFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RFAppDelegate.h; sourceTree = "<group>"; };
 		CA17A10E15A6941A00ACBA13 /* RFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RFAppDelegate.m; sourceTree = "<group>"; };
 		CA17A11115A6941A00ACBA13 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		CA17A11A15A6972800ACBA13 /* largeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = largeButton.png; path = Graphics/largeButton.png; sourceTree = SOURCE_ROOT; };
-		CA17A11B15A6972800ACBA13 /* largeButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "largeButton@2x.png"; path = "Graphics/largeButton@2x.png"; sourceTree = SOURCE_ROOT; };
 		CA17A12715A69C3400ACBA13 /* RFSmallButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFSmallButtonCell.h; sourceTree = "<group>"; };
 		CA17A12815A69C3400ACBA13 /* RFSmallButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFSmallButtonCell.m; sourceTree = "<group>"; };
 		CA17A12915A69C3400ACBA13 /* RFLargeButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFLargeButtonCell.h; sourceTree = "<group>"; };
 		CA17A12A15A69C3400ACBA13 /* RFLargeButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFLargeButtonCell.m; sourceTree = "<group>"; };
-		CA17A12D15A69CC100ACBA13 /* smallButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = smallButton.png; path = Graphics/smallButton.png; sourceTree = SOURCE_ROOT; };
-		CA17A12E15A69CC100ACBA13 /* smallButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "smallButton@2x.png"; path = "Graphics/smallButton@2x.png"; sourceTree = SOURCE_ROOT; };
 		CA1B97A2164E225A00055C19 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		CA1B97A4164E227F00055C19 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		CA2091561693EB4E001261A2 /* RFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFImageView.h; sourceTree = "<group>"; };
@@ -426,14 +412,10 @@
 		CAEE3E4F164F4CBC0057E141 /* RFArtworkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFArtworkView.m; sourceTree = "<group>"; };
 		CAF1476E165640D80061FC46 /* RFTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFTextFieldCell.h; sourceTree = "<group>"; };
 		CAF1476F165640D80061FC46 /* RFTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFTextFieldCell.m; sourceTree = "<group>"; };
-		CAF5934B15A6B280006E331A /* smallButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = smallButtonPressed.png; path = Graphics/smallButtonPressed.png; sourceTree = SOURCE_ROOT; };
-		CAF5934C15A6B280006E331A /* smallButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "smallButtonPressed@2x.png"; path = "Graphics/smallButtonPressed@2x.png"; sourceTree = SOURCE_ROOT; };
 		CAF5935015A6B840006E331A /* bottomBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bottomBg.png; path = Graphics/bottomBg.png; sourceTree = SOURCE_ROOT; };
 		CAF5935415A6B9B4006E331A /* bottomBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottomBg@2x.png"; path = "Graphics/bottomBg@2x.png"; sourceTree = SOURCE_ROOT; };
 		CAF5935615A6BBCF006E331A /* topBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = topBg.png; path = Graphics/topBg.png; sourceTree = SOURCE_ROOT; };
 		CAF5935715A6BBCF006E331A /* topBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "topBg@2x.png"; path = "Graphics/topBg@2x.png"; sourceTree = SOURCE_ROOT; };
-		CAF5935A15A6BE5E006E331A /* largeButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = largeButtonPressed.png; path = Graphics/largeButtonPressed.png; sourceTree = SOURCE_ROOT; };
-		CAF5935B15A6BE5E006E331A /* largeButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "largeButtonPressed@2x.png"; path = "Graphics/largeButtonPressed@2x.png"; sourceTree = SOURCE_ROOT; };
 		CAF5935E15A6E2F4006E331A /* RFWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFWindow.h; sourceTree = "<group>"; };
 		CAF5935F15A6E2F4006E331A /* RFWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFWindow.m; sourceTree = "<group>"; };
 		CAF5936115A6E302006E331A /* RFDragView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFDragView.h; sourceTree = "<group>"; };
@@ -459,8 +441,6 @@
 		CAF5939515A7DCE0006E331A /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		CAF5939715A7DCF0006E331A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CAF5939915A7DD1F006E331A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		CAF5939B15A80790006E331A /* volumeDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = volumeDot.png; path = Graphics/volumeDot.png; sourceTree = SOURCE_ROOT; };
-		CAF5939C15A80790006E331A /* volumeDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "volumeDot@2x.png"; path = "Graphics/volumeDot@2x.png"; sourceTree = SOURCE_ROOT; };
 		CAF593A315A90988006E331A /* Stereotype.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Stereotype.icns; sourceTree = SOURCE_ROOT; };
 		CAF593A515A91C85006E331A /* RFSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFSlider.h; sourceTree = "<group>"; };
 		CAF593A615A91C85006E331A /* RFSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFSlider.m; sourceTree = "<group>"; };
@@ -685,14 +665,6 @@
 				CACFF68B163E8F2400BC243A /* eqButton@2x.png */,
 				CACFF68C163E8F2400BC243A /* libraryButton@2x.png */,
 				CACFF68D163E8F2400BC243A /* settingsButton@2x.png */,
-				CA17A11A15A6972800ACBA13 /* largeButton.png */,
-				CA17A11B15A6972800ACBA13 /* largeButton@2x.png */,
-				CAF5935A15A6BE5E006E331A /* largeButtonPressed.png */,
-				CAF5935B15A6BE5E006E331A /* largeButtonPressed@2x.png */,
-				CA17A12D15A69CC100ACBA13 /* smallButton.png */,
-				CA17A12E15A69CC100ACBA13 /* smallButton@2x.png */,
-				CAF5934B15A6B280006E331A /* smallButtonPressed.png */,
-				CAF5934C15A6B280006E331A /* smallButtonPressed@2x.png */,
 			);
 			name = "Button Images";
 			sourceTree = "<group>";
@@ -718,8 +690,6 @@
 				CA17A12A15A69C3400ACBA13 /* RFLargeButtonCell.m */,
 				CAF5938B15A7DA97006E331A /* RFDialSlider.h */,
 				CAF5938C15A7DA97006E331A /* RFDialSlider.m */,
-				CAF5939B15A80790006E331A /* volumeDot.png */,
-				CAF5939C15A80790006E331A /* volumeDot@2x.png */,
 				CAF593A515A91C85006E331A /* RFSlider.h */,
 				CAF593A615A91C85006E331A /* RFSlider.m */,
 				CAF593A715A91C85006E331A /* RFSliderCell.h */,
@@ -1015,18 +985,10 @@
 				CA17A10615A6941A00ACBA13 /* InfoPlist.strings in Resources */,
 				CA17A10C15A6941A00ACBA13 /* Credits.rtf in Resources */,
 				CA17A11215A6941A00ACBA13 /* MainMenu.xib in Resources */,
-				CA17A11C15A6972800ACBA13 /* largeButton.png in Resources */,
-				CA17A11D15A6972800ACBA13 /* largeButton@2x.png in Resources */,
-				CA17A12F15A69CC100ACBA13 /* smallButton.png in Resources */,
-				CA17A13015A69CC100ACBA13 /* smallButton@2x.png in Resources */,
-				CAF5934D15A6B280006E331A /* smallButtonPressed.png in Resources */,
-				CAF5934E15A6B280006E331A /* smallButtonPressed@2x.png in Resources */,
 				CAF5935215A6B840006E331A /* bottomBg.png in Resources */,
 				CAF5935515A6B9B4006E331A /* bottomBg@2x.png in Resources */,
 				CAF5935815A6BBCF006E331A /* topBg.png in Resources */,
 				CAF5935915A6BBCF006E331A /* topBg@2x.png in Resources */,
-				CAF5935C15A6BE5E006E331A /* largeButtonPressed.png in Resources */,
-				CAF5935D15A6BE5E006E331A /* largeButtonPressed@2x.png in Resources */,
 				CAF5937015A766CF006E331A /* topShine@2x.png in Resources */,
 				CAF5937215A76804006E331A /* bottomShine@2x.png in Resources */,
 				CAF5937415A76C38006E331A /* topShine.png in Resources */,
@@ -1039,8 +1001,6 @@
 				CAF5938215A7D7BF006E331A /* playIcon@2x.png in Resources */,
 				CAF5938515A7D87D006E331A /* pauseIcon.png in Resources */,
 				CAF5938615A7D87D006E331A /* pauseIcon@2x.png in Resources */,
-				CAF5939D15A80790006E331A /* volumeDot.png in Resources */,
-				CAF5939E15A80790006E331A /* volumeDot@2x.png in Resources */,
 				CAF593A415A90988006E331A /* Stereotype.icns in Resources */,
 				CAF593B415A91CDE006E331A /* scrubberBackground.png in Resources */,
 				CAF593B515A91CDE006E331A /* scrubberFill.png in Resources */,

@@ -1,42 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4457.6" systemVersion="13A476u" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4488.2" systemVersion="13A538g" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4457.6"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4488.2"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RFApplication">
             <connections>
-                <action selector="orderFrontStandardAboutPanel:" destination="58" id="142"/>
                 <outlet property="delegate" destination="494" id="495"/>
             </connections>
         </customObject>
-        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder">
-            <connections>
-                <action selector="arrangeInFront:" destination="5" id="39"/>
-                <action selector="copy:" destination="197" id="224"/>
-                <action selector="cut:" destination="199" id="228"/>
-                <action selector="delete:" destination="202" id="235"/>
-                <action selector="hide:" destination="134" id="367"/>
-                <action selector="hideOtherApplications:" destination="145" id="368"/>
-                <action selector="newDocument:" destination="82" id="373"/>
-                <action selector="newDocument:" destination="724" id="725"/>
-                <action selector="paste:" destination="203" id="226"/>
-                <action selector="pasteAsPlainText:" destination="485" id="486"/>
-                <action selector="performMiniaturize:" destination="23" id="37"/>
-                <action selector="performZoom:" destination="239" id="240"/>
-                <action selector="redo:" destination="215" id="231"/>
-                <action selector="selectAll:" destination="198" id="232"/>
-                <action selector="showHelp:" destination="492" id="493"/>
-                <action selector="undo:" destination="207" id="223"/>
-                <action selector="unhideAllApplications:" destination="150" id="370"/>
-            </connections>
-        </customObject>
-        <customObject id="-3" userLabel="Application">
-            <connections>
-                <action selector="terminate:" destination="136" id="449"/>
-            </connections>
-        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
         <menu title="AMainMenu" systemMenu="main" id="29">
             <items>
                 <menuItem title="Stereotype" id="56">
@@ -44,6 +19,9 @@
                         <items>
                             <menuItem title="About Stereotype" id="58">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="orderFrontStandardAboutPanel:" target="-2" id="142"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="236">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
@@ -58,34 +36,63 @@
                             <menuItem isSeparatorItem="YES" id="144">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Hide Stereotype" keyEquivalent="h" id="134"/>
+                            <menuItem title="Hide Stereotype" keyEquivalent="h" id="134">
+                                <connections>
+                                    <action selector="hide:" target="-1" id="367"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Hide Others" keyEquivalent="h" id="145">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="hideOtherApplications:" target="-1" id="368"/>
+                                </connections>
                             </menuItem>
-                            <menuItem title="Show All" id="150"/>
+                            <menuItem title="Show All" id="150">
+                                <connections>
+                                    <action selector="unhideAllApplications:" target="-1" id="370"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="149">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Quit Stereotype" keyEquivalent="q" id="136"/>
+                            <menuItem title="Quit Stereotype" keyEquivalent="q" id="136">
+                                <connections>
+                                    <action selector="terminate:" target="-3" id="449"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
                 <menuItem title="File" id="83">
                     <menu key="submenu" title="File" id="81">
                         <items>
-                            <menuItem title="New Playlist" keyEquivalent="n" id="82"/>
-                            <menuItem title="New Playlist from Selection" keyEquivalent="N" id="724"/>
+                            <menuItem title="New Playlist" keyEquivalent="n" id="82">
+                                <connections>
+                                    <action selector="newDocument:" target="-1" id="373"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="New Playlist from Selection" keyEquivalent="N" id="724">
+                                <connections>
+                                    <action selector="newDocument:" target="-1" id="725"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="79">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
                             <menuItem title="Import Folder to Library" id="726">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="importDirectory:" target="494" id="738"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="74">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
                             <menuItem title="Import iTunes Library" id="727">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="importiTunes:" target="494" id="739"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>
@@ -93,21 +100,51 @@
                 <menuItem title="Edit" id="217">
                     <menu key="submenu" title="Edit" id="205">
                         <items>
-                            <menuItem title="Undo" keyEquivalent="z" id="207"/>
+                            <menuItem title="Undo" keyEquivalent="z" id="207">
+                                <connections>
+                                    <action selector="undo:" target="-1" id="223"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Redo" keyEquivalent="Z" id="215">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="redo:" target="-1" id="231"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="206">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Cut" keyEquivalent="x" id="199"/>
-                            <menuItem title="Copy" keyEquivalent="c" id="197"/>
-                            <menuItem title="Paste" keyEquivalent="v" id="203"/>
+                            <menuItem title="Cut" keyEquivalent="x" id="199">
+                                <connections>
+                                    <action selector="cut:" target="-1" id="228"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Copy" keyEquivalent="c" id="197">
+                                <connections>
+                                    <action selector="copy:" target="-1" id="224"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Paste" keyEquivalent="v" id="203">
+                                <connections>
+                                    <action selector="paste:" target="-1" id="226"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Paste and Match Style" keyEquivalent="V" id="485">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="pasteAsPlainText:" target="-1" id="486"/>
+                                </connections>
                             </menuItem>
-                            <menuItem title="Delete" id="202"/>
-                            <menuItem title="Select All" keyEquivalent="a" id="198"/>
+                            <menuItem title="Delete" id="202">
+                                <connections>
+                                    <action selector="delete:" target="-1" id="235"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Select All" keyEquivalent="a" id="198">
+                                <connections>
+                                    <action selector="selectAll:" target="-1" id="232"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -139,28 +176,62 @@
                             <menuItem title="Play/Pause" keyEquivalent=" " id="760">
                                 <attributedString key="attributedTitle"/>
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="playPauseTrackAction:" target="494" id="763"/>
+                                </connections>
                             </menuItem>
-                            <menuItem title="Next" keyEquivalent="" id="761"/>
-                            <menuItem title="Previous" keyEquivalent="" id="762"/>
+                            <menuItem title="Next" keyEquivalent="" id="761">
+                                <connections>
+                                    <action selector="nextTrackAction:" target="494" id="764"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Previous" keyEquivalent="" id="762">
+                                <connections>
+                                    <action selector="prevTrackAction:" target="494" id="765"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="771"/>
-                            <menuItem title="Increase Volume" keyEquivalent="" id="772"/>
-                            <menuItem title="Decrease Volume" keyEquivalent="" id="773"/>
+                            <menuItem title="Increase Volume" keyEquivalent="" id="772">
+                                <connections>
+                                    <action selector="increaseVolumeAction:" target="494" id="774"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Decrease Volume" keyEquivalent="" id="773">
+                                <connections>
+                                    <action selector="decreaseVolumeAction:" target="494" id="775"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
                 <menuItem title="Window" id="19">
                     <menu key="submenu" title="Window" systemMenu="window" id="24">
                         <items>
-                            <menuItem title="Minimize" keyEquivalent="m" id="23"/>
-                            <menuItem title="Zoom" id="239"/>
+                            <menuItem title="Minimize" keyEquivalent="m" id="23">
+                                <connections>
+                                    <action selector="performMiniaturize:" target="-1" id="37"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom" id="239">
+                                <connections>
+                                    <action selector="performZoom:" target="-1" id="240"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="92">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Bring All to Front" id="5"/>
+                            <menuItem title="Bring All to Front" id="5">
+                                <connections>
+                                    <action selector="arrangeInFront:" target="-1" id="39"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="735"/>
                             <menuItem title="Library" keyEquivalent="l" id="736"/>
                             <menuItem title="Item" id="803">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showHidePane:" target="494" id="804"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>
@@ -169,7 +240,11 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="491">
                         <items>
-                            <menuItem title="Stereotype Help" keyEquivalent="?" id="492"/>
+                            <menuItem title="Stereotype Help" keyEquivalent="?" id="492">
+                                <connections>
+                                    <action selector="showHelp:" target="-1" id="493"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -202,6 +277,9 @@
                                 <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="prevIcon" imagePosition="only" alignment="center" alternateImage="prevIcon" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="537" customClass="RFSmallButtonCell">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <action selector="prevTrackAction:" target="494" id="679"/>
+                                    </connections>
                                 </buttonCell>
                                 <accessibility description="Previous Track" help="Move to the previous track"/>
                             </button>
@@ -217,6 +295,9 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <accessibility description="Play/Pause" help="Starts and Stops audio playback"/>
+                                <connections>
+                                    <action selector="playPauseTrackAction:" target="494" id="680"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" id="546">
                                 <rect key="frame" x="92" y="151" width="32" height="32"/>
@@ -230,6 +311,9 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <accessibility description="Next Track" help="Skip to the next track"/>
+                                <connections>
+                                    <action selector="nextTrackAction:" target="494" id="681"/>
+                                </connections>
                             </button>
                             <customView id="550" customClass="RFDialSlider">
                                 <rect key="frame" x="146" y="144" width="46" height="46"/>
@@ -239,6 +323,9 @@
                                     <color key="color" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
                                 </shadow>
                                 <accessibility description="Volume Control Dial" help="Adjusts the volume up and down"/>
+                                <connections>
+                                    <action selector="volumeSliderAction:" target="494" id="709"/>
+                                </connections>
                             </customView>
                             <textField verticalHuggingPriority="750" id="551">
                                 <rect key="frame" x="15" y="108" width="170" height="28"/>
@@ -284,6 +371,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <sliderCell key="cell" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="556" customClass="RFSliderCell"/>
                                 <accessibility description="Elapsed Track Time"/>
+                                <connections>
+                                    <action selector="sliderMovedAction:" target="494" id="699"/>
+                                </connections>
                             </slider>
                             <textField verticalHuggingPriority="750" id="554">
                                 <rect key="frame" x="118" y="33" width="69" height="15"/>
@@ -311,6 +401,9 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <accessibility description="Open the settings drawer"/>
+                                <connections>
+                                    <action selector="repeatAction:" target="494" id="792"/>
+                                </connections>
                             </button>
                             <button focusRingType="exterior" id="786">
                                 <rect key="frame" x="116" y="3" width="20" height="20"/>
@@ -320,6 +413,9 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <accessibility description="Open the settings drawer"/>
+                                <connections>
+                                    <action selector="shuffleAction:" target="494" id="793"/>
+                                </connections>
                             </button>
                             <button focusRingType="exterior" id="639">
                                 <rect key="frame" x="144" y="2" width="20" height="20"/>
@@ -329,6 +425,9 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <accessibility description="Open the settings drawer"/>
+                                <connections>
+                                    <action selector="openSettingsAction:" target="494" id="677"/>
+                                </connections>
                             </button>
                             <button focusRingType="exterior" id="641">
                                 <rect key="frame" x="172" y="2" width="20" height="20"/>
@@ -338,6 +437,9 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <accessibility description="Open the library drawer"/>
+                                <connections>
+                                    <action selector="openLibraryAction:" target="494" id="678"/>
+                                </connections>
                             </button>
                         </subviews>
                     </customView>
@@ -378,23 +480,6 @@
         </window>
         <customObject id="494" customClass="RFAppDelegate">
             <connections>
-                <action selector="decreaseVolumeAction:" destination="773" id="775"/>
-                <action selector="importDirectory:" destination="726" id="738"/>
-                <action selector="importiTunes:" destination="727" id="739"/>
-                <action selector="increaseVolumeAction:" destination="772" id="774"/>
-                <action selector="nextTrackAction:" destination="546" id="681"/>
-                <action selector="nextTrackAction:" destination="761" id="764"/>
-                <action selector="openLibraryAction:" destination="641" id="678"/>
-                <action selector="openSettingsAction:" destination="639" id="677"/>
-                <action selector="playPauseTrackAction:" destination="544" id="680"/>
-                <action selector="playPauseTrackAction:" destination="760" id="763"/>
-                <action selector="prevTrackAction:" destination="537" id="679"/>
-                <action selector="prevTrackAction:" destination="762" id="765"/>
-                <action selector="repeatAction:" destination="789" id="792"/>
-                <action selector="showHidePane:" destination="803" id="804"/>
-                <action selector="shuffleAction:" destination="786" id="793"/>
-                <action selector="sliderMovedAction:" destination="555" id="699"/>
-                <action selector="volumeSliderAction:" destination="550" id="709"/>
                 <outlet property="albumTextField" destination="553" id="672"/>
                 <outlet property="artistTextField" destination="552" id="670"/>
                 <outlet property="artworkView" destination="714" id="715"/>
