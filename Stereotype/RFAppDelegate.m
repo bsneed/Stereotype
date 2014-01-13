@@ -27,6 +27,11 @@
     NSDictionary *currentTrackInfo;
     BOOL importing;
     SPMediaKeyTap *keyTap;
+    
+    BOOL isFullscreen;
+    NSRect originalArtworkFrame;
+    NSRect originalTabFrame;
+    NSRect originalWindowFrame;
 }
 
 static RFAppDelegate *__appDelegateInstance = nil;
@@ -434,8 +439,8 @@ static RFAppDelegate *__appDelegateInstance = nil;
     [self.window makeKeyAndOrderFront:nil];
     [self.window makeFirstResponder:self.playerView];
     
-    updateTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(updateDisplayInfo:) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:updateTimer forMode:NSRunLoopCommonModes];
+    //updateTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(updateDisplayInfo:) userInfo:nil repeats:YES];
+    //[[NSRunLoop currentRunLoop] addTimer:updateTimer forMode:NSRunLoopCommonModes];
     
     [self checkLibrarySetup];
     
@@ -488,6 +493,68 @@ static RFAppDelegate *__appDelegateInstance = nil;
 {
     if ([self.window isVisible])
         [self.artworkView adjustChildWindow:NO];
+}
+
+- (void)windowWillEnterFullScreen:(NSNotification *)notification
+{
+    [self openLibraryAction:nil];
+    
+    isFullscreen = YES;
+    
+    originalArtworkFrame = self.artworkView.frame;
+    originalTabFrame = self.drawerTabView.frame;
+    originalWindowFrame = self.window.frame;
+    
+    // 202 + 608
+    [self.window setFrame:[NSScreen mainScreen].frame display:YES];
+    
+    NSRect artworkFrame = [NSScreen mainScreen].frame;
+    artworkFrame.size.width -= 608;
+    self.artworkView.frame = artworkFrame;
+    [self.artworkView setFullscreen:YES];
+    
+    //[self.artworkView setComp]
+    
+    NSRect tabFrame = [NSScreen mainScreen].frame;
+    tabFrame.origin.x = tabFrame.size.width - 608;
+    tabFrame.size.width = 608;
+    self.drawerTabView.frame = tabFrame;
+}
+
+- (void)windowDidEnterFullScreen:(NSNotification *)notification
+{
+    if (_useVisualizer)
+    {
+        _useVisualizer = NO;
+        [self setUseVisualizer:YES];
+    }
+}
+
+- (void)windowWillExitFullScreen:(NSNotification *)notification
+{
+    isFullscreen = NO;
+    
+    [self.window setFrame:originalWindowFrame display:YES];
+    self.artworkView.frame = originalArtworkFrame;
+    [self.artworkView setFullscreen:NO];
+    self.drawerTabView.frame = originalTabFrame;    
+
+}
+
+- (void)windowDidExitFullScreen:(NSNotification *)notification
+{
+    if (_useVisualizer)
+    {
+        _useVisualizer = NO;
+        [self setUseVisualizer:YES];
+    }
+    
+    [self.artworkView adjustChildWindow:YES];
+}
+
+- (NSApplicationPresentationOptions)window:(NSWindow *)window willUseFullScreenPresentationOptions:(NSApplicationPresentationOptions)proposedOptions
+{
+    return NSApplicationPresentationHideDock | NSApplicationPresentationHideMenuBar | NSApplicationPresentationFullScreen;
 }
 
 - (void)setTime:(double)seconds textField:(NSTextField *)textField
@@ -556,7 +623,8 @@ static RFAppDelegate *__appDelegateInstance = nil;
     if (_useVisualizer)
     {
         NSString *vizPath = [[NSBundle mainBundle] pathForResource:@"Occluded Light" ofType:@"qtz"];
-        visualizer = [[RFCompositionView alloc] initWithFrame:NSMakeRect(0, 202, 202, 202)];
+        //NSString *vizPath = [[NSBundle mainBundle] pathForResource:@"Cubism" ofType:@"qtz"];
+        visualizer = [[RFCompositionView alloc] initWithFrame:self.artworkView.bounds];//NSMakeRect(0, 202, 202, 202)];
         [visualizer loadCompositionAtPath:vizPath];
         audioPlayer.visualizer = visualizer;
         visualizer.enabled = YES;
@@ -832,7 +900,11 @@ static RFAppDelegate *__appDelegateInstance = nil;
 
 - (IBAction)showHidePane:(id)sender
 {
-    [self toggleBottomPane];
+    //[self toggleBottomPane];
+    
+    [self.window toggleFullScreen:nil];
+    
+    //[[NSApplication sharedApplication] setPresentationOptions:NSFullScreenWindowMask];
 }
 
 - (void)toggleBottomPane

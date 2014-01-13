@@ -12,7 +12,7 @@
 @implementation RFMetadata
 {
     NSURL *_url;
-    AudioMetadata *metadata;
+    SFB::Audio::Metadata::unique_ptr metadata;
 }
 
 - (id)initWithURL:(NSURL *)url
@@ -20,7 +20,7 @@
     self = [super init];
     
     _url = url;
-    metadata = AudioMetadata::CreateMetadataForURL((__bridge CFURLRef)url);
+    metadata = SFB::Audio::Metadata::CreateMetadataForURL((__bridge CFURLRef)url);
     if (!metadata)
         return nil;
     return self;
@@ -28,7 +28,7 @@
 
 - (void)dealloc
 {
-    delete metadata, metadata = nil;
+    metadata = nil;
 }
 
 - (NSString *)getTitle
@@ -133,29 +133,13 @@
     return value;
 }
 
-- (NSData*)getAlbumArtData
-{
-	std::vector<AttachedPicture *> front = metadata->GetAttachedPicturesOfType(AttachedPicture::Type::FrontCover);
-	if (front.size())
-    {
-		AttachedPicture *frontArt = front.at(0);
-		return (__bridge NSData*)frontArt->GetData();
-	}
-    else
-    {
-		std::vector<AttachedPicture *> all = metadata->GetAttachedPictures();
-		if (all.size())
-        {
-			AttachedPicture *art = all.at(0);
-			return (__bridge NSData*)art->GetData();
-		}
-	}
-	return nil;
-}
-
 - (NSImage *)getAlbumArt
 {
-    return [[NSImage alloc] initWithData:[self getAlbumArtData]];
+    NSImage *result = nil;
+    auto pictures = metadata->GetAttachedPictures();
+    if (!pictures.empty())
+        result = [[NSImage alloc] initWithData:(__bridge NSData *)pictures.front()->GetData()];
+	return result;
 }
 
 - (BOOL)handlesFileExtension

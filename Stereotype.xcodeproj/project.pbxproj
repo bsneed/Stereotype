@@ -135,6 +135,7 @@
 		CAEE3E4D164F48650057E141 /* RFCompositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEE3E4C164F48650057E141 /* RFCompositionView.m */; };
 		CAEE3E50164F4CBC0057E141 /* RFArtworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEE3E4F164F4CBC0057E141 /* RFArtworkView.m */; };
 		CAF14770165640D80061FC46 /* RFTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF1476F165640D80061FC46 /* RFTextFieldCell.m */; };
+		CAF3971B1872A24A0017787A /* RFSpectrumAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF3971A1872A24A0017787A /* RFSpectrumAnalyzer.m */; };
 		CAF5935215A6B840006E331A /* bottomBg.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5935015A6B840006E331A /* bottomBg.png */; };
 		CAF5935515A6B9B4006E331A /* bottomBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5935415A6B9B4006E331A /* bottomBg@2x.png */; };
 		CAF5935815A6BBCF006E331A /* topBg.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5935615A6BBCF006E331A /* topBg.png */; };
@@ -191,20 +192,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3252E83B10CC9E4500F1AA23;
 			remoteInfo = SimplePlayer;
-		};
-		CA49547F166B44A500033370 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CA49546F166B44A500033370 /* SFBAudioEngine.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 32AEB2701409AC30001F9A60;
-			remoteInfo = SFBAudioEngine;
-		};
-		CA495481166B44A500033370 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CA49546F166B44A500033370 /* SFBAudioEngine.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 32AEB3041409BE48001F9A60;
-			remoteInfo = "SimplePlayer-iOS";
 		};
 		CA495483166B44CA00033370 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -412,6 +399,8 @@
 		CAEE3E4F164F4CBC0057E141 /* RFArtworkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFArtworkView.m; sourceTree = "<group>"; };
 		CAF1476E165640D80061FC46 /* RFTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFTextFieldCell.h; sourceTree = "<group>"; };
 		CAF1476F165640D80061FC46 /* RFTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFTextFieldCell.m; sourceTree = "<group>"; };
+		CAF397191872A24A0017787A /* RFSpectrumAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFSpectrumAnalyzer.h; sourceTree = "<group>"; };
+		CAF3971A1872A24A0017787A /* RFSpectrumAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFSpectrumAnalyzer.m; sourceTree = "<group>"; };
 		CAF5935015A6B840006E331A /* bottomBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bottomBg.png; path = Graphics/bottomBg.png; sourceTree = SOURCE_ROOT; };
 		CAF5935415A6B9B4006E331A /* bottomBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottomBg@2x.png"; path = "Graphics/bottomBg@2x.png"; sourceTree = SOURCE_ROOT; };
 		CAF5935615A6BBCF006E331A /* topBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = topBg.png; path = Graphics/topBg.png; sourceTree = SOURCE_ROOT; };
@@ -746,8 +735,6 @@
 			children = (
 				CA49547C166B44A500033370 /* SFBAudioEngine.framework */,
 				CA49547E166B44A500033370 /* SimplePlayer.app */,
-				CA495480166B44A500033370 /* libSFBAudioEngine.a */,
-				CA495482166B44A500033370 /* SimplePlayer-iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -755,6 +742,8 @@
 		CA4D5D21166014E300214280 /* AudioExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				CAF397191872A24A0017787A /* RFSpectrumAnalyzer.h */,
+				CAF3971A1872A24A0017787A /* RFSpectrumAnalyzer.m */,
 				CAD5F194165F5FB7006E4A59 /* RFMetadata.h */,
 				CAD5F195165F5FB8006E4A59 /* RFMetadata.mm */,
 				CAD5F191165E3AAF006E4A59 /* RFAudioPlayer.h */,
@@ -914,7 +903,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = RF;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = redf.net;
 				TargetAttributes = {
 					CA17A0F615A6941A00ACBA13 = {
@@ -959,20 +948,6 @@
 			fileType = wrapper.application;
 			path = SimplePlayer.app;
 			remoteRef = CA49547D166B44A500033370 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CA495480166B44A500033370 /* libSFBAudioEngine.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSFBAudioEngine.a;
-			remoteRef = CA49547F166B44A500033370 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CA495482166B44A500033370 /* SimplePlayer-iOS.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "SimplePlayer-iOS.app";
-			remoteRef = CA495481166B44A500033370 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1098,6 +1073,7 @@
 				CA890D23163501B200BE8ACE /* NSMutableArray+RFExtensions.m in Sources */,
 				CA890D24163501B200BE8ACE /* NSFileManager+RFExtensions.m in Sources */,
 				CA890D2B16350AC000BE8ACE /* RFLibrary.m in Sources */,
+				CAF3971B1872A24A0017787A /* RFSpectrumAnalyzer.m in Sources */,
 				CACFF60F163A98EC00BC243A /* RFLibraryViewController.m in Sources */,
 				CACFF618163A9E8500BC243A /* RFSettingsViewController.m in Sources */,
 				CACFF61C163AA14D00BC243A /* RFTabView.m in Sources */,
@@ -1187,7 +1163,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1217,7 +1192,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1239,7 +1213,7 @@
 		CA17A11615A6941A00ACBA13 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stereotype/Stereotype-Prefix.pch";
@@ -1255,7 +1229,6 @@
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				MOMC_SUPPRESS_INVERSE_TRANSIENT_ERROR = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2480FAEF-453D-4C03-A82E-F0A733FA16A6";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1264,7 +1237,7 @@
 		CA17A11715A6941A00ACBA13 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stereotype/Stereotype-Prefix.pch";
@@ -1280,7 +1253,6 @@
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				MOMC_SUPPRESS_INVERSE_TRANSIENT_ERROR = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2480FAEF-453D-4C03-A82E-F0A733FA16A6";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};

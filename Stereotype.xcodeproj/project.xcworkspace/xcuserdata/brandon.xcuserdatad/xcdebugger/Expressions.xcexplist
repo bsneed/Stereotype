@@ -3,7 +3,7 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[AFOutputSoundcard getFrequencyResponseBins:numberOfBins:]:AFOutputSoundcard.m">
+         contextName = "-[SpectrumAnalyzer processAudioInput:sampleRate:]:SpectrumAnalyzer.m">
       </ContextState>
       <ContextState
          contextName = "AudioPlayer::GetPlaybackTime(double&amp;, double&amp;) const:AudioPlayer.cpp">
@@ -12,10 +12,25 @@
          contextName = "-[RFCompositionView initWithFrame:]:RFCompositionView.m">
       </ContextState>
       <ContextState
-         contextName = "AudioPlayer::GetCurrentDecoderURL():AudioPlayer.cpp">
+         contextName = "-[AFOutputSoundcard getFrequencyResponseBins:numberOfBins:]:AFOutputSoundcard.m">
       </ContextState>
       <ContextState
-         contextName = "-[RFCompositionView updateInput]:RFCompositionView.m">
+         contextName = "__21-[RFAudioPlayer init]_block_invoke_2:RFAudioPlayer.mm">
+      </ContextState>
+      <ContextState
+         contextName = "SFB::Audio::Player::RenderNotify(unsigned int*, AudioTimeStamp const*, unsigned int, unsigned int, AudioBufferList*):AudioPlayer.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "-[SpectrumAnalyzer calculateWithInputBuffer:]:SpectrumAnalyzer.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[RFCompositionView setBuffer:samples:]:RFCompositionView.m">
+      </ContextState>
+      <ContextState
+         contextName = "__21-[RFAudioPlayer init]_block_invoke41:RFAudioPlayer.mm">
+      </ContextState>
+      <ContextState
+         contextName = "AudioPlayer::GetCurrentDecoderURL():AudioPlayer.cpp">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

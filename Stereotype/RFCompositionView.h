@@ -9,12 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import "RFAudioPlayer.h"
 
-@interface RFCompositionView : NSOpenGLView<RFAudioPlayerVisualizationProtocol>
+@interface RFCompositionView : NSOpenGLView
 
 @property (nonatomic, assign) BOOL enabled;
 @property (nonatomic, strong) NSDictionary *trackInfo;
 
 - (void)loadCompositionAtPath:(NSString *)compositionPath;
-- (void)setBuffers:(float **)aBuffer numberOfBuffers:(NSInteger)count samples:(NSInteger)sampleCount;
 
 @end

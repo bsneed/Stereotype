@@ -9,12 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "RFAudioDevices.h"
 #import "RFAudioUnitContainer.h"
+#import "RFCompositionView.h"
 
 @class RFAudioPlayer;
-
-@protocol RFAudioPlayerVisualizationProtocol <NSObject>
-- (void)setBuffers:(float **)aBuffer numberOfBuffers:(NSInteger)count samples:(NSInteger)sampleCount;
-@end
+@class RFCompositionView;
 
 @protocol RFAudioPlayerDelegate <NSObject>
 - (void)audioPlayer:(RFAudioPlayer *)player didChangeToDevice:(RFAudioDevice *)device;
@@ -47,7 +45,7 @@ typedef enum
 
 @property (nonatomic, readonly) NSUInteger elapsedTimeInSeconds;
 
-@property (nonatomic, weak) NSObject<RFAudioPlayerVisualizationProtocol> *visualizer;
+@property (nonatomic, weak) RFCompositionView *visualizer;
 @property (nonatomic, weak) NSObject<RFAudioPlayerDelegate> *delegate;
 
 + (RFAudioPlayer *)sharedInstance;

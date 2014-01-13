@@ -82,6 +82,18 @@
     [self setNeedsDisplay:YES];
 }
 
+- (void)setFullscreen:(BOOL)fullscreen
+{
+    if (fullscreen)
+    {
+        [overlayWindow orderOut:nil];
+    }
+    else
+    {
+        [overlayWindow orderFront:nil];
+    }
+}
+
 - (void)awakeFromNib
 {
     _albumArtImage = [NSImage imageNamed:@"topBg"];
@@ -115,6 +127,8 @@
     [overlayWindow setParentWindow:self.window];
     
     [self registerForDraggedTypes:@[NSFilenamesPboardType]];
+    
+    //self.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
 }
 
 - (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
@@ -189,21 +203,28 @@
     if (_compositionView)
         [_compositionView removeFromSuperview];
     _compositionView = value;
-    _compositionView.frame = NSMakeRect(0, 0, 202, 202);
+    //_compositionView.frame = NSMakeRect(0, 0, 202, 202);
     [self addSubview:_compositionView];
     
     // keep the shine on top.
     //[self addSubview:_shineImageView];
 }
 
+- (RFCompositionView *)compositionView
+{
+    return _compositionView;
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
     // draw album art.
     [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+    
+    NSRect outRect = self.bounds; // NSMakeRect(0, 0, 202, 202)
 
     NSRect artRect = NSMakeRect(0, 0, _albumArtImage.size.width, _albumArtImage.size.height);
-    [_topBgImage drawInRect:NSMakeRect(0, 0, 202, 202) fromRect:artRect operation:NSCompositeSourceOver fraction:1.0];
-    [_albumArtImage drawInRect:NSMakeRect(0, 0, 202, 202) fromRect:artRect operation:NSCompositeSourceOver fraction:1.0];
+    [_topBgImage drawInRect:outRect fromRect:artRect operation:NSCompositeSourceOver fraction:1.0];
+    [_albumArtImage drawInRect:outRect fromRect:artRect operation:NSCompositeSourceOver fraction:1.0];
     //[_shineImage drawInRect:NSMakeRect(0, 0, 202, 202) fromRect:artRect operation:NSCompositeSourceOver fraction:1.0];
 }
 

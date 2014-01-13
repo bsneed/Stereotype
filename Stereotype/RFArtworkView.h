@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSImage *albumArtImage;
 
 - (void)setCompositionView:(RFCompositionView *)value;
+- (RFCompositionView *)compositionView;
 - (void)adjustChildWindow:(BOOL)hidden;
+- (void)setFullscreen:(BOOL)fullscreen;
 
 @end

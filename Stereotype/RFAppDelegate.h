@@ -21,7 +21,7 @@
 #import "LBProgressBar.h"
 #import "SPMediaKeyTap.h"
 
-@interface RFAppDelegate : NSObject <NSApplicationDelegate, AudioDevicesChangedProtocol, RFAudioPlayerDelegate>
+@interface RFAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, AudioDevicesChangedProtocol, RFAudioPlayerDelegate>
 {
 }
 

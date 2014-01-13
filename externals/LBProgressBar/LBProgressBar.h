@@ -10,10 +10,10 @@
 
 @interface LBProgressBar : NSProgressIndicator {
     double progressOffset;
-    NSTimer* animator;
+    NSTimer* animationTimer;
 }
 
-@property (readwrite, retain) NSTimer* animator;
+@property (readwrite, retain) NSTimer* animationTimer;
 @property (readwrite) double progressOffset;
 
 -(void)drawBezel;

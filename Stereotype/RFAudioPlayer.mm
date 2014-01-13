@@ -10,6 +10,8 @@
 #import "NSFileManager+RFExtensions.h"
 #import "RFMetadata.h"
 #import "NSMutableArray+RFExtensions.h"
+#import "RFSpectrumAnalyzer.h"
+#import "RFCompositionView.h"
 
 #import <SFBAudioEngine/AudioPlayer.h>
 #import <SFBAudioEngine/InputSource.h>
@@ -23,67 +25,9 @@
 @property (atomic, assign) BOOL decoding;
 @end
 
-enum {
-	ePlayerFlagRenderingStarted			= 1 << 0,
-	ePlayerFlagRenderingFinished		= 1 << 1,
-    ePlayerFlagDecodingStarted          = 1 << 2,
-    ePlayerFlagDecodingFinished         = 1 << 3
-};
-
-volatile static uint32_t _playerFlags = 0;
-
-static void renderingStarted(void *context, const AudioDecoder *decoder)
-{
-	OSAtomicTestAndSetBarrier(7 /* ePlayerFlagRenderingStarted */, &_playerFlags);
-}
-
-static void renderingFinished(void *context, const AudioDecoder *decoder)
-{
-	OSAtomicTestAndSetBarrier(6 /* ePlayerFlagRenderingFinished */, &_playerFlags);
-}
-
-static void decodingStarted(void *context, const AudioDecoder *decoder)
-{
-    OSAtomicTestAndSetBarrier(5 /* ePlayerFlagDecodingStarted */, &_playerFlags);
-}
-
-static void decodingFinished(void *context, const AudioDecoder *decoder)
-{
-    OSAtomicTestAndSetBarrier(4 /* ePlayerFlaDecodingFinished */, &_playerFlags);
-}
-
-static void audioPreRenderCallback(void *context, float *bufferLeft, float *bufferRight, UInt32 numberOfFrames)
-{
-    @autoreleasepool {
-        float *buffers[2] = {bufferLeft, bufferRight};
-        RFAudioPlayer *audioPlayer = (__bridge RFAudioPlayer *)context;
-        if ([audioPlayer.visualizer conformsToProtocol:@protocol(RFAudioPlayerVisualizationProtocol)])
-            [audioPlayer.visualizer setBuffers:buffers numberOfBuffers:2 samples:numberOfFrames];
-    }
-}
-
-static void audioQueueEmptyCallback(void *context)
-{
-    @autoreleasepool {
-        RFAudioPlayer *audioPlayer = (__bridge RFAudioPlayer *)context;
-        if ([audioPlayer.delegate conformsToProtocol:@protocol(RFAudioPlayerDelegate)])
-        {
-            [audioPlayer.delegate performSelectorOnMainThread:@selector(audioPlayerQueueEmpty:) withObject:audioPlayer waitUntilDone:NO];
-        }
-    }
-}
-
-static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleRate)
-{
-    @autoreleasepool {
-        RFAudioPlayer *audioPlayer = (__bridge RFAudioPlayer *)context;
-        [audioPlayer performSelectorOnMainThread:@selector(changeSampleRate:) withObject:[NSNumber numberWithFloat:proposedSampleRate] waitUntilDone:YES];
-    }
-}
-
 @implementation RFAudioPlayer
 {
-    AudioPlayer *audioPlayer;
+    SFB::Audio::Player *_player;
     NSTimer *renderTimer;
     BOOL needsToPlay;
     BOOL canSkipNext;
@@ -123,17 +67,18 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 {
     self = [super init];
     
-    decoderQueue = [[NSMutableArray alloc] init];
-    audioPlayer = new AudioPlayer();
-    self.outputDevice = [RFAudioDeviceList sharedInstance].defaultOutputDevice;
-    audioPlayer->SetDeviceMasterVolume(1.0);
-    audioPlayer->SetSampleRateConverterComplexity(kAudioUnitSampleRateConverterComplexity_Mastering);
+    [RFSpectrumAnalyzer sharedInstance].pointNumber = 512;
+    [RFSpectrumAnalyzer sharedInstance].bandType = 4;
     
-    audioPlayer->SetRenderingStartedBlock(^(const AudioDecoder *decoder) {
-        //OSAtomicTestAndSetBarrier(7 /* ePlayerFlagRenderingStarted */, &_playerFlags);
-
+    decoderQueue = [[NSMutableArray alloc] init];
+    _player = new SFB::Audio::Player();
+    self.outputDevice = [RFAudioDeviceList sharedInstance].defaultOutputDevice;
+    _player->SetDeviceMasterVolume(1.0);
+    _player->SetSampleRateConverterComplexity(kAudioUnitSampleRateConverterComplexity_Mastering);
+    
+    _player->SetRenderingStartedBlock(^(const SFB::Audio::Decoder& decoder) {
         @autoreleasepool {
-            self.currentURL = [(__bridge NSURL *)audioPlayer->GetPlayingURL() copy];
+            self.currentURL = [(__bridge NSURL *)_player->GetPlayingURL() copy];
             _queueIndex = [self indexOfURLFromQueue:self.currentURL];
             NSLog(@"started playing %@", self.currentURL);
             
@@ -144,9 +89,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         }
     });
     
-    audioPlayer->SetRenderingFinishedBlock(^(const AudioDecoder *decoder) {
-        //OSAtomicTestAndSetBarrier(6 /* ePlayerFlagRenderingFinished */, &_playerFlags);
-
+    _player->SetRenderingFinishedBlock(^(const SFB::Audio::Decoder& decoder) {
         @autoreleasepool {
             _rendering = NO;
             _playing = NO;
@@ -169,7 +112,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         }
     });
     
-    audioPlayer->SetDecodingStartedBlock(^(const AudioDecoder *decoder) {
+    _player->SetDecodingStartedBlock(^(const SFB::Audio::Decoder& decoder) {
         @autoreleasepool {
             _decoding = YES;
             canSkipNext = YES;
@@ -177,65 +120,33 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         }
     });
     
-    audioPlayer->SetDecodingFinishedBlock(^(const AudioDecoder *decoder) {
+    _player->SetDecodingFinishedBlock(^(const SFB::Audio::Decoder& decoder) {
         @autoreleasepool {
             _decoding = NO;
         }
     });
     
-    /*audioPlayer->SetFormatMismatchBlock(^(AudioStreamBasicDescription currentFormat, AudioStreamBasicDescription nextFormat) {
+    _player->SetFormatMismatchBlock(^(AudioStreamBasicDescription currentFormat, AudioStreamBasicDescription nextFormat) {
         @autoreleasepool {
             Float64 sampleRate = 0;
-            audioPlayer->GetOutputDeviceSampleRate(sampleRate);
-            //if (nextFormat.mSampleRate != sampleRate)
+            _player->GetOutputDeviceSampleRate(sampleRate);
+            if (nextFormat.mSampleRate != sampleRate)
             {
                 [self performBlockOnMainThread:^{
-                    audioPlayer->Pause();
-                    audioPlayer->SetOutputDeviceSampleRate(nextFormat.mSampleRate);
-                    audioPlayer->Play();
-                }];
-                //audioPlayer->Pause();
-                //[self performSelectorOnMainThread:@selector(changeSampleRate:) withObject:[NSNumber numberWithFloat:nextFormat.mSampleRate] waitUntilDone:YES];
-            }
-        }
-    });*/
-    
-    audioPlayer->SetPreRenderBlock(^(AudioBufferList *data, UInt32 frameCount) {
-        @autoreleasepool {
-            if (self.visualizer && [self.visualizer conformsToProtocol:@protocol(RFAudioPlayerVisualizationProtocol)])
-            {
-                float *buffer1 = (float *)data->mBuffers[0].mData;
-                float *buffer2 = (float *)data->mBuffers[1].mData;
-                [self performBlockOnMainThread:^{
-                    float *buffers[2] = {buffer1, buffer2};
-                    [self.visualizer setBuffers:buffers numberOfBuffers:data->mNumberBuffers samples:frameCount];
+                    _player->Pause();
+                    _player->SetOutputDeviceSampleRate(nextFormat.mSampleRate);
+                    _player->Play();
                 }];
             }
         }
     });
     
-    /*audioPlayer->SetPostRenderBlock(^(AudioBufferList *data, UInt32 frameCount) {
+    _player->SetPostRenderBlock(^(AudioBufferList *data, UInt32 frameCount) {
         @autoreleasepool {
-            [self performUserBlockOnMainThread:^(id userObject) {
-                CFTimeInterval currentTime = 0;
-                audioPlayer->GetCurrentTime(currentTime);
-                
-                NSUInteger currentTimeAsInt = currentTime;
-                
-                if (_elapsedTimeInSeconds != currentTimeAsInt)
-                {
-                    [self willChangeValueForKey:@"elapsedTimeInSeconds"];
-                    _elapsedTimeInSeconds = currentTimeAsInt;
-                    [self didChangeValueForKey:@"elapsedTimeInSeconds"];
-                }
-            } userObject:nil];
+            [[RFSpectrumAnalyzer sharedInstance] processAudioInput:data sampleRate:[self outputSampleRate]];
         }
-    });*/
-    
-    //renderTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(renderTimerFired:) userInfo:nil repeats:YES];
-    //[[NSRunLoop currentRunLoop] addTimer:renderTimer forMode:NSRunLoopCommonModes];
-    //[[NSRunLoop currentRunLoop] addTimer:renderTimer forMode:NSDefaultRunLoopMode];
-    
+    });
+
     effectFilters = [[NSMutableArray alloc] init];
     
     return self;
@@ -245,9 +156,10 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 {
     [renderTimer invalidate];
     
-    audioPlayer->Stop();
-    audioPlayer->ClearQueuedDecoders();
-    delete audioPlayer;
+    _player->Stop();
+    _player->ClearQueuedDecoders();
+    delete _player;
+    _player = nullptr;
 }
 
 #pragma mark - Managed Output Menu
@@ -488,7 +400,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         [self pause];
     
     _outputDevice = outputDevice;
-    audioPlayer->SetOutputDeviceID(outputDevice.deviceID);
+    _player->SetOutputDeviceID(outputDevice.deviceID);
     
     [self setManagedOutputDevicePopup:managedOutputDevicePopup];
     [self setManagedOutputSampleRatePopup:managedOutputSampleRatePopup];
@@ -509,7 +421,8 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
             highestRate = rate;
     }
     
-    audioPlayer->SetInputOutputSampleRatesShouldMatch(!_upsampling);
+    // TODO:: fix this?
+    //_player->SetInputOutputSampleRatesShouldMatch(!_upsampling);
 
     BOOL wasPlaying = [self isPlaying];
     if (wasPlaying)
@@ -553,17 +466,17 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
     
     BOOL playing = [self isPlaying];
     if (playing && _exclusiveMode)
-        audioPlayer->StartHoggingOutputDevice();
+        _player->StartHoggingOutputDevice();
     else
     if (!_exclusiveMode)
-        audioPlayer->StopHoggingOutputDevice();
+        _player->StopHoggingOutputDevice();
 }
 
 - (void)setOutputSampleRate:(Float64)outputSampleRate
 {
     if (outputSampleRate > 0)
     {
-        audioPlayer->SetOutputDeviceSampleRate(outputSampleRate);
+        _player->SetOutputDeviceSampleRate(outputSampleRate);
         [self setManagedOutputFormatPopup:managedOutputFormatPopup];
     }
 }
@@ -571,7 +484,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 - (Float64)outputSampleRate
 {
     Float64 outputSampleRate = 0;
-    audioPlayer->GetOutputDeviceSampleRate(outputSampleRate);
+    _player->GetOutputDeviceSampleRate(outputSampleRate);
     
     return outputSampleRate;
 }
@@ -580,10 +493,10 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 {
     BOOL playing = [self isPlaying];
     if (playing)
-        audioPlayer->Pause();
+        _player->Pause();
     [self.outputDevice selectFormat:format];
     if (playing)
-        audioPlayer->Play();
+        _player->Play();
 }
 
 - (void)setCurrentURL:(NSURL *)currentURL
@@ -611,7 +524,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
     if (_shuffle)
     {
         [workingQueue shufflePreservingIndex:_queueIndex];
-        audioPlayer->ClearQueuedDecoders();
+        _player->ClearQueuedDecoders();
         [self queueNextTrack];
     }
     else
@@ -619,7 +532,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         id currentItem = [workingQueue objectAtIndex:_queueIndex];
         workingQueue = [originalQueue mutableCopy];
         _queueIndex = [workingQueue indexOfObject:currentItem];
-        audioPlayer->ClearQueuedDecoders();
+        _player->ClearQueuedDecoders();
         [self queueNextTrack];
     }
 }
@@ -630,7 +543,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         return;
     
     _repeatMode = repeatMode;
-    audioPlayer->ClearQueuedDecoders();
+    _player->ClearQueuedDecoders();
     [self queueNextTrack];
 }
 
@@ -756,7 +669,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 //    }
     
     CFTimeInterval currentTime = 0;
-    audioPlayer->GetCurrentTime(currentTime);
+    _player->GetCurrentTime(currentTime);
     
     NSUInteger currentTimeAsInt = currentTime;
     
@@ -804,7 +717,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 {
     for (RFAudioUnitContainer *container in effectFilters)
     {
-        audioPlayer->RemoveEffect(container.audioUnit);
+        _player->RemoveEffect(container.audioUnit);
     }
     [effectFilters removeAllObjects];
 }
@@ -813,7 +726,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 {
     BOOL playing = [self isPlaying];
     if (playing)
-        audioPlayer->Pause();
+        _player->Pause();
     
     [self clearEffects];
     
@@ -827,7 +740,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         [self add432hzPitchAdjustment];
 
     if (playing)
-        audioPlayer->Play();
+        _player->Play();
 }
 
 - (void)add432hzPitchAdjustment
@@ -859,7 +772,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         if ([name isEqualToString:filterName])
         {
             AudioUnit effectUnit = nil;
-            if (audioPlayer->AddEffect(componentDesc.componentType, componentDesc.componentSubType, componentDesc.componentManufacturer, componentDesc.componentFlags, componentDesc.componentFlagsMask, &effectUnit))
+            if (_player->AddEffect(componentDesc.componentType, componentDesc.componentSubType, componentDesc.componentManufacturer, componentDesc.componentFlags, componentDesc.componentFlagsMask, &effectUnit))
             {
                 RFAudioUnitContainer *container = [[RFAudioUnitContainer alloc] initWithName:name audioUnit:effectUnit];
 
@@ -902,7 +815,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
         if ([name isEqualToString:filterName])
         {
             AudioUnit effectUnit = nil;
-            if (audioPlayer->AddEffect(componentDesc.componentType, componentDesc.componentSubType, componentDesc.componentManufacturer, componentDesc.componentFlags, componentDesc.componentFlagsMask, &effectUnit))
+            if (_player->AddEffect(componentDesc.componentType, componentDesc.componentSubType, componentDesc.componentManufacturer, componentDesc.componentFlags, componentDesc.componentFlagsMask, &effectUnit))
             {
                 RFAudioUnitContainer *container = [[RFAudioUnitContainer alloc] initWithName:name audioUnit:effectUnit];
                 [effectFilters addObject:container];
@@ -977,28 +890,23 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
     
     BOOL useMemoryInputSource = YES;
     
-    InputSource *inputSource = InputSource::CreateInputSourceForURL((__bridge CFURLRef)url, useMemoryInputSource ? InputSourceFlagMemoryMapFiles : 0, nullptr);
+    auto inputSource = SFB::InputSource::CreateInputSourceForURL((__bridge CFURLRef)url, useMemoryInputSource ? SFB::InputSource::MemoryMapFiles : 0, nullptr);
     if (inputSource == nullptr)
     {
         return NO;
     }
-
-    AudioDecoder::SetAutomaticallyOpenDecoders(true);
-    AudioDecoder *decoder = AudioDecoder::CreateDecoderForInputSource(inputSource);
+    
+    SFB::Audio::Decoder::SetAutomaticallyOpenDecoders(true);
+    auto decoder = SFB::Audio::Decoder::CreateDecoderForInputSource(std::move(inputSource));
     if (decoder == nullptr)
     {
-        delete inputSource, inputSource = nullptr;
+        inputSource = nullptr;
         return NO;
     }
     
-	/*decoder->SetRenderingStartedCallback(renderingStarted, (__bridge void*)self);
-	decoder->SetRenderingFinishedCallback(renderingFinished, (__bridge void*)self);
-    decoder->SetDecodingStartedCallback(decodingStarted, (__bridge void*)self);
-    decoder->SetDecodingFinishedCallback(decodingFinished, (__bridge void*)self);*/
-    
-	if ((audioPlayer->Enqueue(decoder)) == false)
+	if ((_player->Enqueue(decoder)) == false)
     {
-		delete decoder, decoder = nullptr;
+		decoder = nullptr;
         return NO;
 	}
     
@@ -1007,7 +915,7 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 
 - (BOOL)isPlaying
 {
-    if (audioPlayer->IsPlaying() && !audioPlayer->IsPaused())
+    if (_player->IsPlaying() && !_player->IsPaused())
         return YES;
     return NO;
 }
@@ -1015,16 +923,16 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 - (void)play
 {
     if (_exclusiveMode)
-        audioPlayer->StartHoggingOutputDevice();
+        _player->StartHoggingOutputDevice();
     //NSLog(@"virtual formats for %@ = %@", self.outputDevice.deviceName, self.outputDevice.allVirtualFormats);
-    audioPlayer->Play();
+    _player->Play();
 }
 
 - (void)pause
 {
-    audioPlayer->Pause();
+    _player->Pause();
     if (_exclusiveMode)
-        audioPlayer->StopHoggingOutputDevice();
+        _player->StopHoggingOutputDevice();
 }
 
 - (void)playPause
@@ -1032,16 +940,16 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
     if (![self isPlaying])
     {
         if (_exclusiveMode)
-            audioPlayer->StartHoggingOutputDevice();
+            _player->StartHoggingOutputDevice();
         [self.outputDevice selectFormat:self.outputDevice.currentFormat];
         //NSLog(@"virtual formats for %@ = %@", self.outputDevice.deviceName, self.outputDevice.allVirtualFormats);
     }
-    audioPlayer->PlayPause();
+    _player->PlayPause();
 
     if (![self isPlaying])
     {
         if (_exclusiveMode)
-            audioPlayer->StopHoggingOutputDevice();
+            _player->StopHoggingOutputDevice();
     }
 }
 
@@ -1049,11 +957,11 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 {
     queueShouldStop = NO;
     nextURL = nil;
-    audioPlayer->Stop();
-    audioPlayer->ClearQueuedDecoders();
+    _player->Stop();
+    _player->ClearQueuedDecoders();
     
     if (_exclusiveMode)
-        audioPlayer->StopHoggingOutputDevice();
+        _player->StopHoggingOutputDevice();
 
     if ([self.delegate conformsToProtocol:@protocol(RFAudioPlayerDelegate)])
         [self.delegate audioPlayerDidStop:self];
@@ -1108,25 +1016,25 @@ static void audioSampleRateChangeCallback(void *context, Float64 proposedSampleR
 - (CFTimeInterval)elapsedTime
 {
     CFTimeInterval result = 0;
-    audioPlayer->GetCurrentTime(result);
+    _player->GetCurrentTime(result);
     return result;
 }
 
 - (CFTimeInterval)totalTime
 {
     CFTimeInterval result = 0;
-    audioPlayer->GetTotalTime(result);
+    _player->GetTotalTime(result);
     return result;
 }
 
 - (void)seekToTime:(CFTimeInterval)time
 {
-    audioPlayer->SeekToTime(time);
+    _player->SeekToTime(time);
 }
 
 - (void)setVolume:(Float32)volume
 {
-    audioPlayer->SetVolume(volume);
+    _player->SetVolume(volume);
 }
 
 @end

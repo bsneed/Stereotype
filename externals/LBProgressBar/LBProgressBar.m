@@ -34,14 +34,14 @@
     }
 }
 
--(NSTimer*)animator {
-    return animator;
+-(NSTimer *)animationTimer {
+    return animationTimer;
 }
 
--(void)setAnimator:(NSTimer *)value {
-    if (animator != value) {
-        [animator invalidate];
-        animator = value;
+-(void)setAnimationTimer:(NSTimer *)value {
+    if (animationTimer != value) {
+        [animationTimer invalidate];
+        animationTimer = value;
     }
 }
 
@@ -51,7 +51,7 @@
     self = [super initWithFrame:frameRect];
     if (self) {
         self.progressOffset = 0;
-        self.animator = nil;
+        self.animationTimer = nil;
     }
     return self;
 }
@@ -61,7 +61,7 @@
 
 -(void)dealloc {
     self.progressOffset = 0;
-    self.animator = nil;
+    self.animationTimer = nil;
 }
 
 #pragma mark -
@@ -178,12 +178,12 @@
 
 -(void)startAnimation:(id)sender {
     if (!self.animator) {
-        self.animator = [NSTimer scheduledTimerWithTimeInterval:1.0/30 target:self selector:@selector(activateAnimation:) userInfo:nil repeats:YES];
+        self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30 target:self selector:@selector(activateAnimation:) userInfo:nil repeats:YES];
     }
 }
 
 -(void)stopAnimation:(id)sender {
-    self.animator = nil;
+    self.animationTimer = nil;
 }
 
 -(void)activateAnimation:(NSTimer*)timer {

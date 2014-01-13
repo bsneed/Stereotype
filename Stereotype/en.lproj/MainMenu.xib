@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4488.2" systemVersion="13A538g" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A3017" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4488.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RFApplication">
@@ -227,7 +227,8 @@
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="735"/>
                             <menuItem title="Library" keyEquivalent="l" id="736"/>
-                            <menuItem title="Item" id="803">
+                            <menuItem isSeparatorItem="YES" id="fae-V1-lx8"/>
+                            <menuItem title="Full Screen" id="803">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="showHidePane:" target="494" id="804"/>
@@ -252,6 +253,7 @@
         </menu>
         <window title="Stereotype" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="371" customClass="RFWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES"/>
+            <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="20" y="20" width="608" height="404"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
@@ -259,10 +261,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="608" height="404"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView id="714" customClass="RFArtworkView">
-                        <rect key="frame" x="0.0" y="202" width="202" height="202"/>
+                    <imageView id="595">
+                        <rect key="frame" x="202" y="0.0" width="406" height="404"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="topLeft" imageScaling="axesIndependently" image="drawerBg" id="596"/>
+                    </imageView>
+                    <customView id="704" customClass="RFTabView">
+                        <rect key="frame" x="202" y="26" width="406" height="378"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </customView>
+                    <imageView id="707">
+                        <rect key="frame" x="202" y="0.0" width="15" height="404"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="topLeft" imageScaling="proportionallyDown" image="leftShadow@2x" id="708"/>
+                    </imageView>
                     <customView wantsLayer="YES" id="589" customClass="RFPlayerView">
                         <rect key="frame" x="0.0" y="0.0" width="202" height="202"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -443,15 +455,6 @@
                             </button>
                         </subviews>
                     </customView>
-                    <imageView id="595">
-                        <rect key="frame" x="202" y="0.0" width="406" height="404"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="topLeft" imageScaling="axesIndependently" image="drawerBg" id="596"/>
-                    </imageView>
-                    <customView id="704" customClass="RFTabView">
-                        <rect key="frame" x="202" y="26" width="406" height="378"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    </customView>
                     <customView id="797">
                         <rect key="frame" x="202" y="0.0" width="406" height="26"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -467,14 +470,14 @@
                             </imageView>
                         </subviews>
                     </customView>
-                    <imageView id="707">
-                        <rect key="frame" x="202" y="0.0" width="15" height="404"/>
+                    <customView id="714" customClass="RFArtworkView">
+                        <rect key="frame" x="0.0" y="202" width="202" height="202"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="topLeft" imageScaling="proportionallyDown" image="leftShadow@2x" id="708"/>
-                    </imageView>
+                    </customView>
                 </subviews>
             </view>
             <connections>
+                <outlet property="delegate" destination="494" id="iyC-gg-BY2"/>
                 <outlet property="initialFirstResponder" destination="589" id="785"/>
             </connections>
         </window>
