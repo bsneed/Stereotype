@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A3017" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
@@ -251,7 +251,7 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="Stereotype" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="371" customClass="RFWindow">
+        <window title="Stereotype" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" animationBehavior="default" id="371" customClass="RFBlurWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -261,31 +261,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="608" height="404"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView id="595">
-                        <rect key="frame" x="202" y="0.0" width="406" height="404"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="topLeft" imageScaling="axesIndependently" image="drawerBg" id="596"/>
-                    </imageView>
                     <customView id="704" customClass="RFTabView">
                         <rect key="frame" x="202" y="26" width="406" height="378"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </customView>
-                    <imageView id="707">
-                        <rect key="frame" x="202" y="0.0" width="15" height="404"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="topLeft" imageScaling="proportionallyDown" image="leftShadow@2x" id="708"/>
-                    </imageView>
-                    <customView wantsLayer="YES" id="589" customClass="RFPlayerView">
+                    <customView id="589" customClass="RFPlayerView">
                         <rect key="frame" x="0.0" y="0.0" width="202" height="202"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button verticalHuggingPriority="750" id="536">
                                 <rect key="frame" x="10" y="151" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <shadow key="shadow">
-                                    <size key="offset" width="0.0" height="1"/>
-                                    <color key="color" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                                </shadow>
                                 <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="prevIcon" imagePosition="only" alignment="center" alternateImage="prevIcon" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="537" customClass="RFSmallButtonCell">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -298,10 +284,6 @@
                             <button verticalHuggingPriority="750" id="544">
                                 <rect key="frame" x="44" y="144" width="46" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <shadow key="shadow">
-                                    <size key="offset" width="0.0" height="1"/>
-                                    <color key="color" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                                </shadow>
                                 <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="pauseIcon" imagePosition="only" alignment="center" alternateImage="playIcon" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="545" customClass="RFLargeButtonCell">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -314,10 +296,6 @@
                             <button verticalHuggingPriority="750" id="546">
                                 <rect key="frame" x="92" y="151" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <shadow key="shadow">
-                                    <size key="offset" width="0.0" height="1"/>
-                                    <color key="color" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                                </shadow>
                                 <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="nextIcon" imagePosition="only" alignment="center" alternateImage="nextIcon" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="547" customClass="RFSmallButtonCell">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -330,10 +308,6 @@
                             <customView id="550" customClass="RFDialSlider">
                                 <rect key="frame" x="146" y="144" width="46" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <shadow key="shadow" blurRadius="3">
-                                    <size key="offset" width="0.0" height="-6"/>
-                                    <color key="color" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
-                                </shadow>
                                 <accessibility description="Volume Control Dial" help="Adjusts the volume up and down"/>
                                 <connections>
                                     <action selector="volumeSliderAction:" target="494" id="709"/>
@@ -342,9 +316,6 @@
                             <textField verticalHuggingPriority="750" id="551">
                                 <rect key="frame" x="15" y="108" width="170" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <shadow key="shadow" blurRadius="2">
-                                    <color key="color" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
-                                </shadow>
                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Laying the trap" id="560">
                                     <font key="font" metaFont="system" size="18"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -355,9 +326,6 @@
                             <textField verticalHuggingPriority="750" id="552">
                                 <rect key="frame" x="15" y="89" width="169" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <shadow key="shadow" blurRadius="1">
-                                    <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </shadow>
                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="DATAROCK" id="559">
                                     <font key="font" metaFont="system" size="14"/>
                                     <color key="textColor" red="0.68235296010000002" green="0.6784313917" blue="0.6784313917" alpha="1" colorSpace="deviceRGB"/>
@@ -368,9 +336,6 @@
                             <textField verticalHuggingPriority="750" id="553">
                                 <rect key="frame" x="15" y="73" width="169" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <shadow key="shadow" blurRadius="1">
-                                    <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </shadow>
                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Blue Album" id="558">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="0.68235296010000002" green="0.6784313917" blue="0.6784313917" alpha="1" colorSpace="deviceRGB"/>
@@ -463,11 +428,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="406" height="26"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </customView>
-                            <imageView id="799">
-                                <rect key="frame" x="0.0" y="0.0" width="406" height="26"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="bottomShadow" id="800"/>
-                            </imageView>
                         </subviews>
                     </customView>
                     <customView id="714" customClass="RFArtworkView">
@@ -545,9 +505,6 @@
         </window>
     </objects>
     <resources>
-        <image name="bottomShadow" width="406" height="26"/>
-        <image name="drawerBg" width="406" height="404"/>
-        <image name="leftShadow@2x" width="15" height="404.5"/>
         <image name="libraryButton@2x" width="20" height="20"/>
         <image name="nextIcon" width="31" height="31"/>
         <image name="pauseIcon" width="46" height="46"/>

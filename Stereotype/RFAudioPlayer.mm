@@ -14,6 +14,8 @@
 #import "RFCompositionView.h"
 
 #import <SFBAudioEngine/AudioPlayer.h>
+#import <SFBAudioEngine/CoreAudioOutput.h>
+#import <SFBAudioEngine/AudioFormat.h>
 #import <SFBAudioEngine/InputSource.h>
 #import <SFBAudioEngine/AudioDecoder.h>
 #import <SFBAudioEngine/AudioMetadata.h>
@@ -23,11 +25,14 @@
 @interface RFAudioPlayer()
 @property (atomic, assign) BOOL rendering;
 @property (atomic, assign) BOOL decoding;
+@property (nonatomic, readonly) SFB::Audio::CoreAudioOutput *internalOutput;
 @end
 
 @implementation RFAudioPlayer
 {
     SFB::Audio::Player *_player;
+    SFB::Audio::CoreAudioOutput *_output;
+    
     NSTimer *renderTimer;
     BOOL needsToPlay;
     BOOL canSkipNext;
@@ -72,9 +77,17 @@
     
     decoderQueue = [[NSMutableArray alloc] init];
     _player = new SFB::Audio::Player();
+    _output = new SFB::Audio::CoreAudioOutput();
+    
+    _player->SetOutput((std::unique_ptr<SFB::Audio::Output>)_output);
+    
     self.outputDevice = [RFAudioDeviceList sharedInstance].defaultOutputDevice;
-    _player->SetDeviceMasterVolume(1.0);
-    _player->SetSampleRateConverterComplexity(kAudioUnitSampleRateConverterComplexity_Mastering);
+    _output->SetDeviceID(self.outputDevice.deviceID);
+    //_output->SetDeviceMasterVolume(1.0);
+    _output->SetSampleRateConverterComplexity(kAudioUnitSampleRateConverterComplexity_Mastering);
+    
+    //_player->SetDeviceMasterVolume(1.0);
+    //_player->SetSampleRateConverterComplexity(kAudioUnitSampleRateConverterComplexity_Mastering);
     
     _player->SetRenderingStartedBlock(^(const SFB::Audio::Decoder& decoder) {
         @autoreleasepool {
@@ -126,15 +139,15 @@
         }
     });
     
-    _player->SetFormatMismatchBlock(^(AudioStreamBasicDescription currentFormat, AudioStreamBasicDescription nextFormat) {
+    _player->SetFormatMismatchBlock(^(const SFB::Audio::AudioFormat& currentFormat, const SFB::Audio::AudioFormat& nextFormat) {
         @autoreleasepool {
             Float64 sampleRate = 0;
-            _player->GetOutputDeviceSampleRate(sampleRate);
+            _output->GetDeviceSampleRate(sampleRate);
             if (nextFormat.mSampleRate != sampleRate)
             {
                 [self performBlockOnMainThread:^{
                     _player->Pause();
-                    _player->SetOutputDeviceSampleRate(nextFormat.mSampleRate);
+                    _output->SetDeviceSampleRate(nextFormat.mSampleRate);
                     _player->Play();
                 }];
             }
@@ -400,7 +413,7 @@
         [self pause];
     
     _outputDevice = outputDevice;
-    _player->SetOutputDeviceID(outputDevice.deviceID);
+    _output->SetDeviceID(outputDevice.deviceID);
     
     [self setManagedOutputDevicePopup:managedOutputDevicePopup];
     [self setManagedOutputSampleRatePopup:managedOutputSampleRatePopup];
@@ -466,17 +479,17 @@
     
     BOOL playing = [self isPlaying];
     if (playing && _exclusiveMode)
-        _player->StartHoggingOutputDevice();
+        _output->StartHoggingDevice();
     else
     if (!_exclusiveMode)
-        _player->StopHoggingOutputDevice();
+        _output->StopHoggingDevice();
 }
 
 - (void)setOutputSampleRate:(Float64)outputSampleRate
 {
     if (outputSampleRate > 0)
     {
-        _player->SetOutputDeviceSampleRate(outputSampleRate);
+        _output->SetDeviceSampleRate(outputSampleRate);
         [self setManagedOutputFormatPopup:managedOutputFormatPopup];
     }
 }
@@ -484,7 +497,7 @@
 - (Float64)outputSampleRate
 {
     Float64 outputSampleRate = 0;
-    _player->GetOutputDeviceSampleRate(outputSampleRate);
+    _output->GetDeviceSampleRate(outputSampleRate);
     
     return outputSampleRate;
 }
@@ -717,7 +730,7 @@
 {
     for (RFAudioUnitContainer *container in effectFilters)
     {
-        _player->RemoveEffect(container.audioUnit);
+        _output->RemoveEffect(container.audioUnit);
     }
     [effectFilters removeAllObjects];
 }
@@ -772,7 +785,7 @@
         if ([name isEqualToString:filterName])
         {
             AudioUnit effectUnit = nil;
-            if (_player->AddEffect(componentDesc.componentType, componentDesc.componentSubType, componentDesc.componentManufacturer, componentDesc.componentFlags, componentDesc.componentFlagsMask, &effectUnit))
+            if (_output->AddEffect(componentDesc.componentType, componentDesc.componentSubType, componentDesc.componentManufacturer, componentDesc.componentFlags, componentDesc.componentFlagsMask, &effectUnit))
             {
                 RFAudioUnitContainer *container = [[RFAudioUnitContainer alloc] initWithName:name audioUnit:effectUnit];
 
@@ -815,7 +828,7 @@
         if ([name isEqualToString:filterName])
         {
             AudioUnit effectUnit = nil;
-            if (_player->AddEffect(componentDesc.componentType, componentDesc.componentSubType, componentDesc.componentManufacturer, componentDesc.componentFlags, componentDesc.componentFlagsMask, &effectUnit))
+            if (_output->AddEffect(componentDesc.componentType, componentDesc.componentSubType, componentDesc.componentManufacturer, componentDesc.componentFlags, componentDesc.componentFlagsMask, &effectUnit))
             {
                 RFAudioUnitContainer *container = [[RFAudioUnitContainer alloc] initWithName:name audioUnit:effectUnit];
                 [effectFilters addObject:container];
@@ -890,7 +903,7 @@
     
     BOOL useMemoryInputSource = YES;
     
-    auto inputSource = SFB::InputSource::CreateInputSourceForURL((__bridge CFURLRef)url, useMemoryInputSource ? SFB::InputSource::MemoryMapFiles : 0, nullptr);
+    auto inputSource = SFB::InputSource::CreateInputSourceForURL((__bridge CFURLRef)url, useMemoryInputSource ? SFB::InputSource::LoadFilesInMemory : 0, nullptr);
     if (inputSource == nullptr)
     {
         return NO;
@@ -923,7 +936,7 @@
 - (void)play
 {
     if (_exclusiveMode)
-        _player->StartHoggingOutputDevice();
+        _output->StartHoggingDevice();
     //NSLog(@"virtual formats for %@ = %@", self.outputDevice.deviceName, self.outputDevice.allVirtualFormats);
     _player->Play();
 }
@@ -932,7 +945,7 @@
 {
     _player->Pause();
     if (_exclusiveMode)
-        _player->StopHoggingOutputDevice();
+        _output->StopHoggingDevice();
 }
 
 - (void)playPause
@@ -940,7 +953,7 @@
     if (![self isPlaying])
     {
         if (_exclusiveMode)
-            _player->StartHoggingOutputDevice();
+            _output->StartHoggingDevice();
         [self.outputDevice selectFormat:self.outputDevice.currentFormat];
         //NSLog(@"virtual formats for %@ = %@", self.outputDevice.deviceName, self.outputDevice.allVirtualFormats);
     }
@@ -949,7 +962,7 @@
     if (![self isPlaying])
     {
         if (_exclusiveMode)
-            _player->StopHoggingOutputDevice();
+            _output->StopHoggingDevice();
     }
 }
 
@@ -961,7 +974,7 @@
     _player->ClearQueuedDecoders();
     
     if (_exclusiveMode)
-        _player->StopHoggingOutputDevice();
+        _output->StopHoggingDevice();
 
     if ([self.delegate conformsToProtocol:@protocol(RFAudioPlayerDelegate)])
         [self.delegate audioPlayerDidStop:self];
@@ -1034,7 +1047,8 @@
 
 - (void)setVolume:(Float32)volume
 {
-    _player->SetVolume(volume);
+    _output->SetDeviceMasterVolume(volume);
+    _output->SetVolume(volume);
 }
 
 @end

@@ -20,12 +20,12 @@
 - (void)audioPlayerQueueEmpty:(RFAudioPlayer *)player;
 @end
 
-typedef enum
+typedef NS_ENUM(NSUInteger, RepeatMode)
 {
     eRepeatModeOff = 0,
     eRepeatModeOn = 1,
     eRepeatModeSingle = 2
-} RepeatMode;
+};
 
 @interface RFAudioPlayer : NSObject
 

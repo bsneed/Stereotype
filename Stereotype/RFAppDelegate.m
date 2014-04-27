@@ -394,7 +394,6 @@ static RFAppDelegate *__appDelegateInstance = nil;
         NSObjectPerformBlock doneBlock = ^{
             [self.importPanel orderOut:nil];
             [self.window makeKeyAndOrderFront:nil];
-            [self.artworkView adjustChildWindow:NO];
             importing = NO;
             
             [[NSNotificationCenter defaultCenter] postNotificationName:kLibraryUpdatedNotification object:nil];
@@ -424,6 +423,14 @@ static RFAppDelegate *__appDelegateInstance = nil;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    //[self.window setOpaque:NO];
+    
+    NSColor *backColor = [NSColor colorWithCalibratedRed:81/255 green:80/255 blue:78/255 alpha:1.0];
+    [self.window setBackgroundColor:backColor];
+    //self.window.alphaValue = 0.9999;
+    //[self.window enableBlur:20.0];
+    
+
     keyTap = [[SPMediaKeyTap alloc] initWithDelegate:self];
 	if([SPMediaKeyTap usesGlobalMediaKeyTap])
 		[keyTap startWatchingMediaKeys];
@@ -491,8 +498,6 @@ static RFAppDelegate *__appDelegateInstance = nil;
 
 - (void)applicationWillBecomeActive:(NSNotification *)aNotification
 {
-    if ([self.window isVisible])
-        [self.artworkView adjustChildWindow:NO];
 }
 
 - (void)windowWillEnterFullScreen:(NSNotification *)notification
@@ -548,8 +553,6 @@ static RFAppDelegate *__appDelegateInstance = nil;
         _useVisualizer = NO;
         [self setUseVisualizer:YES];
     }
-    
-    [self.artworkView adjustChildWindow:YES];
 }
 
 - (NSApplicationPresentationOptions)window:(NSWindow *)window willUseFullScreenPresentationOptions:(NSApplicationPresentationOptions)proposedOptions
@@ -664,7 +667,6 @@ static RFAppDelegate *__appDelegateInstance = nil;
         {
             newFrame.origin.x = (screen.visibleFrame.origin.x + screen.visibleFrame.size.width) - (608 + 10);
             movedWhenDrawerOpen = YES;
-            [self.artworkView adjustChildWindow:YES];
         }
         openXPosition = newFrame.origin.x;
         newFrame.size.width = 608;
@@ -690,7 +692,6 @@ static RFAppDelegate *__appDelegateInstance = nil;
         settings.activeDrawer = RFDrawerClosedIndex;
 
     [window setFrame:newFrame display:YES animate:YES];
-    [self.artworkView adjustChildWindow:NO];
 }
 
 - (void)updatePlayButtonState
@@ -847,7 +848,6 @@ static RFAppDelegate *__appDelegateInstance = nil;
         [self.importProgress stopAnimation:nil];
         [self.importPanel orderOut:nil];
         [self.window makeKeyAndOrderFront:nil];
-        [self.artworkView adjustChildWindow:NO];
         importing = NO;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kLibraryUpdatedNotification object:nil];
@@ -889,7 +889,6 @@ static RFAppDelegate *__appDelegateInstance = nil;
                 [self.importProgress stopAnimation:nil];
                 [self.importPanel orderOut:nil];
                 [self.window makeKeyAndOrderFront:nil];
-                [self.artworkView adjustChildWindow:NO];
                 importing = NO;
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:kLibraryUpdatedNotification object:nil];

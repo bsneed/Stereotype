@@ -36,7 +36,7 @@
     if (!object)
         object = [[[self class] alloc] init];
     
-    if (![NSBundle loadNibNamed:nibName owner:object])
+    if (![[NSBundle bundleForClass:[self class]] loadNibNamed:nibName owner:object topLevelObjects:nil])
         NSAssert1(NO, @"No view or controllers of class %@ found.", NSStringFromClass(self));
     else
         return object;

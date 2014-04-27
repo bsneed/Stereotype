@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4471.1" systemVersion="13A510d" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4471.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner"/>
@@ -29,14 +29,14 @@
                         <font key="font" metaFont="cellTitle"/>
                     </buttonCell>
                 </button>
-                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="36" horizontalPageScroll="10" verticalLineScroll="36" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="18">
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="18">
                     <rect key="frame" x="0.0" y="0.0" width="406" height="149"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="r06-Hb-cPA">
                         <rect key="frame" x="0.0" y="0.0" width="406" height="149"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="34" rowSizeStyle="automatic" viewBased="YES" id="19">
+                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="19">
                                 <rect key="frame" x="0.0" y="0.0" width="406" height="149"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -56,7 +56,7 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView wantsLayer="YES" id="27">
+                                            <tableCellView id="27">
                                                 <rect key="frame" x="1" y="1" width="403" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
@@ -67,10 +67,6 @@
                                                             <textField verticalHuggingPriority="750" id="44">
                                                                 <rect key="frame" x="12" y="16" width="291" height="17"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                <shadow key="shadow" blurRadius="1">
-                                                                    <size key="offset" width="0.0" height="1"/>
-                                                                    <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                </shadow>
                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Label" id="47">
                                                                     <font key="font" metaFont="cellTitle"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -80,10 +76,6 @@
                                                             <textField verticalHuggingPriority="750" id="43">
                                                                 <rect key="frame" x="12" y="0.0" width="291" height="17"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                <shadow key="shadow" blurRadius="1">
-                                                                    <size key="offset" width="0.0" height="1"/>
-                                                                    <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                </shadow>
                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Label" id="48">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" red="0.80494658799999996" green="0.80494658799999996" blue="0.80494658799999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -93,10 +85,6 @@
                                                             <textField verticalHuggingPriority="750" id="45">
                                                                 <rect key="frame" x="302" y="8" width="57" height="17"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                                                <shadow key="shadow" blurRadius="1">
-                                                                    <size key="offset" width="0.0" height="1"/>
-                                                                    <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                </shadow>
                                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="1:99:99" id="46">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" red="0.80494658799999996" green="0.80494658799999996" blue="0.80494658799999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -108,10 +96,6 @@
                                                     <textField verticalHuggingPriority="750" id="41">
                                                         <rect key="frame" x="-2" y="8" width="43" height="17"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <shadow key="shadow" blurRadius="1">
-                                                            <size key="offset" width="0.0" height="1"/>
-                                                            <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </shadow>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="99999" id="42">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" red="0.80494658799999996" green="0.80494658799999996" blue="0.80494658799999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -131,11 +115,11 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" id="20">
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="20">
                         <rect key="frame" x="1" y="119" width="223" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" id="22">
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="22">
                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>

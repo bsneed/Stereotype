@@ -13,6 +13,7 @@
 		CA041B3215B3F8380062B33A /* NSObject+RFExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CA041B3115B3F8380062B33A /* NSObject+RFExtensions.m */; };
 		CA041B4415B405050062B33A /* hideSection.png in Resources */ = {isa = PBXBuildFile; fileRef = CA041B4315B405050062B33A /* hideSection.png */; };
 		CA041B4615B407DC0062B33A /* template.png in Resources */ = {isa = PBXBuildFile; fileRef = CA041B4515B407DC0062B33A /* template.png */; };
+		CA141AFB18C44AA000A2B926 /* RFBlurWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CA141AFA18C44AA000A2B926 /* RFBlurWindow.m */; };
 		CA17A0FC15A6941A00ACBA13 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA17A0FB15A6941A00ACBA13 /* Cocoa.framework */; };
 		CA17A10615A6941A00ACBA13 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA17A10415A6941A00ACBA13 /* InfoPlist.strings */; };
 		CA17A10815A6941A00ACBA13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA17A10715A6941A00ACBA13 /* main.m */; };
@@ -140,7 +141,6 @@
 		CAF5935515A6B9B4006E331A /* bottomBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5935415A6B9B4006E331A /* bottomBg@2x.png */; };
 		CAF5935815A6BBCF006E331A /* topBg.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5935615A6BBCF006E331A /* topBg.png */; };
 		CAF5935915A6BBCF006E331A /* topBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5935715A6BBCF006E331A /* topBg@2x.png */; };
-		CAF5936015A6E2F4006E331A /* RFWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF5935F15A6E2F4006E331A /* RFWindow.m */; };
 		CAF5936315A6E302006E331A /* RFDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF5936215A6E302006E331A /* RFDragView.m */; };
 		CAF5936615A6E33C006E331A /* RFPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF5936515A6E33C006E331A /* RFPlayerView.m */; };
 		CAF5937015A766CF006E331A /* topShine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF5936F15A766CF006E331A /* topShine@2x.png */; };
@@ -224,6 +224,25 @@
 		CA041B3115B3F8380062B33A /* NSObject+RFExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RFExtensions.m"; sourceTree = "<group>"; };
 		CA041B4315B405050062B33A /* hideSection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hideSection.png; sourceTree = "<group>"; };
 		CA041B4515B407DC0062B33A /* template.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = template.png; path = Graphics/template.png; sourceTree = SOURCE_ROOT; };
+		CA141AF918C44AA000A2B926 /* RFBlurWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBlurWindow.h; sourceTree = "<group>"; };
+		CA141AFA18C44AA000A2B926 /* RFBlurWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBlurWindow.m; sourceTree = "<group>"; };
+		CA141AFE18C44B3C00A2B926 /* CarbonHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarbonHelpers.h; sourceTree = "<group>"; };
+		CA141AFF18C44B3C00A2B926 /* CGSAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSAccessibility.h; sourceTree = "<group>"; };
+		CA141B0018C44B3C00A2B926 /* CGSCIFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSCIFilter.h; sourceTree = "<group>"; };
+		CA141B0118C44B3C00A2B926 /* CGSConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSConnection.h; sourceTree = "<group>"; };
+		CA141B0218C44B3C00A2B926 /* CGSCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSCursor.h; sourceTree = "<group>"; };
+		CA141B0318C44B3C00A2B926 /* CGSDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSDebug.h; sourceTree = "<group>"; };
+		CA141B0418C44B3C00A2B926 /* CGSDisplays.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSDisplays.h; sourceTree = "<group>"; };
+		CA141B0518C44B3C00A2B926 /* CGSHotKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSHotKeys.h; sourceTree = "<group>"; };
+		CA141B0618C44B3C00A2B926 /* CGSInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSInternal.h; sourceTree = "<group>"; };
+		CA141B0718C44B3C00A2B926 /* CGSMisc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSMisc.h; sourceTree = "<group>"; };
+		CA141B0818C44B3C00A2B926 /* CGSNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSNotifications.h; sourceTree = "<group>"; };
+		CA141B0918C44B3C00A2B926 /* CGSRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSRegion.h; sourceTree = "<group>"; };
+		CA141B0A18C44B3C00A2B926 /* CGSSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSSession.h; sourceTree = "<group>"; };
+		CA141B0B18C44B3C00A2B926 /* CGSTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSTransitions.h; sourceTree = "<group>"; };
+		CA141B0C18C44B3C00A2B926 /* CGSWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSWindow.h; sourceTree = "<group>"; };
+		CA141B0D18C44B3C00A2B926 /* CGSWorkspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSWorkspace.h; sourceTree = "<group>"; };
+		CA141B0E18C44B3C00A2B926 /* Compatability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compatability.h; sourceTree = "<group>"; };
 		CA17A0F715A6941A00ACBA13 /* Stereotype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stereotype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA17A0FB15A6941A00ACBA13 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CA17A0FE15A6941A00ACBA13 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -405,8 +424,6 @@
 		CAF5935415A6B9B4006E331A /* bottomBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottomBg@2x.png"; path = "Graphics/bottomBg@2x.png"; sourceTree = SOURCE_ROOT; };
 		CAF5935615A6BBCF006E331A /* topBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = topBg.png; path = Graphics/topBg.png; sourceTree = SOURCE_ROOT; };
 		CAF5935715A6BBCF006E331A /* topBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "topBg@2x.png"; path = "Graphics/topBg@2x.png"; sourceTree = SOURCE_ROOT; };
-		CAF5935E15A6E2F4006E331A /* RFWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFWindow.h; sourceTree = "<group>"; };
-		CAF5935F15A6E2F4006E331A /* RFWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFWindow.m; sourceTree = "<group>"; };
 		CAF5936115A6E302006E331A /* RFDragView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFDragView.h; sourceTree = "<group>"; };
 		CAF5936215A6E302006E331A /* RFDragView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFDragView.m; sourceTree = "<group>"; };
 		CAF5936415A6E33C006E331A /* RFPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFPlayerView.h; sourceTree = "<group>"; };
@@ -496,6 +513,30 @@
 				CAD05939168AA9410085D742 /* RFArtistViewCell.m */,
 			);
 			name = Lists;
+			sourceTree = "<group>";
+		};
+		CA141AFD18C44B3C00A2B926 /* CGSInternal */ = {
+			isa = PBXGroup;
+			children = (
+				CA141AFE18C44B3C00A2B926 /* CarbonHelpers.h */,
+				CA141AFF18C44B3C00A2B926 /* CGSAccessibility.h */,
+				CA141B0018C44B3C00A2B926 /* CGSCIFilter.h */,
+				CA141B0118C44B3C00A2B926 /* CGSConnection.h */,
+				CA141B0218C44B3C00A2B926 /* CGSCursor.h */,
+				CA141B0318C44B3C00A2B926 /* CGSDebug.h */,
+				CA141B0418C44B3C00A2B926 /* CGSDisplays.h */,
+				CA141B0518C44B3C00A2B926 /* CGSHotKeys.h */,
+				CA141B0618C44B3C00A2B926 /* CGSInternal.h */,
+				CA141B0718C44B3C00A2B926 /* CGSMisc.h */,
+				CA141B0818C44B3C00A2B926 /* CGSNotifications.h */,
+				CA141B0918C44B3C00A2B926 /* CGSRegion.h */,
+				CA141B0A18C44B3C00A2B926 /* CGSSession.h */,
+				CA141B0B18C44B3C00A2B926 /* CGSTransitions.h */,
+				CA141B0C18C44B3C00A2B926 /* CGSWindow.h */,
+				CA141B0D18C44B3C00A2B926 /* CGSWorkspace.h */,
+				CA141B0E18C44B3C00A2B926 /* Compatability.h */,
+			);
+			path = CGSInternal;
 			sourceTree = "<group>";
 		};
 		CA17A0EC15A6941900ACBA13 = {
@@ -669,8 +710,8 @@
 				CAF5936515A6E33C006E331A /* RFPlayerView.m */,
 				CAF5936115A6E302006E331A /* RFDragView.h */,
 				CAF5936215A6E302006E331A /* RFDragView.m */,
-				CAF5935E15A6E2F4006E331A /* RFWindow.h */,
-				CAF5935F15A6E2F4006E331A /* RFWindow.m */,
+				CA141AF918C44AA000A2B926 /* RFBlurWindow.h */,
+				CA141AFA18C44AA000A2B926 /* RFBlurWindow.m */,
 				CACA5299164A3171005EF3E5 /* RFBackButtonCell.h */,
 				CACA529A164A3171005EF3E5 /* RFBackButtonCell.m */,
 				CA17A12715A69C3400ACBA13 /* RFSmallButtonCell.h */,
@@ -766,6 +807,7 @@
 				CAD6019316708ACA0098C9A8 /* LBProgressBar */,
 				CAD0592C16896BE00085D742 /* SPMediaKeyTap */,
 				CACAFCD41754067200521EE3 /* asmlib */,
+				CA141AFD18C44B3C00A2B926 /* CGSInternal */,
 			);
 			name = Externals;
 			path = externals;
@@ -1057,11 +1099,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA141AFB18C44AA000A2B926 /* RFBlurWindow.m in Sources */,
 				CA17A10815A6941A00ACBA13 /* main.m in Sources */,
 				CA17A10F15A6941A00ACBA13 /* RFAppDelegate.m in Sources */,
 				CA17A12B15A69C3400ACBA13 /* RFSmallButtonCell.m in Sources */,
 				CA17A12C15A69C3400ACBA13 /* RFLargeButtonCell.m in Sources */,
-				CAF5936015A6E2F4006E331A /* RFWindow.m in Sources */,
 				CAF5936315A6E302006E331A /* RFDragView.m in Sources */,
 				CAF5936615A6E33C006E331A /* RFPlayerView.m in Sources */,
 				CAF5938D15A7DA97006E331A /* RFDialSlider.m in Sources */,

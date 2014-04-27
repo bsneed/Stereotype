@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "RFBlurWindow.h"
 #import "RFTabView.h"
 #import "RFSlider.h"
 #import "RFDialSlider.h"
@@ -29,7 +30,7 @@
 @property (weak) IBOutlet LBProgressBar *importProgress;
 @property (weak) IBOutlet NSTextField *importLabel;
 
-@property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet RFBlurWindow *window;
 
 @property (weak) IBOutlet RFArtworkView *artworkView;
 

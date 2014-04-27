@@ -23,9 +23,9 @@
 @property (nonatomic, assign) float volume;
 @property (nonatomic, assign) NSInteger activeDrawer;
 @property (nonatomic, strong) NSArray *filterNames;
-@property (nonatomic, assign) int libraryViewStyle;
+@property (nonatomic, assign) NSUInteger libraryViewStyle;
 @property (nonatomic, assign) BOOL shuffle;
-@property (nonatomic, assign) int repeatMode;
+@property (nonatomic, assign) NSUInteger repeatMode;
 
 + (RFSettingsModel *)sharedInstance;
 + (void)save;

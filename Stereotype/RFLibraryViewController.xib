@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A3017" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1070" defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="406" height="404"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <customView wantsLayer="YES" id="103" customClass="RFDragView">
+                <customView id="103" customClass="RFDragView">
                     <rect key="frame" x="0.0" y="360" width="406" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
@@ -31,10 +31,6 @@
                         <button hidden="YES" focusRingType="none" verticalHuggingPriority="750" id="37">
                             <rect key="frame" x="7" y="7" width="45" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <shadow key="shadow">
-                                <size key="offset" width="0.0" height="1"/>
-                                <color key="color" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                            </shadow>
                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="backIcon@2x" imagePosition="only" alignment="center" alternateImage="backIcon@2x" borderStyle="border" focusRingType="none" imageScaling="proportionallyUpOrDown" inset="2" id="38" customClass="RFBackButtonCell">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -47,10 +43,6 @@
                         <textField verticalHuggingPriority="750" id="39">
                             <rect key="frame" x="59" y="13" width="238" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <shadow key="shadow" blurRadius="1">
-                                <size key="offset" width="0.0" height="1"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </shadow>
                             <textFieldCell key="cell" lineBreakMode="truncatingTail" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="40">
                                 <font key="font" metaFont="system" size="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,10 +52,6 @@
                         <popUpButton id="72">
                             <rect key="frame" x="138" y="9" width="81" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <shadow key="shadow" blurRadius="1">
-                                <size key="offset" width="0.0" height="1"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </shadow>
                             <popUpButtonCell key="cell" type="bevel" title="Item" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" pullsDown="YES" autoenablesItems="NO" selectedItem="81" id="73" customClass="RFPopUpButtonNoBgCell">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="14"/>
@@ -91,11 +79,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="406" height="363"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </customView>
-                <imageView id="34">
-                    <rect key="frame" x="0.0" y="331" width="406" height="32"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="drawerTopBar@2x" id="35"/>
-                </imageView>
             </subviews>
             <connections>
                 <outlet property="backButton" destination="37" id="94"/>
@@ -104,12 +87,10 @@
                 <outlet property="searchField" destination="9" id="96"/>
                 <outlet property="titleLabel" destination="39" id="97"/>
                 <outlet property="titlePopup" destination="72" id="98"/>
-                <outlet property="topBarImageView" destination="34" id="99"/>
             </connections>
         </customView>
     </objects>
     <resources>
         <image name="backIcon@2x" width="45" height="30"/>
-        <image name="drawerTopBar@2x" width="406" height="32"/>
     </resources>
 </document>

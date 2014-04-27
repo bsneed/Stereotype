@@ -24,9 +24,18 @@
 
 - (NSString*)description
 {
+    NSString *mixableString = @"";
+
+    /*BOOL mixable = !(streamDesc.mFormatFlags & kAudioFormatFlagIsNonMixable);
+    
+    if (!mixable)
+        mixableString = @"Unmixable ";
+    else
+        mixableString = @"Mixable ";*/
+    
     if (streamDesc.mFormatFlags & kAudioFormatFlagIsFloat)
-        return [NSString stringWithFormat:@"%dch-%dbit Float", streamDesc.mChannelsPerFrame, streamDesc.mBitsPerChannel];
-	return [NSString stringWithFormat:@"%dch-%dbit Integer", streamDesc.mChannelsPerFrame, streamDesc.mBitsPerChannel];
+        return [NSString stringWithFormat:@"%@%dch-%dbit Float", mixableString, streamDesc.mChannelsPerFrame, streamDesc.mBitsPerChannel];
+	return [NSString stringWithFormat:@"%@%dch-%dbit Integer", mixableString, streamDesc.mChannelsPerFrame, streamDesc.mBitsPerChannel];
 }
 
 - (AudioStreamBasicDescription *)streamDescription
@@ -230,7 +239,7 @@
 			for (int i = 0; i < ranges; i++)
             {
 				AudioStreamRangedDescription *range = &rangedFormats[i];
-                if (range->mFormat.mSampleRate == sampleRate)
+                if (range->mFormat.mSampleRate == sampleRate && ((range->mFormat.mFormatFlags & kAudioFormatFlagIsNonMixable) == 0))
                     [supportedFormats addObject:[RFAudioDeviceFormat formatForDescription:&range->mFormat]];
 			}
 		}

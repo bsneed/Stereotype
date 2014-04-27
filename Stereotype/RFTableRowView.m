@@ -15,11 +15,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
-        self.wantsLayer = YES;
-
-        self.layer.shadowOffset = CGSizeMake(0, 1);
-        self.layer.shadowRadius = 3.0;
-        self.layer.shadowColor = [NSColor blackColor].CGColor;
     }
     
     return self;

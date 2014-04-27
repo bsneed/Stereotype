@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4457.9" systemVersion="13A497d" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1070" defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4457.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner">
@@ -32,9 +32,6 @@
                 <textField verticalHuggingPriority="750" id="7">
                     <rect key="frame" x="34" y="366" width="94" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <shadow key="shadow" blurRadius="1">
-                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </shadow>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Output Device" id="8">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
@@ -59,9 +56,6 @@
                 <textField verticalHuggingPriority="750" id="96">
                     <rect key="frame" x="34" y="179" width="100" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <shadow key="shadow" blurRadius="1">
-                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </shadow>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Audio Effect 1" id="103">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
@@ -86,9 +80,6 @@
                 <textField verticalHuggingPriority="750" id="104">
                     <rect key="frame" x="34" y="153" width="100" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <shadow key="shadow" blurRadius="1">
-                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </shadow>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Audio Effect 2" id="111">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
@@ -113,9 +104,6 @@
                 <textField verticalHuggingPriority="750" id="112">
                     <rect key="frame" x="34" y="127" width="100" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <shadow key="shadow" blurRadius="1">
-                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </shadow>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Audio Effect 3" id="119">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
@@ -140,9 +128,6 @@
                 <textField verticalHuggingPriority="750" id="13">
                     <rect key="frame" x="46" y="340" width="82" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <shadow key="shadow" blurRadius="1">
-                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </shadow>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Sample Rate" id="14">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
@@ -167,9 +152,6 @@
                 <textField verticalHuggingPriority="750" id="135">
                     <rect key="frame" x="47" y="314" width="56" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <shadow key="shadow" blurRadius="1">
-                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </shadow>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Formats" id="142">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
@@ -194,57 +176,57 @@
                 <button id="86">
                     <rect key="frame" x="142" y="282" width="242" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <shadow key="shadow" blurRadius="1">
-                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </shadow>
                     <buttonCell key="cell" type="check" title="Use as preferred output device" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="87" customClass="RFCheckBoxCell">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="preferredDeviceAction:" target="1" id="190"/>
+                    </connections>
                 </button>
                 <button id="144">
                     <rect key="frame" x="142" y="254" width="242" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <shadow key="shadow" blurRadius="1">
-                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </shadow>
                     <buttonCell key="cell" type="check" title="Exclusive Mode" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="145" customClass="RFCheckBoxCell">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="exclusiveModeAction:" target="1" id="189"/>
+                    </connections>
                 </button>
                 <button id="149">
                     <rect key="frame" x="35" y="222" width="349" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <shadow key="shadow" blurRadius="1">
-                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </shadow>
                     <buttonCell key="cell" type="check" title="Adjust sample rate for best quality" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="150" customClass="RFCheckBoxCell">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="upsamplingAction:" target="1" id="192"/>
+                    </connections>
                 </button>
                 <button id="68">
                     <rect key="frame" x="35" y="72" width="176" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <shadow key="shadow" blurRadius="1">
-                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </shadow>
                     <buttonCell key="cell" type="check" title="Use Visualizer" bezelStyle="regularSquare" imagePosition="left" inset="2" id="69" customClass="RFCheckBoxCell">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="visualizerAction:" target="1" id="195"/>
+                    </connections>
                 </button>
                 <button id="ZCT-My-FM6">
                     <rect key="frame" x="35" y="44" width="176" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <shadow key="shadow" blurRadius="1">
-                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </shadow>
                     <buttonCell key="cell" type="check" title="Use 432hz Tuning" bezelStyle="regularSquare" imagePosition="left" inset="2" id="5Md-xE-FZx" customClass="RFCheckBoxCell">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="tuningAction:" target="1" id="oVd-sr-Z3i"/>
+                    </connections>
                 </button>
                 <button tag="1" id="120">
                     <rect key="frame" x="367" y="178" width="20" height="20"/>
@@ -254,6 +236,9 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <accessibility description="Open the settings drawer"/>
+                    <connections>
+                        <action selector="showEffectWindowAction:" target="1" id="191"/>
+                    </connections>
                 </button>
                 <button tag="2" id="122">
                     <rect key="frame" x="367" y="152" width="20" height="20"/>
@@ -263,6 +248,9 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <accessibility description="Open the settings drawer"/>
+                    <connections>
+                        <action selector="showEffectWindowAction:" target="1" id="193"/>
+                    </connections>
                 </button>
                 <button tag="3" id="124">
                     <rect key="frame" x="367" y="126" width="20" height="20"/>
@@ -272,17 +260,12 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <accessibility description="Open the settings drawer"/>
+                    <connections>
+                        <action selector="showEffectWindowAction:" target="1" id="194"/>
+                    </connections>
                 </button>
             </subviews>
             <connections>
-                <action selector="exclusiveModeAction:" destination="144" id="189"/>
-                <action selector="preferredDeviceAction:" destination="86" id="190"/>
-                <action selector="showEffectWindowAction:" destination="120" id="191"/>
-                <action selector="showEffectWindowAction:" destination="122" id="193"/>
-                <action selector="showEffectWindowAction:" destination="124" id="194"/>
-                <action selector="tuningAction:" destination="ZCT-My-FM6" id="oVd-sr-Z3i"/>
-                <action selector="upsamplingAction:" destination="149" id="192"/>
-                <action selector="visualizerAction:" destination="68" id="195"/>
                 <outlet property="audioFilter1Popup" destination="97" id="176"/>
                 <outlet property="audioFilter2Popup" destination="105" id="177"/>
                 <outlet property="audioFilter3Popup" destination="113" id="178"/>
@@ -303,36 +286,4 @@
     <resources>
         <image name="settingsButton@2x" width="19.5" height="20"/>
     </resources>
-    <classes>
-        <class className="RFCheckBoxCell" superclassName="NSButtonCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RFCheckBoxCell.h"/>
-        </class>
-        <class className="RFPopUpButtonCell" superclassName="NSPopUpButtonCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RFPopUpButtonCell.h"/>
-        </class>
-        <class className="RFSettingsViewController" superclassName="NSView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RFSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="exclusiveModeAction:"/>
-                <relationship kind="action" name="preferredDeviceAction:"/>
-                <relationship kind="action" name="showEffectWindowAction:"/>
-                <relationship kind="action" name="upsamplingAction:"/>
-                <relationship kind="action" name="visualizerAction:"/>
-                <relationship kind="outlet" name="audioFilter1Popup" candidateClass="NSPopUpButton"/>
-                <relationship kind="outlet" name="audioFilter2Popup" candidateClass="NSPopUpButton"/>
-                <relationship kind="outlet" name="audioFilter3Popup" candidateClass="NSPopUpButton"/>
-                <relationship kind="outlet" name="exclusiveModeCheckbox" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="filter1WindowButton" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="filter2WindowButton" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="filter3WindowButton" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="formatPopup" candidateClass="NSPopUpButton"/>
-                <relationship kind="outlet" name="outputDevicePopup" candidateClass="NSPopUpButton"/>
-                <relationship kind="outlet" name="preferredDeviceCheckbox" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="sampleRatePopup" candidateClass="NSPopUpButton"/>
-                <relationship kind="outlet" name="tuningCheckbox" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="upsamplingCheckbox" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="visualizerCheckbox" candidateClass="NSButton"/>
-            </relationships>
-        </class>
-    </classes>
 </document>

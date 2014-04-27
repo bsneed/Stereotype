@@ -49,18 +49,6 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
-    backgroundImage = [NSImage imageNamed:@"bottomBg"];
-    bottomShineImage = [NSImage imageNamed:@"bottomShine"];
-}
-
-- (void)drawRect:(NSRect)dirtyRect
-{
-    // Drawing code here.
-    [backgroundImage drawInRect:NSMakeRect(0, 0, 202, 404) fromRect:NSMakeRect(0, 0, 202, 404) operation:NSCompositeSourceOver fraction:1.0];
-    
-    // draw overlay.
-    [bottomShineImage drawInRect:NSMakeRect(0, 0, 202, 404) fromRect:NSMakeRect(0, 0, 202, 404) operation:NSCompositeSourceOver fraction:1.0];
 }
 
 @end

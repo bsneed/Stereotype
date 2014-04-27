@@ -14,10 +14,9 @@
 @interface RFArtworkView : RFDragView
 
 @property (nonatomic, strong) NSImage *albumArtImage;
+@property (nonatomic, assign) BOOL fullscreen;
 
 - (void)setCompositionView:(RFCompositionView *)value;
 - (RFCompositionView *)compositionView;
-- (void)adjustChildWindow:(BOOL)hidden;
-- (void)setFullscreen:(BOOL)fullscreen;
 
 @end

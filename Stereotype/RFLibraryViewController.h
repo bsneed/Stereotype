@@ -15,13 +15,13 @@
 
 @class RFLibraryCollectionView;
 
-typedef enum
+typedef NS_ENUM(NSUInteger, RFLibraryViewStyle)
 {
     RFLibraryViewStyleAlbums = 0,
     RFLibraryViewStyleArtists,
     RFLibraryViewStylePlaylists,
     RFLibraryViewStyleSongs,
-} RFLibraryViewStyle;
+};
 
 typedef void(^RFLibrarySelectionBlock)();
 
