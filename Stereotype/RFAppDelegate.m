@@ -897,6 +897,46 @@ static RFAppDelegate *__appDelegateInstance = nil;
     }
 }
 
+- (IBAction)importAK120:(id)sender
+{
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    [openPanel setCanChooseFiles:NO];
+    [openPanel setCanChooseDirectories:YES];
+    [openPanel setAllowsMultipleSelection:NO];
+    
+    NSInteger value = [openPanel runModal];
+    
+    if (value == NSFileHandlingPanelCancelButton)
+        return;
+    
+    if ([[openPanel URLs] count] == 0)
+        return;
+    
+    importing = YES;
+    
+    // hide the player
+    [audioPlayer stop];
+    [self.window orderOut:nil];
+    
+    // show the import window
+    [self.importPanel makeKeyAndOrderFront:nil];
+    [self.importProgress setDoubleValue:100];
+    [self.importProgress startAnimation:nil];
+    
+    [library syncToAK120WithProgressBlock:^(NSString *text, float percentDone) {
+        if (percentDone >= 0 && percentDone <= 100)
+            [self.importProgress setDoubleValue:percentDone];
+        [self.importLabel setStringValue:text];
+    } doneBlock:^{
+        [self.importProgress stopAnimation:nil];
+        [self.importPanel orderOut:nil];
+        [self.window makeKeyAndOrderFront:nil];
+        importing = NO;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kLibraryUpdatedNotification object:nil];
+    }];
+}
+
 - (IBAction)showHidePane:(id)sender
 {
     //[self toggleBottomPane];

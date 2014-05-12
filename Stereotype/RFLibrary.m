@@ -177,7 +177,6 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         for (NSURL *directory in directories)
             [self scanDirectory:directory skipExisting:YES progressBlock:progressBlock];
-        
         [self performBlockOnMainThread:doneBlock];
     });
 }
@@ -186,10 +185,18 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self importiTunesPlaylists:progressBlock];
-        
         [self performBlockOnMainThread:doneBlock];
     });
 }
+
+- (void)syncToAK120WithProgressBlock:(RFLibraryImportProgressBlock)progressBlock doneBlock:(NSObjectPerformBlock)doneBlock
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self syncToDevicePath:@"/nand3" progressBlock:progressBlock];
+        [self performBlockOnMainThread:doneBlock];
+    });
+}
+
 
 - (NSArray *)existingURLs
 {
@@ -478,6 +485,175 @@ NSString *kLibraryUpdatedNotification = @"kLibraryUpdatedNotification";
 {
     NSURL *result = [[NSURL fileURLWithPath:path] URLByResolvingSymlinksAndAliases];
     return result;
+}
+
+- (void)generateM3UPlaylistsFromItems:(NSArray *)items
+                      sortDescriptors:(NSArray *)sortDescriptors
+              destinationPathForMusic:(NSString *)destinationPath
+                         playlistPath:(NSString *)playlistPath
+                        progressBlock:(RFLibraryImportProgressBlock)progressBlock
+{
+    NSString *homeDirectory = NSHomeDirectory();
+    NSMutableString *playlistFile = [[NSMutableString alloc] init];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error = nil;
+
+    for (NSUInteger i = 0; i < items.count; i++)
+    {
+        RFTrackEntity *item = [items objectAtIndex:i];
+        
+        NSURL *url = [NSURL URLWithString:item.url];
+        NSString *filePath = url.path;
+        NSString *destPath = [filePath stringByReplacingOccurrencesOfString:homeDirectory withString:destinationPath];
+        
+        if (![fileManager fileExistsAtPath:destPath])
+        {
+            NSString *directory = [destPath stringByDeletingLastPathComponent];
+            if (![fileManager fileExistsAtPath:directory])
+                [fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&error];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                progressBlock([NSString stringWithFormat:@"Copying %@", [filePath lastPathComponent]], ((i * 100) / items.count));
+            });
+            [fileManager copyItemAtPath:filePath toPath:destPath error:&error];
+        }
+        
+        if ([fileManager fileExistsAtPath:destPath])
+        {
+            NSString *filePathForPlaylist = [destPath stringByReplacingOccurrencesOfString:@"/Volumes/AK120" withString:@"/nand3"];
+            [playlistFile appendFormat:@"%@\r\n", filePathForPlaylist];
+        }
+    }
+    
+    NSLog(@"writing to: %@", playlistPath);
+    NSLog(@"\n%@", playlistFile);
+    
+    NSString *directory = [playlistPath stringByDeletingLastPathComponent];
+    if (![fileManager fileExistsAtPath:directory])
+        [fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&error];
+    [playlistFile writeToFile:playlistPath atomically:YES encoding:NSASCIIStringEncoding error:nil];
+}
+
+- (NSArray *)artists
+{
+    NSArray *tracks = [database allObjectsForEntity:@"RFTrackEntity" sortDescriptors:nil filteredBy:nil];
+    NSArray *items = [tracks valueForKeyPath:@"@distinctUnionOfObjects.albumArtist"];
+    
+    NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF != %@ AND SELF != nil", @""]];
+    return [filteredItems sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+}
+
+- (NSArray *)albums
+{
+    NSArray *tracks = [database allObjectsForEntity:@"RFTrackEntity" sortDescriptors:nil filteredBy:nil];
+    NSArray *items = [tracks valueForKeyPath:@"@distinctUnionOfObjects.albumArtist"];
+    
+    NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF != %@ AND SELF != nil", @""]];
+    return [filteredItems sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+}
+
+- (NSArray *)playlists
+{
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    NSPredicate *filterPredicate = nil;
+    return [database allObjectsForEntity:@"RFPlaylistEntity" sortDescriptors:sortDescriptors filteredBy:filterPredicate];
+}
+
+- (void)generatePlaylistsForArtistsWithDevicePath:(NSString *)devicePath progressBlock:(RFLibraryImportProgressBlock)progressBlock
+{
+    NSArray *artists = [self artists];
+
+    for (NSInteger i = 0; i < artists.count; i++)
+    {
+        NSString *artist = [artists objectAtIndex:i];
+
+        RFLibraryImportProgressBlock localBlock = [progressBlock copy];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            localBlock([NSString stringWithFormat:@"Scanning %@", artist], 0);
+        });
+
+        NSString *firstLetter = [artist substringToIndex:1];
+        firstLetter = [firstLetter uppercaseString];
+                                 
+        NSString *destBasePath = [devicePath stringByAppendingPathComponent:@"Music/Computer"];
+        NSString *playlistBasePath = [devicePath stringByAppendingPathComponent:@"Playlists"];
+        NSString *playlistPath = [playlistBasePath stringByAppendingPathComponent:[NSString stringWithFormat:@"_Artists/%@/%@.pls", firstLetter, artist]];
+
+        NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"albumTitle" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+        NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"trackNumber" ascending:YES];
+        NSArray *sortDescriptors = @[sortDescriptor1, sortDescriptor2];
+        
+        NSPredicate *artistPredicate = [NSPredicate predicateWithFormat:@"albumArtist == %@", artist];
+        NSArray *tracks = [database allObjectsForEntity:@"RFTrackEntity" sortDescriptors:sortDescriptors filteredBy:artistPredicate];
+        
+        [self generateM3UPlaylistsFromItems:tracks sortDescriptors:sortDescriptors destinationPathForMusic:destBasePath playlistPath:playlistPath progressBlock:[progressBlock copy]];
+    }
+}
+
+- (void)generatePlaylistsForAlbumsWithDevicePath:(NSString *)devicePath progressBlock:(RFLibraryImportProgressBlock)progressBlock
+{
+    NSArray *albums = [self albums];
+    
+    for (NSInteger i = 0; i < albums.count; i++)
+    {
+        NSString *album = [albums objectAtIndex:i];
+        
+        RFLibraryImportProgressBlock localBlock = [progressBlock copy];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            localBlock([NSString stringWithFormat:@"Scanning %@", album], 0);
+        });
+        
+        NSString *firstLetter = [album substringToIndex:1];
+        firstLetter = [firstLetter uppercaseString];
+        
+        NSString *destBasePath = [devicePath stringByAppendingPathComponent:@"Music/Computer"];
+        NSString *playlistBasePath = [devicePath stringByAppendingPathComponent:@"Playlists"];
+        NSString *playlistPath = [playlistBasePath stringByAppendingPathComponent:[NSString stringWithFormat:@"_Albums/%@/%@.pls", firstLetter, album]];
+        
+        NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"albumTitle" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+        NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"trackNumber" ascending:YES];
+        NSArray *sortDescriptors = @[sortDescriptor1, sortDescriptor2];
+        
+        NSPredicate *albumPredicate = [NSPredicate predicateWithFormat:@"albumTitle == %@", album];
+        NSArray *tracks = [database allObjectsForEntity:@"RFTrackEntity" sortDescriptors:sortDescriptors filteredBy:albumPredicate];
+        
+        [self generateM3UPlaylistsFromItems:tracks sortDescriptors:sortDescriptors destinationPathForMusic:destBasePath playlistPath:playlistPath progressBlock:[progressBlock copy]];
+    }
+}
+
+- (void)generatePlaylistsForiTunesWithDevicePath:(NSString *)devicePath progressBlock:(RFLibraryImportProgressBlock)progressBlock
+{
+    NSArray *playlists = [self playlists];
+    
+    for (NSInteger i = 0; i < playlists.count; i++)
+    {
+        RFPlaylistEntity *playlist = [playlists objectAtIndex:i];
+        
+        RFLibraryImportProgressBlock localBlock = [progressBlock copy];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            localBlock([NSString stringWithFormat:@"Scanning %@", playlist.name], 0);
+        });
+        
+        NSString *destBasePath = [devicePath stringByAppendingPathComponent:@"Music/Computer"];
+        NSString *playlistBasePath = [devicePath stringByAppendingPathComponent:@"Playlists"];
+        NSString *playlistPath = [playlistBasePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.pls", playlist.name]];
+        
+        NSSortDescriptor *sortDescriptor;
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+        NSArray *sortDescriptors = @[sortDescriptor];
+        
+        NSArray *tracks = [[playlist.items allObjects] sortedArrayUsingDescriptors:sortDescriptors];
+        [self generateM3UPlaylistsFromItems:tracks sortDescriptors:sortDescriptors destinationPathForMusic:destBasePath playlistPath:playlistPath progressBlock:[progressBlock copy]];
+    }
+}
+
+- (void)syncToDevicePath:(NSString *)devicePath progressBlock:(RFLibraryImportProgressBlock)progressBlock
+{
+    [self generatePlaylistsForArtistsWithDevicePath:@"/Volumes/AK120" progressBlock:progressBlock];
+    [self generatePlaylistsForAlbumsWithDevicePath:@"/Volumes/AK120" progressBlock:progressBlock];
+    [self generatePlaylistsForiTunesWithDevicePath:@"/Volumes/AK120" progressBlock:progressBlock];
 }
 
 #pragma mark - Downloader delegates

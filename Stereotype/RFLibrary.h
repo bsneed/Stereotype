@@ -31,4 +31,6 @@ typedef void(^RFLibraryImportProgressBlock)(NSString *text, float percentDone);
 - (void)importDirectories:(NSArray *)directories progressBlock:(RFLibraryImportProgressBlock)progressBlock doneBlock:(NSObjectPerformBlock)doneBlock;
 - (void)importiTunesPlaylistsWithProgressBlock:(RFLibraryImportProgressBlock)progressBlock doneBlock:(NSObjectPerformBlock)doneBlock;
 
+- (void)syncToAK120WithProgressBlock:(RFLibraryImportProgressBlock)progressBlock doneBlock:(NSObjectPerformBlock)doneBlock;
+
 @end
